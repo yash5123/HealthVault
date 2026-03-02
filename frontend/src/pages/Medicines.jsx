@@ -607,22 +607,29 @@ export default function Medicines() {
           </div>
 
           {/* LOW STOCK THRESHOLD */}
-          <input
-            type="number"
-            placeholder="Low Stock Threshold"
-            value={
-              form.lowStockThreshold
-            }
-            onChange={(e) =>
-              setForm({
-                ...form,
-                lowStockThreshold:
-                  Number(
-                    e.target.value
-                  ),
-              })
-            }
-          />
+          <div>
+            <input
+              type="number"
+              placeholder="Low Stock Alert At"
+              value={form.lowStockThreshold}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  lowStockThreshold:
+                    Number(e.target.value),
+                })
+              }
+            />
+            <small
+              style={{
+                color: "#64748b",
+                fontSize: 12,
+              }}
+            >
+              You will be notified when stock
+              goes below this number.
+            </small>
+          </div>
 
         </div>
 
