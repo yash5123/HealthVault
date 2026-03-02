@@ -1,14 +1,11 @@
 const Medicine = require("../models/Medicine");
-const mongoose = require("mongoose");
 
 /* ================= GET ALL ================= */
 const getMedicines = async (req, res) => {
   try {
-  const mongoose = require("mongoose");
-
-  const medicines = await Medicine.find({
-  user: new mongoose.Types.ObjectId(req.user.id),
-});
+    const medicines = await Medicine.find({
+      userId: req.user.id,
+    }).sort({ createdAt: -1 });
 
     res.json(medicines);
   } catch (error) {
@@ -21,10 +18,10 @@ const addMedicine = async (req, res) => {
   try {
     const medicine = await Medicine.create({
       ...req.body,
-      user: new mongoose.Types.ObjectId(req.user.id),
+      userId: req.user.id,
     });
 
-    res.json(medicine);
+    res.status(201).json(medicine);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -36,7 +33,7 @@ const updateMedicine = async (req, res) => {
     const medicine = await Medicine.findOneAndUpdate(
       {
         _id: req.params.id,
-        user: new mongoose.Types.ObjectId(req.user.id),
+        userId: req.user.id,
       },
       req.body,
       { new: true }
@@ -57,14 +54,14 @@ const deleteMedicine = async (req, res) => {
   try {
     const medicine = await Medicine.findOneAndDelete({
       _id: req.params.id,
-      user: new mongoose.Types.ObjectId(req.user.id),
+      userId: req.user.id,
     });
 
     if (!medicine) {
       return res.status(404).json({ message: "Medicine not found" });
     }
 
-    res.json({ message: "Medicine deleted" });
+    res.json({ message: "Medicine deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -75,7 +72,7 @@ const markComplete = async (req, res) => {
   try {
     const medicine = await Medicine.findOne({
       _id: req.params.id,
-      user: new mongoose.Types.ObjectId(req.user.id),
+      userId: req.user.id,
     });
 
     if (!medicine) {

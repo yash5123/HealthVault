@@ -7,7 +7,6 @@ exports.protect = (req, res, next) => {
     return res.status(401).json({ message: "No token provided" });
   }
 
-  // Expecting format: Bearer TOKEN
   const token = authHeader.split(" ")[1];
 
   if (!token) {
@@ -17,7 +16,6 @@ exports.protect = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Store only user id cleanly
     req.user = { id: decoded.id };
 
     next();
