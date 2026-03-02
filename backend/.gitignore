@@ -1,0 +1,24 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads (if you don't want to store them in GitHub)
+backend/uploads/
+
+# Build folders
+dist/
+build/
+
+# Render local env
+.env.local

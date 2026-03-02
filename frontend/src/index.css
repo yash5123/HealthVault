@@ -1,0 +1,462 @@
+/* =====================================================
+   GLOBAL BASE
+===================================================== */
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #f8fafc, #eef2ff);
+  color: #1e293b;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.brand-gradient {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-dark {
+  color: #1e293b;
+  margin-left: 4px;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+  background: white;
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: white;
+  border-right: 1px solid #e2e8f0;
+  padding: 30px 20px;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+}
+
+/* =====================================================
+   SIDEBAR LINKS
+===================================================== */
+
+.sidebar a {
+  text-decoration: none !important;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  color: #475569;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background: #f1f5f9;
+}
+
+.sidebar-link.active {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  color: white;
+  box-shadow: 0 6px 20px rgba(37,99,235,0.2);
+}
+
+/* =====================================================
+   GRID SYSTEM
+===================================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* =====================================================
+   CARD DESIGN
+===================================================== */
+
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* =====================================================
+   DASHBOARD CARDS
+===================================================== */
+
+.dashboard-card {
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  opacity: 0.08;
+  border-radius: 50%;
+}
+
+.dashboard-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.dashboard-card p {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dashboard-card.warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.dashboard-card.danger {
+  border-left: 4px solid #ef4444;
+}
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+input {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+button {
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124,58,237,0.3);
+}
+
+button.danger-btn {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.progress-container {
+  margin-top: 14px;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  transition: width 0.4s ease;
+}
+
+.progress-danger {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+.badge {
+  margin-top: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.badge.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =====================================================
+   NOTIFICATION BANNER
+===================================================== */
+
+.notification-banner {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* =====================================================
+   FLOATING GRADIENT SHAPES
+===================================================== */
+
+.app-wrapper {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.floating-shape {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  z-index: -1;
+  animation: float 10s infinite alternate ease-in-out;
+}
+
+.shape1 {
+  width: 300px;
+  height: 300px;
+  background: #2563eb;
+  top: -100px;
+  left: -100px;
+}
+
+.shape2 {
+  width: 250px;
+  height: 250px;
+  background: #7c3aed;
+  bottom: -100px;
+  right: -100px;
+}
+
+.shape3 {
+  width: 200px;
+  height: 200px;
+  background: #ec4899;
+  top: 50%;
+  left: 60%;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(40px); }
+}
+
+/* =====================================================
+   PAGE TRANSITIONS
+===================================================== */
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 300ms ease;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: 300ms ease;
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* =========================================
+   MEDICINE CARD PROFESSIONAL STYLE
+========================================= */
+
+.medicine-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.medicine-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.medicine-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.medicine-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.medicine-details div {
+  flex: 1;
+}
+
+.medicine-details label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.medicine-details p {
+  margin: 5px 0 0;
+  font-weight: 500;
+}
+
+.medicine-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ================= DOCUMENT ACTION BUTTONS ================= */
+
+.doc-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* space between View and Delete */
+  margin-top: 12px;
+}
+
+/* View button styled like real button */
+.doc-actions a {
+  text-decoration: none;        /* remove underline */
+  font-size: 15px;              /* increase font size */
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  transition: 0.3s ease;
+}
+
+.doc-actions a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Delete button */
+.doc-actions button {
+  font-size: 15px;              /* increase font size */
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #ef4444;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.doc-actions button:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
