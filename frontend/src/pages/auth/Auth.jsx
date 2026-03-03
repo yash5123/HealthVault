@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import API from "../../services/api";
 import "../../styles/auth.css";
 
 export default function Auth() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // ✅ IMPORTANT
 
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -34,8 +36,8 @@ export default function Auth() {
 
       const res = await API.post(endpoint, form);
 
-      // Save token
-      localStorage.setItem("token", res.data.token);
+      // ✅ Update AuthContext (not just localStorage)
+      login(res.data.token);
 
       // Redirect to dashboard
       navigate("/");
@@ -52,7 +54,6 @@ export default function Auth() {
 
   return (
     <div className="auth-wrapper">
-
       <div className="auth-blob blob1"></div>
       <div className="auth-blob blob2"></div>
 
