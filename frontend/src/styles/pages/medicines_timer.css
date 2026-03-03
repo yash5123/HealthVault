@@ -1,0 +1,82 @@
+/* ======================================================
+   MEDICINE TIMER PAGE
+   Energetic & Active
+====================================================== */
+
+.page-medicine-timer {
+  position: relative;
+}
+
+/* ===============================
+   HEADER PERSONALITY
+================================ */
+
+.page-medicine-timer .page-title {
+  background: linear-gradient(
+    90deg,
+    #00e5c3,
+    #3b82f6
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===============================
+   PAGE AURA (Subtle Energy)
+================================ */
+
+.page-medicine-timer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 15% 15%,
+    rgba(0,229,195,0.06),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* ===============================
+   GRID SPACING
+================================ */
+
+.medicine-grid {
+  margin-top: 40px;
+}
+
+/* ===============================
+   CARD PERSONALITY
+================================ */
+
+.page-medicine-timer .medicine-card:hover {
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.1),
+    0 0 25px rgba(0,229,195,0.12);
+}
+
+/* ===============================
+   SEVERITY EDGE ACCENT
+================================ */
+
+.medicine-card.healthy {
+  border-left: 5px solid var(--success);
+}
+
+.medicine-card.low {
+  border-left: 5px solid var(--warning);
+}
+
+.medicine-card.critical {
+  border-left: 5px solid var(--critical);
+}
+
+/* ===============================
+   ACTION AREA SPACING
+================================ */
+
+.medicine-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}

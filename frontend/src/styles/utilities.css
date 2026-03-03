@@ -1,0 +1,6 @@
+.flex { display: flex; }
+.flex-center { display:flex; align-items:center; justify-content:center; }
+.gap-sm { gap: 10px; }
+.gap-md { gap: 20px; }
+.mt-lg { margin-top: 40px; }
+.text-muted { color: var(--text-muted); }

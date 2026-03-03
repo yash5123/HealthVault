@@ -1,103 +1,137 @@
-import { useState, useContext } from "react";
-import API from "../../services/api";
-import { AuthContext } from "../../context/AuthContext";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../../services/api";
+import "../../styles/auth.css";
 
 export default function Auth() {
+  const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [form, setForm] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
   });
 
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async () => {
+    setLoading(true);
+    setError("");
+
     try {
-      if (isLogin) {
-        // LOGIN
-        const res = await API.post("/api/auth/login", {
-          email: form.email,
-          password: form.password
-        });
+      const endpoint = isLogin
+        ? "/api/auth/login"
+        : "/api/auth/register";
 
-        login(res.data.token);
-        navigate("/");
-      } else {
-        // REGISTER
-        const res = await API.post("/api/auth/register", form);
+      const res = await API.post(endpoint, form);
 
-        // auto login after register
-        login(res.data.token);
-        navigate("/");
-      }
+      // Save token
+      localStorage.setItem("token", res.data.token);
+
+      // Redirect to dashboard
+      navigate("/");
 
     } catch (err) {
-      alert(err.response?.data?.message || "Authentication failed");
+      setError(
+        err.response?.data?.message ||
+        "Something went wrong"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: 40, maxWidth: 400, margin: "auto" }}>
-      <h2>{isLogin ? "Login" : "Register"}</h2>
+    <div className="auth-wrapper">
 
-      {!isLogin && (
-        <>
+      <div className="auth-blob blob1"></div>
+      <div className="auth-blob blob2"></div>
+
+      <div className="auth-left">
+        <div className="auth-brand">
+          <h1>MedVault</h1>
+          <p>
+            Manage medicines, track stock,
+            schedule checkups, and store
+            documents securely.
+          </p>
+        </div>
+      </div>
+
+      <div className="auth-right">
+        <div className="auth-card">
+          <h2>{isLogin ? "Login" : "Register"}</h2>
+
+          {!isLogin && (
+            <input
+              name="name"
+              className="auth-input"
+              placeholder="Full Name"
+              onChange={handleChange}
+            />
+          )}
+
           <input
-            type="text"
-            placeholder="Name"
-            value={form.name}
-            onChange={(e) =>
-              setForm({ ...form, name: e.target.value })
-            }
+            name="email"
+            className="auth-input"
+            placeholder="Email"
+            onChange={handleChange}
           />
-          <br /><br />
-        </>
-      )}
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={(e) =>
-          setForm({ ...form, email: e.target.value })
-        }
-      />
-      <br /><br />
+          <input
+            name="password"
+            type="password"
+            className="auth-input"
+            placeholder="Password"
+            onChange={handleChange}
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={(e) =>
-          setForm({ ...form, password: e.target.value })
-        }
-      />
-      <br /><br />
+          {error && (
+            <p style={{ color: "#ef4444", fontSize: 13 }}>
+              {error}
+            </p>
+          )}
 
-      <button onClick={handleSubmit}>
-        {isLogin ? "Login" : "Register"}
-      </button>
+          <button
+            className="auth-btn"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading
+              ? "Please wait..."
+              : isLogin
+              ? "Login"
+              : "Register"}
+          </button>
 
-      <p style={{ marginTop: 20 }}>
-        {isLogin
-          ? "Don't have an account?"
-          : "Already have an account?"}
-
-        <span
-          onClick={() => setIsLogin(!isLogin)}
-          style={{
-            color: "blue",
-            cursor: "pointer",
-            marginLeft: 5
-          }}
-        >
-          {isLogin ? "Register" : "Login"}
-        </span>
-      </p>
+          <div className="auth-link">
+            {isLogin ? (
+              <>
+                Don't have an account?{" "}
+                <span onClick={() => setIsLogin(false)}>
+                  Register
+                </span>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <span onClick={() => setIsLogin(true)}>
+                  Login
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

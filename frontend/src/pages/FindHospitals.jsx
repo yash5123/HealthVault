@@ -4,7 +4,6 @@ import {
   fetchHospitalsFromOSM,
   calculateDistance,
 } from "../utils/geoUtils";
-import "./hospitals.css";
 
 export default function FindHospitals() {
   const [location, setLocation] = useState(null);

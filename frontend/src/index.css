@@ -456,7 +456,3 @@ button.danger-btn {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
 }
-
-body {
-  font-family: 'Inter', sans-serif;
-}

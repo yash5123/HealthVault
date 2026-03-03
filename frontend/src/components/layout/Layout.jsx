@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import "./layout.css";
+import "../../styles/layout.css";
 
 export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -17,18 +17,29 @@ export default function Layout({ children }) {
   return (
     <div className="app-container">
 
-      <div className="floating-shape shape1"></div>
-      <div className="floating-shape shape2"></div>
+      {/* === BACKGROUND ORBS === */}
+      <div className="floating-orb orb-1"></div>
+      <div className="floating-orb orb-2"></div>
 
       {/* ================= SIDEBAR ================= */}
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
 
+        {/* HEADER */}
         <div className="sidebar-header">
           <div className="logo">
-            💜 <span>MedVault</span>
+            💜 {!collapsed && <span>MedVault</span>}
           </div>
+
+          {/* Collapse Button */}
+          <button
+            className="collapse-btn"
+            onClick={() => setCollapsed(!collapsed)}
+          >
+            {collapsed ? "➡" : "⬅"}
+          </button>
         </div>
 
+        {/* NAVIGATION */}
         <nav className="nav-links">
 
           <NavLink to="/" end>
@@ -63,6 +74,7 @@ export default function Layout({ children }) {
 
         </nav>
 
+        {/* FOOTER */}
         <div className="sidebar-footer">
 
           {!collapsed && (
@@ -90,7 +102,9 @@ export default function Layout({ children }) {
 
       {/* ================= MAIN CONTENT ================= */}
       <main className="main-content">
-        {children}
+        <div className="page-container">
+          {children}
+        </div>
       </main>
 
     </div>

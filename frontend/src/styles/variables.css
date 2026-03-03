@@ -1,0 +1,67 @@
+:root {
+
+  /* ===========================
+     COLOR SYSTEM
+  ============================ */
+
+  --bg-main: #f6f9fc;
+  --bg-soft: #ffffff;
+
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.85);
+
+  --primary: #00e5c3;
+  --primary-dark: #00cbb0;
+  --secondary: #3b82f6;
+
+  --critical: #ff4d6d;
+  --warning: #f59e0b;
+  --success: #22c55e;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+
+  /* ===========================
+     GLOW SYSTEM
+  ============================ */
+
+  --glow-primary: 0 0 25px rgba(0, 229, 195, 0.35);
+  --glow-secondary: 0 0 25px rgba(59, 130, 246, 0.35);
+  --glow-critical: 0 0 25px rgba(255, 77, 109, 0.35);
+
+  /* ===========================
+     SHADOWS
+  ============================ */
+
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.08);
+  --shadow-deep: 0 25px 60px rgba(0, 0, 0, 0.12);
+
+  /* ===========================
+     RADIUS
+  ============================ */
+
+  --radius-xl: 24px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+
+  /* ===========================
+     TRANSITIONS
+  ============================ */
+
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===============================
+   PAGE ACCENTS
+================================ */
+
+:root {
+  --accent-medicines: #00e5c3;
+  --accent-lowstock: #ff4d6d;
+  --accent-checkup: #3b82f6;
+  --accent-documents: #8b5cf6;
+  --accent-hospital: #06b6d4;
+}
