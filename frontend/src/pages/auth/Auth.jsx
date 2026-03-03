@@ -29,8 +29,8 @@ export default function Auth() {
 
     try {
       const endpoint = isLogin
-        ? "/api/auth/login"
-        : "/api/auth/register";
+        ? "/auth/login"
+        : "/auth/register";
 
       const res = await API.post(endpoint, form);
 

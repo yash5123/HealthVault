@@ -13,7 +13,7 @@ export default function Register() {
 
   const handleRegister = async () => {
     try {
-      const res = await API.post("/api/auth/register", form);
+      const res = await API.post("/auth/register", form);
 
       alert(res.data.message);
       navigate("/login");
