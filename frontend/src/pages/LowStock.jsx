@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import API from "../services/api";
 import { fetchMedicines } from "../queries/medicinesQuery";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import "../styles/pages/lowstock.css";
 
 export default function LowStock() {
 
@@ -120,68 +121,93 @@ export default function LowStock() {
   /* ================= RENDER ================= */
 
   return (
+    <div className="page-lowstock">
 
-    <>
-      <h2>🚨 Stock Alert System</h2>
+      {/* HEADER */}
 
-      {/* SUMMARY */}
+      <div className="page-header">
+        <h1 className="page-title">🚨 Stock Alert System</h1>
+        <p className="page-subtitle">
+          Monitor medicine inventory and refill before it runs out.
+        </p>
+      </div>
 
-      <div className="grid">
 
-        <div className="card card-critical">
-          <h3>Critical</h3>
-          <p>{criticalCount}</p>
+      {/* STATS */}
+
+      <div className="stats-panel">
+
+        <div className="stat-card critical">
+          <span className="stat-title">CRITICAL</span>
+          <h2>{criticalCount}</h2>
         </div>
 
-        <div className="card">
-          <h3>Low</h3>
-          <p>{lowCount}</p>
+        <div className="stat-card low">
+          <span className="stat-title">LOW</span>
+          <h2>{lowCount}</h2>
         </div>
 
-        <div className="card">
-          <h3>Healthy</h3>
-          <p>{healthyCount}</p>
+        <div className="stat-card healthy">
+          <span className="stat-title">HEALTHY</span>
+          <h2>{healthyCount}</h2>
         </div>
 
       </div>
 
-      {/* CONTROLS */}
 
-      <div className="card" style={{ marginTop: 30 }}>
+      {/* SEARCH PANEL */}
 
-        <div className="grid">
+      <div className="search-panel">
 
-          <input
-            placeholder="Search medicine..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        <div className="search-grid">
 
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option value="ALL">All</option>
-            <option value="CRITICAL">Critical</option>
-            <option value="LOW">Low</option>
-            <option value="HEALTHY">Healthy</option>
-          </select>
+          <div className="search-field">
+            <label>Search Medicine</label>
+            <input
+              placeholder="Search medicine..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
 
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-          >
-            <option value="CRITICAL_FIRST">Critical First</option>
-            <option value="ALPHABETICAL">Alphabetical</option>
-          </select>
+          <div className="search-field">
+            <label>Status</label>
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="ALL">All</option>
+              <option value="CRITICAL">Critical</option>
+              <option value="LOW">Low</option>
+              <option value="HEALTHY">Healthy</option>
+            </select>
+          </div>
+
+          <div className="search-field">
+            <label>Sort</label>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+            >
+              <option value="CRITICAL_FIRST">Critical First</option>
+              <option value="ALPHABETICAL">Alphabetical</option>
+            </select>
+          </div>
 
         </div>
 
       </div>
+      
+      {processedData.length === 0 && (
+        <div className="empty-state">
+          <h3>No medicines found</h3>
+          <p>Try adjusting search or filter settings.</p>
+        </div>
+      )}
 
       {/* MEDICINE LIST */}
 
-      <div style={{ marginTop: 40 }}>
+      <div className="medicine-grid">
 
         {processedData.map((med) => {
 
@@ -197,39 +223,49 @@ export default function LowStock() {
 
             <div
               key={med._id}
-              className={`card ${level === "CRITICAL" ? "card-critical" : ""}`}
-              style={{ marginBottom: 25 }}
+              className={`medicine-card ${level.toLowerCase()}`}
             >
 
-              <h3>{med.name}</h3>
+              <div className="medicine-card-header">
+                <h3>{med.name}</h3>
+              </div>
 
-              <p>Current Quantity: {med.quantity}</p>
-              <p>Estimated Days Remaining: {days >= 0 ? days : 0}</p>
+              <div className="medicine-card-details">
 
-              {/* PREMIUM PROGRESS BAR */}
+                <div>
+                  <label>Quantity</label>
+                  <p>{med.quantity}</p>
+                </div>
 
-              <div className="progress-container">
+                <div>
+                  <label>Days Remaining</label>
+                  <p>{days >= 0 ? days : 0}</p>
+                </div>
+
+              </div>
+
+
+              <div className="medicine-progress">
 
                 <div
-                  className={`progress-bar ${
-                    level === "CRITICAL"
-                      ? "progress-critical"
-                      : level === "LOW"
-                      ? "progress-low"
-                      : "progress-healthy"
-                  }`}
+                  className="medicine-progress-bar"
                   style={{ width: `${percentage}%` }}
                 />
 
               </div>
 
-              <div style={{ marginTop: 18, display: "flex", gap: 12 }}>
 
-                <button onClick={() => restockMedicine(med, 10)}>
+              <div className="medicine-actions">
+
+                <button
+                  onClick={() => restockMedicine(med, 10)}
+                >
                   +10 Refill
                 </button>
 
-                <button onClick={() => restockMedicine(med, 30)}>
+                <button
+                  onClick={() => restockMedicine(med, 30)}
+                >
                   +30 Refill
                 </button>
 
@@ -243,9 +279,10 @@ export default function LowStock() {
 
       </div>
 
+
       {/* REFILL HISTORY */}
 
-      <div style={{ marginTop: 50 }}>
+      <div className="refill-history">
 
         <h3>📦 Refill History</h3>
 
@@ -255,7 +292,7 @@ export default function LowStock() {
 
         {refillHistory.map((item, index) => (
 
-          <div key={index} className="card">
+          <div key={index} className="history-item">
 
             <p>
               {item.name} refilled by {item.amount} units
@@ -268,6 +305,7 @@ export default function LowStock() {
         ))}
 
       </div>
-    </>
+
+    </div>
   );
 }

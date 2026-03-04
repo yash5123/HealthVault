@@ -94,7 +94,7 @@ export default function Layout({ children }) {
 
           <NavLink to="/medicines" onMouseEnter={prefetchMedicines}>
             <span className="icon">💊</span>
-            {!collapsed && <span>Medicine Timer</span>}
+            {!collapsed && <span>Medicines Management </span>}
           </NavLink>
 
           <NavLink to="/lowstock" onMouseEnter={prefetchMedicines}>
