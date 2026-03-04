@@ -29,6 +29,7 @@ export default function Documents() {
   const [file, setFile] = useState(null);
 
   const [message, setMessage] = useState(null);
+  const [deleteId, setDeleteId] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -113,14 +114,16 @@ export default function Documents() {
 
   /* ================= DELETE DOCUMENT ================= */
 
-  const handleDelete = async (id) => {
+  const confirmDelete = async () => {
+
+    if (!deleteId) return;
 
     try {
 
-      await API.delete(`/documents/${id}`);
+      await API.delete(`/documents/${deleteId}`);
 
       queryClient.setQueryData(["documents"], (old = []) =>
-        old.filter((doc) => doc._id !== id)
+        old.filter((doc) => doc._id !== deleteId)
       );
 
       setMessage({
@@ -139,6 +142,7 @@ export default function Documents() {
 
     }
 
+    setDeleteId(null);
   };
 
   /* ================= FILTER DOCUMENTS ================= */
@@ -175,183 +179,216 @@ export default function Documents() {
 
   return (
 
-      <div className="page-documents">
-        <div className="page-content">
+    <div className="page-documents">
+      <div className="page-content">
 
-          {message && (
-            <div className={`glass-toast ${message.type}`}>
-              {message.type === "success" && "✔ "}
-              {message.type === "error" && "⚠ "}
-              {message.text}
-            </div>
-          )}
-
-          {/* ================= HEADER ================= */}
-
-          <div className="page-header">
-            <h1 className="page-title">Document Vault</h1>
-            <p className="page-subtitle">
-              Securely manage prescriptions, lab reports and medical records.
-            </p>
+        {message && (
+          <div className={`glass-toast ${message.type}`}>
+            {message.type === "success" && "✔ "}
+            {message.type === "error" && "⚠ "}
+            {message.text}
           </div>
+        )}
 
-          {/* ================= STATS ================= */}
+        {/* ================= HEADER ================= */}
 
-          {(isLoading || isFetching) ? (
+        <div className="page-header">
+          <h1 className="page-title">Document Vault</h1>
+          <p className="page-subtitle">
+            Securely manage prescriptions, lab reports and medical records.
+          </p>
+        </div>
 
-            <div className="grid">
+        {/* ================= STATS ================= */}
 
-              <div className="stat-card purple">
-                <span>Total Documents</span>
-                <h2>...</h2>
-              </div>
+        {(isLoading || isFetching) ? (
 
-              <div className="stat-card green">
-                <span>Lab Reports</span>
-                <h2>...</h2>
-              </div>
+          <div className="grid">
 
-              <div className="stat-card orange">
-                <span>Prescriptions</span>
-                <h2>...</h2>
-              </div>
-
+            <div className="stat-card purple">
+              <span>Total Documents</span>
+              <h2>...</h2>
             </div>
 
-          ) : (
-
-            <div className="grid">
-
-              <div className="stat-card purple">
-                <span>Total Documents</span>
-                <h2>{stats.total}</h2>
-              </div>
-
-              <div className="stat-card green">
-                <span>Lab Reports</span>
-                <h2>{stats.lab}</h2>
-              </div>
-
-              <div className="stat-card orange">
-                <span>Prescriptions</span>
-                <h2>{stats.prescription}</h2>
-              </div>
-
+            <div className="stat-card green">
+              <span>Lab Reports</span>
+              <h2>...</h2>
             </div>
 
-          )}
-
-          {/* ================= UPLOAD SECTION ================= */}
-
-          <div className="card upload-section">
-
-            <h2 className="section-title">Upload New Document</h2>
-
-            <div className="grid">
-
-              <input
-                type="text"
-                placeholder="Document Title"
-                className="form-input"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-
-              <select
-                className="form-input"
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option>Lab Report</option>
-                <option>Prescription</option>
-                <option>Other</option>
-              </select>
-
-              <div className="file-upload-premium">
-
-                <button
-                  type="button"
-                  className="file-upload-btn"
-                  onClick={() => fileInputRef.current.click()}
-                >
-                  Upload File
-                </button>
-
-                {file ? (
-                  <div className="file-chip">
-                    📄 {file.name}
-
-                    <button
-                      type="button"
-                      className="file-remove"
-                      onClick={() => {
-                        setFile(null);
-                        if (fileInputRef.current) fileInputRef.current.value = "";
-                      }}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ) : (
-                  <span className="file-upload-name">No file selected</span>
-                )}
-
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileChange}
-                  hidden
-                />
-
-              </div>
-
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={handleUpload}
-              >
-                Upload Document
-              </button>
-
+            <div className="stat-card orange">
+              <span>Prescriptions</span>
+              <h2>...</h2>
             </div>
 
           </div>
 
-          {/* ================= SEARCH ================= */}
+        ) : (
 
-          <div className="search-section">
+          <div className="grid">
+
+            <div className="stat-card purple">
+              <span>Total Documents</span>
+              <h2>{stats.total}</h2>
+            </div>
+
+            <div className="stat-card green">
+              <span>Lab Reports</span>
+              <h2>{stats.lab}</h2>
+            </div>
+
+            <div className="stat-card orange">
+              <span>Prescriptions</span>
+              <h2>{stats.prescription}</h2>
+            </div>
+
+          </div>
+
+        )}
+
+        {/* ================= UPLOAD SECTION ================= */}
+
+        <div className="card upload-section">
+
+          <h2 className="section-title">Upload New Document</h2>
+
+          <div className="grid">
 
             <input
               type="text"
-              placeholder="Search documents..."
+              placeholder="Document Title"
               className="form-input"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
 
-          </div>
+            <select
+              className="form-input"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option>Lab Report</option>
+              <option>Prescription</option>
+              <option>Other</option>
+            </select>
 
-          {/* ================= DOCUMENT LIST ================= */}
+            <div className="file-upload-premium">
 
-          <div className="grid document-grid">
+              <button
+                type="button"
+                className="file-upload-btn"
+                onClick={() => fileInputRef.current.click()}
+              >
+                Upload File
+              </button>
 
-            {!(isLoading || isFetching) && filteredDocs.length === 0 && (
-              <p className="empty-text">No documents uploaded yet.</p>
-            )}
+              {file ? (
+                <div className="file-chip">
+                  📄 {file.name}
 
-            {filteredDocs.map((doc) => (
-              <DocumentCard
-                key={doc._id}
-                doc={doc}
-                onDelete={handleDelete}
+                  <button
+                    type="button"
+                    className="file-remove"
+                    onClick={() => {
+                      setFile(null);
+                      if (fileInputRef.current) fileInputRef.current.value = "";
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <span className="file-upload-name">No file selected</span>
+              )}
+
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                hidden
               />
-            ))}
+
+            </div>
+
+            <button
+              type="button"
+              className="btn-primary"
+              onClick={handleUpload}
+            >
+              Upload Document
+            </button>
 
           </div>
 
         </div>
 
+        {/* ================= SEARCH ================= */}
+
+        <div className="search-section">
+
+          <input
+            type="text"
+            placeholder="Search documents..."
+            className="form-input"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+        </div>
+
+        {/* ================= DOCUMENT LIST ================= */}
+
+        <div className="grid document-grid">
+
+          {!(isLoading || isFetching) && filteredDocs.length === 0 && (
+            <p className="empty-text">No documents uploaded yet.</p>
+          )}
+
+          {filteredDocs.map((doc) => (
+            <DocumentCard
+              key={doc._id}
+              doc={doc}
+              onDelete={(id) => setDeleteId(id)}
+            />
+          ))}
+
+        </div>
+
+        {deleteId && (
+          <div className="modal-overlay">
+
+            <div className="delete-modal">
+
+              <h3>
+                Delete "{documents.find(d => d._id === deleteId)?.title}"?
+              </h3>
+
+              <p>This action cannot be undone.</p>
+
+              <div className="modal-actions">
+
+                <button
+                  className="modal-cancel"
+                  onClick={() => setDeleteId(null)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="modal-delete"
+                  onClick={confirmDelete}
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+        )}
       </div>
+
+    </div>
 
   );
 }

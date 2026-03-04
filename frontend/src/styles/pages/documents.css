@@ -804,3 +804,115 @@
   }
 
 }
+
+/* ==========================================================
+   DELETE CONFIRMATION MODAL
+========================================================== */
+
+.page-documents .modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+.page-documents .delete-modal {
+
+  width: 420px;
+  padding: 32px;
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.95),
+    rgba(255,255,255,0.85)
+  );
+
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,0.7);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.15),
+    inset 0 0 40px rgba(255,255,255,0.4);
+
+  text-align: center;
+
+  animation: modalAppear .25s ease;
+}
+
+.page-documents .delete-modal h3 {
+  font-size: 20px;
+  font-weight: 700;
+
+  background: linear-gradient(90deg,#6366f1,#8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  margin-bottom: 12px;
+}
+
+.page-documents .delete-modal p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 26px;
+}
+
+.page-documents .modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.page-documents .modal-cancel {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+
+  background: rgba(0,0,0,0.06);
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-documents .modal-delete {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+
+  background: #ef4444;
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-documents .modal-delete:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(239,68,68,0.5);
+}
+
+@keyframes modalAppear {
+
+  from{
+    opacity:0;
+    transform:scale(.92);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+
+}
+
