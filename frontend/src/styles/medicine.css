@@ -1120,33 +1120,7 @@
   gap: 16px;
 }
 
-.page-medicines .modal-cancel {
-  padding: 12px 22px;
-  border-radius: 999px;
-  border: none;
 
-  background: rgba(0, 0, 0, 0.06);
-
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.page-medicines .modal-delete {
-  padding: 12px 24px;
-  border-radius: 999px;
-  border: none;
-
-  background: linear-gradient(90deg,
-      #ff4d4d,
-      #ff1a1a,
-      #dc2626);
-
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-
-  transition: all .35s ease;
-}
 
 .page-medicines .modal-delete:hover {
   transform: translateY(-2px);
