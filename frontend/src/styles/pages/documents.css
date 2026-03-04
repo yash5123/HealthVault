@@ -823,7 +823,7 @@
   align-items: center;
   justify-content: center;
 
-  z-index: 99999;
+  z-index: 999999; /* higher than sidebar */
 }
 
 .delete-modal {
