@@ -785,4 +785,21 @@
   background: transparent;
 }
 
-  
+.message-banner {
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.message-banner.success {
+  background: #e6fffa;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.message-banner.error {
+  background: #fff5f5;
+  color: #7f1d1d;
+  border: 1px solid #ef4444;
+}

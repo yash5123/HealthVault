@@ -14,6 +14,8 @@ export default function Documents() {
   const [type, setType] = useState("Lab Report");
   const [file, setFile] = useState(null);
 
+  const [message, setMessage] = useState(null);
+
   const fileInputRef = useRef(null);
 
 
@@ -39,7 +41,7 @@ export default function Documents() {
     const selectedFile = e.target.files[0];
 
     if (!selectedFile) {
-      alert("No file selected");
+      setMessage({ type: "error", text: "No file selected" });
       return;
     }
 
@@ -52,26 +54,28 @@ export default function Documents() {
   const handleUpload = async () => {
 
     if (!title.trim()) {
-      alert("Please enter document title");
+      setMessage({ type: "error", text: "Please enter document title" });
       return;
     }
 
     if (!file) {
-      alert("Please select a file");
+      setMessage({ type: "error", text: "Please select a file" });
       return;
     }
 
     try {
 
       const formData = new FormData();
-
       formData.append("title", title);
       formData.append("type", type);
       formData.append("file", file);
 
       await API.post("/documents", formData);
 
-      alert("Document uploaded successfully!");
+      setMessage({
+        type: "success",
+        text: "Document uploaded successfully"
+      });
 
       setTitle("");
       setType("Lab Report");
@@ -87,13 +91,41 @@ export default function Documents() {
 
       console.error("Upload error:", err);
 
-      if (err.response) {
-        alert(err.response.data.message || "Upload failed");
-      } else {
-        alert("Upload failed");
-      }
+      setMessage({
+        type: "error",
+        text: "Upload failed"
+      });
 
     }
+  };
+
+
+  /* ================= DELETE DOCUMENT ================= */
+
+  const handleDelete = async (id) => {
+
+    try {
+
+      await API.delete(`/documents/${id}`);
+
+      setMessage({
+        type: "success",
+        text: "Document deleted successfully"
+      });
+
+      fetchDocuments();
+
+    } catch (err) {
+
+      console.error("Delete error:", err);
+
+      setMessage({
+        type: "error",
+        text: "Delete failed"
+      });
+
+    }
+
   };
 
 
@@ -127,6 +159,15 @@ export default function Documents() {
     <Layout>
 
       <div className="page-container page-documents">
+
+        {/* ================= MESSAGE ================= */}
+
+        {message && (
+          <div className={`message-banner ${message.type}`}>
+            {message.text}
+          </div>
+        )}
+
 
         {/* ================= HEADER ================= */}
 
@@ -247,6 +288,14 @@ export default function Documents() {
               >
                 View Document
               </a>
+
+              <button
+                className="btn-danger"
+                onClick={() => handleDelete(doc._id)}
+                style={{ marginTop: "10px" }}
+              >
+                Delete
+              </button>
 
             </div>
           ))}
