@@ -45,6 +45,22 @@ export default function Documents() {
     return () => clearTimeout(timer);
   }, [message]);
 
+  /* ================= LOCK SCROLL WHEN MODAL OPEN ================= */
+
+  useEffect(() => {
+
+    if (deleteId) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+
+  }, [deleteId]);
+
 
   /* ================= FILE SELECT ================= */
 
@@ -354,9 +370,15 @@ export default function Documents() {
         </div>
 
         {deleteId && (
-          <div className="modal-overlay">
+          <div
+            className="modal-overlay"
+            onClick={() => setDeleteId(null)}
+          >
 
-            <div className="delete-modal">
+            <div
+              className="delete-modal"
+              onClick={(e) => e.stopPropagation()}
+            >
 
               <h3>
                 Delete "{documents.find(d => d._id === deleteId)?.title}"?
