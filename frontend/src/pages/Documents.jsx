@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import DocumentCard from "../components/documents/DocumentCard";
@@ -20,29 +20,29 @@ export default function Documents() {
   /* ================= AUTO CLEAR MESSAGE ================= */
 
   useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        setMessage(null);
-      }, 3000);
+    if (!message) return;
 
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setMessage(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [message]);
 
   /* ================= FETCH DOCUMENTS ================= */
 
-  useEffect(() => {
-    fetchDocuments();
-  }, []);
-
-  const fetchDocuments = async () => {
+  const fetchDocuments = useCallback(async () => {
     try {
       const res = await API.get("/documents");
       setDocuments(res.data || []);
     } catch (err) {
       console.error("Fetch documents error:", err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchDocuments();
+  }, [fetchDocuments]);
 
   /* ================= FILE SELECT ================= */
 
@@ -149,9 +149,15 @@ export default function Documents() {
 
   /* ================= STATS ================= */
 
-  const total = documents.length;
-  const lab = documents.filter(d => d.type === "Lab Report").length;
-  const prescription = documents.filter(d => d.type === "Prescription").length;
+  const stats = useMemo(() => {
+
+    return {
+      total: documents.length,
+      lab: documents.filter(d => d.type === "Lab Report").length,
+      prescription: documents.filter(d => d.type === "Prescription").length
+    };
+
+  }, [documents]);
 
   return (
     <Layout>
@@ -175,17 +181,17 @@ export default function Documents() {
 
           <div className="stat-card purple">
             <span>Total Documents</span>
-            <h2>{total}</h2>
+            <h2>{stats.total}</h2>
           </div>
 
           <div className="stat-card green">
             <span>Lab Reports</span>
-            <h2>{lab}</h2>
+            <h2>{stats.lab}</h2>
           </div>
 
           <div className="stat-card orange">
             <span>Prescriptions</span>
-            <h2>{prescription}</h2>
+            <h2>{stats.prescription}</h2>
           </div>
 
         </div>

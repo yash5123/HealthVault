@@ -141,7 +141,9 @@
   font-weight: 800;
   letter-spacing: -1px;
   color: var(--text-main);
+
   opacity: 1;
+  transform: none;
 }
 
 
@@ -390,6 +392,7 @@
 
   transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
   overflow: hidden;
+  animation: docFadeIn 0.5s ease forwards;
 }
 
 .page-documents .document-card:hover {
@@ -416,9 +419,6 @@
   }
 }
 
-.page-documents .document-card {
-  animation: docFadeIn 0.5s ease forwards;
-}
 
 
 /* ==========================================================
