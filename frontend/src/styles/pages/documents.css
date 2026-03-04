@@ -366,53 +366,123 @@
   font-size: 15px;
 }
 
-.page-documents .file-upload {
-  position: relative;
-  width: 100%;
-}
+/* ==========================================================
+   PREMIUM FILE INPUT
+========================================================== */
 
-.page-documents .file-upload input {
-  display: none;
-}
-
-.page-documents .file-upload-label {
+.page-documents .file-upload-premium {
+  min-height: 48px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
 
   width: 100%;
-  padding: 14px 18px;
+  padding: 10px 14px;
 
   border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 
   background: rgba(255, 255, 255, 0.9);
-  border: 1px dashed rgba(0, 0, 0, 0.12);
-
-  font-size: 14px;
-  font-weight: 500;
-  color: #334155;
-
-  cursor: pointer;
 
   transition: all 0.25s ease;
 }
 
-/* Hover */
+.page-documents .file-upload-premium:hover {
 
-.page-documents .file-upload-label:hover {
   border-color: #6366f1;
 
-  background: rgba(255, 255, 255, 0.95);
-
   box-shadow:
-    0 8px 20px rgba(99, 102, 241, 0.12);
+    0 6px 18px rgba(99, 102, 241, 0.12);
 }
 
-/* File Selected */
+.page-documents .file-upload-btn {
 
-.page-documents .file-upload-label.selected {
-  border-color: #00e5c3;
-  color: #065f46;
+  border: none;
+  padding: 8px 16px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6);
+
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.page-documents .file-upload-btn:hover {
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(99, 102, 241, 0.35);
+}
+
+.page-documents .file-upload-name {
+
+  font-size: 14px;
+  color: #64748b;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   FILE CHIP (STRIPE STYLE)
+========================================================== */
+
+.page-documents .file-chip {
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 10px;
+
+  border-radius: 10px;
+
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+
+  font-size: 13px;
+  color: #4338ca;
+
+  max-width: 220px;
+
+  overflow: hidden;
+}
+
+.page-documents .file-chip span {
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-documents .file-remove {
+
+  border: none;
+  background: transparent;
+
+  font-size: 12px;
+  cursor: pointer;
+
+  color: #6366f1;
+
+  padding: 2px 4px;
+  border-radius: 6px;
+
+  transition: background 0.2s;
+}
+
+.page-documents .file-remove:hover {
+  background: rgba(99, 102, 241, 0.15);
 }
 
 /* ==========================================================
@@ -459,10 +529,6 @@
     0 22px 60px rgba(0, 0, 0, 0.08),
     0 0 40px rgba(99, 102, 241, 0.15);
 }
-
-
-
-
 
 /* ==========================================================
    EMPTY STATE — Premium Soft Center Panel
@@ -717,4 +783,24 @@
   align-items: center;
   gap: 12px;
   margin-top: 14px;
+}
+
+/* File chip animation */
+
+.page-documents .file-chip {
+  animation: filePop .25s ease;
+}
+
+@keyframes filePop {
+
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+
 }

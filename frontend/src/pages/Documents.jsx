@@ -271,20 +271,42 @@ export default function Documents() {
                 <option>Other</option>
               </select>
 
-              <div className="file-upload">
+              <div className="file-upload-premium">
+
+                <button
+                  type="button"
+                  className="file-upload-btn"
+                  onClick={() => fileInputRef.current.click()}
+                >
+                  Upload File
+                </button>
+
+                {file ? (
+                  <div className="file-chip">
+                    📄 {file.name}
+
+                    <button
+                      type="button"
+                      className="file-remove"
+                      onClick={() => {
+                        setFile(null);
+                        if (fileInputRef.current) fileInputRef.current.value = "";
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ) : (
+                  <span className="file-upload-name">No file selected</span>
+                )}
+
                 <input
                   type="file"
-                  id="fileUpload"
                   ref={fileInputRef}
                   onChange={handleFileChange}
+                  hidden
                 />
 
-                <label
-                  htmlFor="fileUpload"
-                  className={`file-upload-label ${file ? "selected" : ""}`}
-                >
-                  📄 {file ? file.name : "Choose document file"}
-                </label>
               </div>
 
               <button
