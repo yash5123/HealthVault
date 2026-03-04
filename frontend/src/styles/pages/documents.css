@@ -11,6 +11,7 @@
 .page-documents {
   position: relative;
   padding-bottom: 120px;
+  z-index: 1;
 }
 
 /* Subtle Medical Aura Background */
@@ -85,6 +86,9 @@
 
 .stat-card {
   position: relative;
+  z-index: 2;
+  /* ADD THIS */
+
   padding: 30px;
   border-radius: 24px;
 
@@ -141,9 +145,10 @@
   font-weight: 800;
   letter-spacing: -1px;
   color: var(--text-main);
-
-  opacity: 1;
-  transform: none;
+  opacity: 1 !important;
+  visibility: visible !important;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 
@@ -365,6 +370,8 @@
 
 .page-documents .grid {
   margin-top: 30px;
+  position: relative;
+  z-index: 2;
 }
 
 /* ==========================================================
@@ -376,30 +383,27 @@
   padding: 30px;
   border-radius: 24px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.95),
-    rgba(255,255,255,0.85)
-  );
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.85));
 
   backdrop-filter: blur(18px);
 
-  border: 1px solid rgba(255,255,255,0.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 
   box-shadow:
-    0 12px 35px rgba(0,0,0,0.05),
-    inset 0 0 30px rgba(255,255,255,0.5);
+    0 12px 35px rgba(0, 0, 0, 0.05),
+    inset 0 0 30px rgba(255, 255, 255, 0.5);
 
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  animation: docFadeIn 0.5s ease forwards;
 }
 
 .page-documents .document-card:hover {
   transform: translateY(-6px);
   box-shadow:
-    0 22px 60px rgba(0,0,0,0.08),
-    0 0 40px rgba(99,102,241,0.15);
+    0 22px 60px rgba(0, 0, 0, 0.08),
+    0 0 40px rgba(99, 102, 241, 0.15);
 }
 
 
@@ -619,17 +623,17 @@
   margin-top: 12px;
 }
 
-.page-documents .document-card:hover::after{
-  opacity:.8;
+.page-documents .document-card:hover::after {
+  opacity: .8;
 }
 
 
-.page-documents .document-card{
-  transform-style:preserve-3d;
+.page-documents .document-card {
+  transform-style: preserve-3d;
 }
 
-.page-documents .document-card:hover{
-  transform:translateY(-6px) scale(1.02);
+.page-documents .document-card:hover {
+  transform: translateY(-6px) scale(1.02);
 }
 
 .document-card .actions {
@@ -638,4 +642,3 @@
   gap: 12px;
   margin-top: 14px;
 }
-

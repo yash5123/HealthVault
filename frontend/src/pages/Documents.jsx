@@ -164,106 +164,110 @@ export default function Documents() {
 
       <div className="page-container page-documents">
 
-        {message && (
-          <div className={`message-banner ${message.type}`}>
-            {message.text}
+        <div className="page-content">
+
+          {message && (
+            <div className={`message-banner ${message.type}`}>
+              {message.text}
+            </div>
+          )}
+
+          <div className="page-header">
+            <h1 className="page-title">Document Vault</h1>
+            <p className="page-subtitle">
+              Securely manage prescriptions, lab reports and medical records.
+            </p>
           </div>
-        )}
-
-        <div className="page-header">
-          <h1 className="page-title">Document Vault</h1>
-          <p className="page-subtitle">
-            Securely manage prescriptions, lab reports and medical records.
-          </p>
-        </div>
-
-        <div className="grid">
-
-          <div className="stat-card purple">
-            <span>Total Documents</span>
-            <h2>{stats.total}</h2>
-          </div>
-
-          <div className="stat-card green">
-            <span>Lab Reports</span>
-            <h2>{stats.lab}</h2>
-          </div>
-
-          <div className="stat-card orange">
-            <span>Prescriptions</span>
-            <h2>{stats.prescription}</h2>
-          </div>
-
-        </div>
-
-        <div className="card upload-section">
-
-          <h2 className="section-title">Upload New Document</h2>
 
           <div className="grid">
 
-            <input
-              type="text"
-              placeholder="Document Title"
-              className="form-input"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+            <div className="stat-card purple">
+              <span>Total Documents</span>
+              <h2>{stats.total}</h2>
+            </div>
 
-            <select
-              className="form-input"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
-              <option>Lab Report</option>
-              <option>Prescription</option>
-              <option>Other</option>
-            </select>
+            <div className="stat-card green">
+              <span>Lab Reports</span>
+              <h2>{stats.lab}</h2>
+            </div>
 
-            <input
-              type="file"
-              className="form-input"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-            />
-
-            <button
-              type="button"
-              className="btn-primary"
-              onClick={handleUpload}
-            >
-              Upload Document
-            </button>
+            <div className="stat-card orange">
+              <span>Prescriptions</span>
+              <h2>{stats.prescription}</h2>
+            </div>
 
           </div>
 
-        </div>
+          <div className="card upload-section">
 
-        <div className="search-section">
+            <h2 className="section-title">Upload New Document</h2>
 
-          <input
-            type="text"
-            placeholder="Search documents..."
-            className="form-input"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+            <div className="grid">
 
-        </div>
+              <input
+                type="text"
+                placeholder="Document Title"
+                className="form-input"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
 
-        <div className="grid document-grid">
+              <select
+                className="form-input"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
+                <option>Lab Report</option>
+                <option>Prescription</option>
+                <option>Other</option>
+              </select>
 
-          {filteredDocs.length === 0 && (
-            <p className="empty-text">No documents uploaded yet.</p>
-          )}
+              <input
+                type="file"
+                className="form-input"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+              />
 
-          {filteredDocs.map((doc) => (
-            <DocumentCard
-              key={doc._id}
-              doc={doc}
-              onDelete={handleDelete}
+              <button
+                type="button"
+                className="btn-primary"
+                onClick={handleUpload}
+              >
+                Upload Document
+              </button>
+
+            </div>
+
+          </div>
+
+          <div className="search-section">
+
+            <input
+              type="text"
+              placeholder="Search documents..."
+              className="form-input"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
-          ))}
+
+          </div>
+
+          <div className="grid document-grid">
+
+            {filteredDocs.length === 0 && (
+              <p className="empty-text">No documents uploaded yet.</p>
+            )}
+
+            {filteredDocs.map((doc) => (
+              <DocumentCard
+                key={doc._id}
+                doc={doc}
+                onDelete={handleDelete}
+              />
+            ))}
+
+          </div>
 
         </div>
 

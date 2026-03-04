@@ -2,17 +2,6 @@
    GLOBAL CARD SYSTEM (Unified)
 ============================================ */
 
-.card {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(18px);
-  border-radius: 18px;
-  padding: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.05),
-    0 0 40px rgba(0, 200, 255, 0.05);
-  transition: all 0.3s ease;
-}
 
 .card:hover {
   transform: translateY(-4px);
@@ -126,12 +115,6 @@
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* ===============================
    PAGE LOADER OVERLAY
 ================================ */
@@ -168,14 +151,7 @@
 
 /* ===== Base Card (Layer 1) ===== */
 
-.card {
-  background: var(--glass-bg, #ffffff);
-  border-radius: 20px;
-  padding: 28px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
-}
+
 
 .card:hover {
   transform: translateY(-4px);
@@ -185,21 +161,6 @@
 
 /* ===== KPI Panels (Layer 2) ===== */
 
-.ai-panel {
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.95),
-    rgba(255,255,255,0.85)
-  );
-  backdrop-filter: blur(14px);
-  border-radius: 24px;
-  padding: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 
-    0 10px 35px rgba(0,0,0,0.06),
-    0 0 0 rgba(0,0,0,0);
-  transition: all 0.35s ease;
-}
 
 .ai-panel:hover {
   transform: translateY(-6px);
@@ -282,19 +243,6 @@
 
 /* ========== KPI PANELS (Layer 2) ========== */
 
-.ai-panel {
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.98),
-    rgba(255,255,255,0.9)
-  );
-  backdrop-filter: blur(12px);
-  border-radius: 24px;
-  padding: 30px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
-  transition: all 0.35s ease;
-}
 
 .ai-panel:hover {
   transform: translateY(-6px);
