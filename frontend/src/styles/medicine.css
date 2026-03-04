@@ -385,7 +385,7 @@
 }
 
 /* Base button */
-.page-medicines .btn {
+.btn {
   padding: 14px 26px;
   border-radius: 999px;
   border: none;
@@ -398,34 +398,34 @@
 }
 
 /* Primary */
-.page-medicines .btn-primary {
+.btn-primary {
   background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
   color: white;
 }
 
-.page-medicines .btn-primary:hover {
+.btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(99, 102, 241, 0.35), 0 0 30px rgba(139, 92, 246, 0.3);
 }
 
-.page-medicines .btn-primary:active {
+.btn-primary:active {
   transform: translateY(0);
   box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
 }
 
 /* Secondary */
-.page-medicines .btn-secondary {
+.btn-secondary {
   background: rgba(0, 0, 0, 0.05);
   color: #0f172a;
 }
 
-.page-medicines .btn-secondary:hover {
+.btn-secondary:hover {
   background: rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
 /* Shine effect */
-.page-medicines .btn-primary::after {
+.btn-primary::after {
   content: "";
   position: absolute;
   top: 0;
@@ -436,7 +436,7 @@
   transition: all 0.6s ease;
 }
 
-.page-medicines .btn-primary:hover::after {
+.btn-primary:hover::after {
   left: 120%;
 }
 
@@ -1028,13 +1028,9 @@
    MEDICINE DELETE CONFIRMATION MODAL
    Scoped Only To Medicines Page
 ========================================================== */
-
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
 
   background: rgba(15, 23, 42, 0.55);
 
@@ -1046,8 +1042,6 @@
   justify-content: center;
 
   z-index: 999999;
-
-  pointer-events: all;
 }
 
 .modal-container {
@@ -1090,12 +1084,7 @@
 }
 
 
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-}
-
-.page-medicines .btn-danger {
+.btn-danger {
   background: linear-gradient(90deg,
       #ff4d4d,
       #ff1a1a,

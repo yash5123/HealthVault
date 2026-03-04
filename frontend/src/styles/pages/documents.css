@@ -809,7 +809,7 @@
    DELETE CONFIRMATION MODAL
 ========================================================== */
 
-.page-documents .modal-overlay {
+.modal-overlay {
   position: fixed;
   inset: 0;
 
@@ -828,7 +828,7 @@
   pointer-events: all;
 }
 
-.delete-modal {
+.modal-container {
   width: min(520px, 90%);
   padding: 40px;
 
@@ -851,7 +851,7 @@
   animation: modalAppear .25s cubic-bezier(.2, .8, .2, 1);
 }
 
-.delete-modal h3 {
+.modal-container h3 {
   font-weight: 700;
   font-size: 22px;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
@@ -861,12 +861,11 @@
   margin-bottom: 12px;
 }
 
-.delete-modal p {
+.modal-body {
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 26px;
 }
-
 .modal-actions {
   display: flex;
   justify-content: center;
@@ -896,7 +895,7 @@
   cursor: pointer;
 }
 
-.page-documents .modal-delete:hover {
+.modal-delete:hover {
   transform: translateY(-2px);
 
   box-shadow:

@@ -611,11 +611,10 @@
 }
 
 .page-lowstock .medicine-progress-bar {
-
   height: 100%;
   border-radius: 999px;
   transition: width .5s ease;
-
+  will-change: width;
 }
 
 .page-lowstock .medicine-card.healthy .medicine-progress-bar {
