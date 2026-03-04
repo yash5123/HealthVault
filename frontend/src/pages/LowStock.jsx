@@ -366,6 +366,7 @@ export default function LowStock() {
 
                   <input
                     type="number"
+                    min="0"
                     placeholder="Custom"
                     value={customAmount[med._id] || ""}
                     onChange={(e) =>
@@ -392,7 +393,7 @@ export default function LowStock() {
                     onClick={() =>
                       restockMedicine(
                         med,
-                        -Number(customAmount[med._id] || 0)
+                        -Math.abs(Number(customAmount[med._id] || 0))
                       )
                     }
                   >
