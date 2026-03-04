@@ -84,7 +84,7 @@
    STAT CARDS — Premium Glass Level 2
 ========================================================== */
 
-.stat-card {
+.page-documents .stat-card {
   position: relative;
   z-index: 2;
 
@@ -108,7 +108,7 @@
   overflow: hidden;
 }
 
-.stat-card:hover {
+.page-documents .stat-card:hover {
   transform: translateY(-6px);
   box-shadow:
     0 18px 45px rgba(0, 0, 0, 0.08),
@@ -118,7 +118,7 @@
 
 /* Glow Accent Line */
 
-.stat-card::after {
+.page-documents .stat-card::after {
   content: "";
   position: absolute;
   top: 0;
@@ -135,7 +135,7 @@
 
 /* Stat Typography */
 
-.stat-card span {
+.page-documents .stat-card span {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
@@ -143,7 +143,7 @@
   display: block;
 }
 
-.stat-card h2 {
+.page-documents .stat-card h2 {
   margin-top: 12px;
   font-size: 34px;
   font-weight: 800;
@@ -157,15 +157,15 @@
 
 /* Color Variants */
 
-.stat-card.purple::after {
+.page-documents .stat-card.purple::after {
   background: linear-gradient(180deg, #8b5cf6, #6366f1);
 }
 
-.stat-card.green::after {
+.page-documents .stat-card.green::after {
   background: linear-gradient(180deg, #00e5c3, #3b82f6);
 }
 
-.stat-card.orange::after {
+.page-documents .stat-card.orange::after {
   background: linear-gradient(180deg, #f59e0b, #f97316);
 }
 
@@ -488,17 +488,17 @@
 
 
 /* Lab Report Badge */
-.badge-lab {
+.page-documents .badge-lab {
   background: rgba(0, 229, 195, 0.15);
   color: #00bfa6;
 }
 
-.badge-prescription {
+.page-documents .badge-prescription {
   background: rgba(245, 158, 11, 0.15);
   color: #f59e0b;
 }
 
-.badge-other {
+.page-documents .badge-other {
   background: rgba(99, 102, 241, 0.12);
   color: #6366f1;
 }
@@ -522,20 +522,20 @@
 }
 
 
-.message-banner {
+.page-documents .message-banner {
   padding: 12px 16px;
   margin-bottom: 20px;
   border-radius: 8px;
   font-weight: 500;
 }
 
-.message-banner.success {
+.page-documents .message-banner.success {
   background: #e6fffa;
   color: #065f46;
   border: 1px solid #10b981;
 }
 
-.message-banner.error {
+.page-documents .message-banner.error {
   background: #fff5f5;
   color: #7f1d1d;
   border: 1px solid #ef4444;
@@ -609,8 +609,8 @@
   left: 120%;
 }
 
-.document-card .btn-primary,
-.document-card .btn-danger {
+.page-documents .document-card .btn-primary,
+.page-documents .document-card .btn-danger {
   margin-top: 12px;
 }
 
@@ -627,7 +627,7 @@
   transform: translateY(-6px) scale(1.02);
 }
 
-.document-card .actions {
+.page-documents .document-card .actions {
   display: flex;
   align-items: center;
   gap: 12px;

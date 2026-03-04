@@ -25,12 +25,10 @@
   right: -120px;
   width: 550px;
   height: 550px;
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.15),
-    rgba(139,92,246,0.08),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(99, 102, 241, 0.15),
+      rgba(139, 92, 246, 0.08),
+      transparent 70%);
   filter: blur(90px);
   z-index: 0;
   pointer-events: none;
@@ -43,11 +41,9 @@
   left: -150px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(
-    circle,
-    rgba(0,229,195,0.12),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 229, 195, 0.12),
+      transparent 70%);
   filter: blur(110px);
   z-index: 0;
   pointer-events: none;
@@ -55,7 +51,7 @@
 
 /* Ensure content stays above glow */
 
-.page-medicines > * {
+.page-medicines>* {
   position: relative;
   z-index: 2;
 }
@@ -77,14 +73,14 @@
    STATS PANEL — GLASS LEVEL 2
 ========================================================== */
 
-.stats-panel {
+.page-medicines .stats-panel {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
   margin-top: 40px;
 }
 
-.stat-card {
+.page-medicines .stat-card {
   position: relative;
   padding: 32px;
   border-radius: 26px;
@@ -94,7 +90,7 @@
   border: none;
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.12);
+    0 20px 60px rgba(0, 0, 0, 0.12);
 
   transition: all 0.4s ease;
   overflow: hidden;
@@ -102,17 +98,17 @@
 
 /* Hover Lift */
 
-.stat-card:hover {
+.page-medicines .stat-card:hover {
   transform: translateY(-6px);
   box-shadow:
-    0 28px 70px rgba(0,0,0,0.08),
-    0 0 40px rgba(99,102,241,0.15);
+    0 28px 70px rgba(0, 0, 0, 0.08),
+    0 0 40px rgba(99, 102, 241, 0.15);
 }
 
 
 /* Accent Line */
 
-.stat-card::after {
+.page-medicines .stat-card::after {
   content: "";
   position: absolute;
   left: 0;
@@ -125,40 +121,40 @@
 
 /* Variants */
 
-.stat-card.total::after {
-  background: linear-gradient(180deg,#6366f1,#8b5cf6);
+.page-medicines .stat-card.total::after {
+  background: linear-gradient(180deg, #6366f1, #8b5cf6);
 }
 
-.stat-card.healthy::after {
-  background: linear-gradient(180deg,#00e5c3,#16a34a);
+.page-medicines .stat-card.healthy::after {
+  background: linear-gradient(180deg, #00e5c3, #16a34a);
 }
 
-.stat-card.low::after {
-  background: linear-gradient(180deg,#f59e0b,#f97316);
+.page-medicines .stat-card.low::after {
+  background: linear-gradient(180deg, #f59e0b, #f97316);
 }
 
-.stat-card.critical::after {
-  background: linear-gradient(180deg,#ef4444,#ff4d6d);
+.page-medicines .stat-card.critical::after {
+  background: linear-gradient(180deg, #ef4444, #ff4d6d);
 }
 
 /* === STAT CARD COLORED BACKGROUNDS === */
 
-.stat-card.total {
+.page-medicines .stat-card.total{
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
 }
 
-.stat-card.healthy {
+.page-medicines .stat-card.healthy {
   background: linear-gradient(135deg, #16a34a, #22c55e);
   color: white;
 }
 
-.stat-card.low {
+.page-medicines .stat-card.low {
   background: linear-gradient(135deg, #f59e0b, #f97316);
   color: white;
 }
 
-.stat-card.critical {
+.page-medicines .stat-card.critical{
   background: linear-gradient(135deg, #ef4444, #ff4d6d);
   color: white;
 }
@@ -166,7 +162,7 @@
 
 /* Typography */
 
-.stat-title {
+.page-medicines .stat-title{
   font-size: 15px;
   font-weight: 900;
   letter-spacing: 0.8px;
@@ -177,7 +173,7 @@
   opacity: 0.95;
 }
 
-.stat-value {
+.page-medicines .stat-value{
   margin-top: 14px;
   font-size: 40px;
   font-weight: 900;
@@ -185,10 +181,10 @@
   color: #ffffff !important;
   opacity: 1 !important;
   line-height: 1.1;
-  text-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  text-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-.stat-card h2 {
+.page-medicines .stat-card h2 {
   margin-top: 14px;
   font-size: 40px;
   font-weight: 900;
@@ -200,12 +196,20 @@
 /* Subtle Breathing Effect for Critical */
 
 @keyframes subtleCriticalBreath {
-  0% { box-shadow: 0 18px 45px rgba(0,0,0,0.06); }
-  50% { box-shadow: 0 18px 45px rgba(239,68,68,0.25); }
-  100% { box-shadow: 0 18px 45px rgba(0,0,0,0.06); }
+  0% {
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+  }
+
+  50% {
+    box-shadow: 0 18px 45px rgba(239, 68, 68, 0.25);
+  }
+
+  100% {
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+  }
 }
 
-.stat-card.critical {
+.page-medicines .stat-card.critical {
   animation: subtleCriticalBreath 3s ease-in-out infinite;
 }
 
@@ -214,32 +218,30 @@
    BASE CARD SYSTEM (FORM WRAPPER)
 ========================================================== */
 
-.card {
+.page-medicines .card {
   border-radius: 28px;
   padding: 50px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.95),
-    rgba(255,255,255,0.85)
-  );
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.85));
 
   backdrop-filter: blur(24px);
 
-  border: 1px solid rgba(255,255,255,0.75);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.06),
-    inset 0 0 60px rgba(255,255,255,0.4);
+    0 20px 60px rgba(0, 0, 0, 0.06),
+    inset 0 0 60px rgba(255, 255, 255, 0.4);
 
   transition: all 0.4s ease;
 }
 
-.card:hover {
+.page-medicines .card:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 28px 75px rgba(0,0,0,0.08),
-    0 0 45px rgba(99,102,241,0.12);
+    0 28px 75px rgba(0, 0, 0, 0.08),
+    0 0 45px rgba(99, 102, 241, 0.12);
 }
 
 
@@ -247,16 +249,14 @@
    SECTION TITLE SYSTEM
 ========================================================== */
 
-.section-title {
+.page-medicines .section-title {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 35px;
 
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6
-  );
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -272,6 +272,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -289,7 +290,7 @@
    FORM CARD WRAPPER
 ========================================================== */
 
-.form-card {
+.page-medicines .form-card {
   position: relative;
   margin-top: 60px;
   overflow: hidden;
@@ -297,18 +298,16 @@
 
 /* Soft glow accent */
 
-.form-card::before {
+.page-medicines .form-card::before {
   content: "";
   position: absolute;
   width: 350px;
   height: 350px;
   top: -140px;
   right: -140px;
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.18),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(99, 102, 241, 0.18),
+      transparent 70%);
   filter: blur(60px);
   opacity: 0.6;
   pointer-events: none;
@@ -319,7 +318,7 @@
    FORM GRID LAYOUT
 ========================================================== */
 
-.form-grid {
+.page-medicines .form-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
@@ -330,13 +329,13 @@
    FIELD BLOCK
 ========================================================== */
 
-.field {
+.page-medicines .field {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.field label {
+.page-medicines .field label {
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -349,15 +348,15 @@
    INPUT SYSTEM
 ========================================================== */
 
-.input,
-.select {
+.page-medicines .input,
+.page-medicines .select {
   width: 100%;
   padding: 14px 18px;
 
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
 
   font-size: 14px;
   font-weight: 500;
@@ -368,19 +367,19 @@
 
 /* Hover */
 
-.input:hover,
-.select:hover {
-  border-color: rgba(99,102,241,0.4);
+.page-medicines .input:hover,
+.page-medicines .select:hover {
+  border-color: rgba(99, 102, 241, 0.4);
 }
 
 /* Focus */
 
-.input:focus,
-.select:focus {
+.page-medicines .input:focus,
+.page-medicines .select:focus {
   border-color: #6366f1;
   box-shadow:
-    0 0 0 3px rgba(99,102,241,0.15),
-    0 8px 25px rgba(99,102,241,0.1);
+    0 0 0 3px rgba(99, 102, 241, 0.15),
+    0 8px 25px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
 
@@ -389,17 +388,17 @@
    INLINE GROUP (DOSAGE / FREQUENCY / DURATION)
 ========================================================== */
 
-.inline-group {
+.page-medicines .inline-group {
   display: flex;
   gap: 14px;
   align-items: center;
 }
 
-.inline-group .input {
+.page-medicines .inline-group .input {
   flex: 1;
 }
 
-.inline-text {
+.page-medicines .inline-text {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
@@ -410,7 +409,7 @@
    SELECT DROPDOWN POLISH
 ========================================================== */
 
-.select {
+.page-medicines .select {
   cursor: pointer;
   appearance: none;
   background-image:
@@ -428,7 +427,7 @@
    HELPER TEXT
 ========================================================== */
 
-.helper {
+.page-medicines .helper {
   margin-top: 8px;
   font-size: 12px;
   color: var(--text-muted);
@@ -439,65 +438,63 @@
    ERROR STATE SYSTEM
 ========================================================== */
 
-.error {
+.page-medicines .error {
   margin-top: 6px;
   font-size: 12px;
   font-weight: 600;
   color: #ef4444;
 }
 
-.input.error,
-.select.error {
+.page-medicines .input.error,
+.page-medicines .select.error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 
 
 /* ==========================================================
    SMART CALCULATION BOX
 ========================================================== */
-.smart-box {
+.page-medicines .smart-box {
   margin-top: 45px;
   padding: 30px;
   border-radius: 22px;
 
-  background: linear-gradient(
-    135deg,
-    rgba(99,102,241,0.08),
-    rgba(139,92,246,0.06)
-  );
+  background: linear-gradient(135deg,
+      rgba(99, 102, 241, 0.08),
+      rgba(139, 92, 246, 0.06));
 
-  border: 1px solid rgba(99,102,241,0.2);
+  border: 1px solid rgba(99, 102, 241, 0.2);
 
   box-shadow:
-    0 20px 60px rgba(99,102,241,0.12);
+    0 20px 60px rgba(99, 102, 241, 0.12);
 
   backdrop-filter: blur(18px);
 
   transition: all 0.35s ease;
 }
 
-.smart-box:hover {
+.page-medicines .smart-box:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 20px 50px rgba(0,0,0,0.08),
-    0 0 35px rgba(99,102,241,0.12);
+    0 20px 50px rgba(0, 0, 0, 0.08),
+    0 0 35px rgba(99, 102, 241, 0.12);
 }
 
-.smart-box h4 {
+.page-medicines .smart-box h4 {
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 12px;
   color: #4f46e5;
 }
 
-.smart-box p {
+.page-medicines .smart-box p {
   font-size: 14px;
   margin-bottom: 6px;
   color: var(--text-muted);
 }
 
-.smart-box strong {
+.page-medicines .smart-box strong {
   font-size: 15px;
   font-weight: 700;
   color: #0f172a;
@@ -509,7 +506,7 @@
    FORM ACTIONS
 ========================================================== */
 
-.form-actions {
+.page-medicines .form-actions {
   margin-top: 35px;
   display: flex;
   gap: 16px;
@@ -518,7 +515,7 @@
 
 /* Base button */
 
-.btn {
+.page-medicines .btn {
   padding: 14px 26px;
   border-radius: 999px;
   border: none;
@@ -533,62 +530,58 @@
 
 /* Primary */
 
-.btn-primary {
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6,
-    #06b6d4
-  );
+.page-medicines .btn-primary {
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6,
+      #06b6d4);
   color: white;
 }
 
-.btn-primary:hover {
+.page-medicines .btn-primary:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 15px 40px rgba(99,102,241,0.35),
-    0 0 30px rgba(139,92,246,0.3);
+    0 15px 40px rgba(99, 102, 241, 0.35),
+    0 0 30px rgba(139, 92, 246, 0.3);
 }
 
-.btn-primary:active {
+.page-medicines .btn-primary:active {
   transform: translateY(0);
   box-shadow:
-    0 8px 20px rgba(99,102,241,0.2);
+    0 8px 20px rgba(99, 102, 241, 0.2);
 }
 
 
 /* Secondary */
 
-.btn-secondary {
-  background: rgba(0,0,0,0.05);
+.page-medicines .btn-secondary {
+  background: rgba(0, 0, 0, 0.05);
   color: #0f172a;
 }
 
 .btn-secondary:hover {
-  background: rgba(0,0,0,0.08);
+  background: rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
 
 /* Shine effect */
 
-.btn-primary::after {
+.page-medicines .btn-primary::after {
   content: "";
   position: absolute;
   top: 0;
   left: -40%;
   width: 40%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent);
   transition: all 0.6s ease;
 }
 
-.btn-primary:hover::after {
+.page-medicines .btn-primary:hover::after {
   left: 120%;
 }
 
@@ -598,15 +591,15 @@
 ========================================================== */
 
 @media (max-width: 768px) {
-  .card {
+  .page-medicines .card {
     padding: 30px;
   }
 
-  .form-grid {
+  .page-medicines .form-grid {
     gap: 20px;
   }
 
-  .smart-box {
+  .page-medicines .smart-box {
     padding: 22px;
   }
 }
@@ -621,52 +614,48 @@
    SEARCH PANEL WRAPPER
 ========================================================== */
 
-.search-panel {
+.page-medicines .search-panel {
   margin-top: 60px;
   padding: 45px;
   border-radius: 28px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.94),
-    rgba(255,255,255,0.84)
-  );
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(255, 255, 255, 0.84));
 
   backdrop-filter: blur(20px);
 
-  border: 1px solid rgba(255,255,255,0.75);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 
   box-shadow:
-    0 18px 50px rgba(0,0,0,0.05),
-    inset 0 0 50px rgba(255,255,255,0.45);
+    0 18px 50px rgba(0, 0, 0, 0.05),
+    inset 0 0 50px rgba(255, 255, 255, 0.45);
 
   position: relative;
   overflow: hidden;
   transition: all 0.35s ease;
 }
 
-.search-panel:hover {
+.page-medicines .search-panel:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 28px 70px rgba(0,0,0,0.08),
-    0 0 45px rgba(99,102,241,0.12);
+    0 28px 70px rgba(0, 0, 0, 0.08),
+    0 0 45px rgba(99, 102, 241, 0.12);
 }
 
 
 /* Subtle glow overlay */
 
-.search-panel::before {
+.page-medicines .search-panel::before {
   content: "";
   position: absolute;
   width: 280px;
   height: 280px;
   top: -120px;
   right: -120px;
-  background: radial-gradient(
-    circle,
-    rgba(139,92,246,0.18),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(139, 92, 246, 0.18),
+      transparent 70%);
   filter: blur(70px);
   opacity: 0.6;
   pointer-events: none;
@@ -677,25 +666,23 @@
    SEARCH HEADER
 ========================================================== */
 
-.search-header {
+.page-medicines .search-header {
   margin-bottom: 30px;
 }
 
-.search-header h3 {
+.page-medicines .search-header h3 {
   font-size: 20px;
   font-weight: 700;
 
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6
-  );
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.search-header p {
+.page-medicines .search-header p {
   margin-top: 6px;
   font-size: 14px;
   color: var(--text-muted);
@@ -706,7 +693,7 @@
    SEARCH GRID LAYOUT
 ========================================================== */
 
-.search-grid {
+.page-medicines .search-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 28px;
@@ -717,12 +704,12 @@
    SEARCH FIELD
 ========================================================== */
 
-.search-field {
+.page-medicines .search-field {
   display: flex;
   flex-direction: column;
 }
 
-.search-field label {
+.page-medicines .search-field label {
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -734,12 +721,12 @@
    SEARCH INPUT STYLING
 ========================================================== */
 
-.search-field input,
-.search-field select {
+.page-medicines .search-field input,
+.page-medicines .search-field select {
   padding: 14px 18px;
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.92);
   font-size: 14px;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -748,19 +735,19 @@
 
 /* Hover */
 
-.search-field input:hover,
-.search-field select:hover {
-  border-color: rgba(99,102,241,0.4);
+.page-medicines .search-field input:hover,
+.page-medicines .search-field select:hover {
+  border-color: rgba(99, 102, 241, 0.4);
 }
 
 /* Focus */
 
-.search-field input:focus,
-.search-field select:focus {
+.page-medicines .search-field input:focus,
+.page-medicines .search-field select:focus {
   border-color: #6366f1;
   box-shadow:
-    0 0 0 3px rgba(99,102,241,0.15),
-    0 8px 25px rgba(99,102,241,0.1);
+    0 0 0 3px rgba(99, 102, 241, 0.15),
+    0 8px 25px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
 
@@ -769,7 +756,7 @@
    SELECT DROPDOWN ICON REFINEMENT
 ========================================================== */
 
-.search-field select {
+.page-medicines .search-field select {
   cursor: pointer;
   appearance: none;
   background-image:
@@ -789,10 +776,10 @@
 
 /* This is ready if you later add active filter chips */
 
-.filter-active {
+.page-medicines .filter-active {
   border-color: #6366f1 !important;
   box-shadow:
-    0 0 0 3px rgba(99,102,241,0.15);
+    0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 
@@ -800,42 +787,40 @@
    EMPTY STATE (UPGRADED)
 ========================================================== */
 
-.empty-state {
+.page-medicines .empty-state {
   margin-top: 70px;
   padding: 70px;
   text-align: center;
   border-radius: 28px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.95),
-    rgba(255,255,255,0.85)
-  );
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.85));
 
   backdrop-filter: blur(20px);
 
-  border: 1px solid rgba(255,255,255,0.75);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 
   box-shadow:
-    0 18px 50px rgba(0,0,0,0.05);
+    0 18px 50px rgba(0, 0, 0, 0.05);
 
   transition: all 0.35s ease;
 }
 
-.empty-state:hover {
+.page-medicines .empty-state:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 28px 70px rgba(0,0,0,0.08),
-    0 0 45px rgba(99,102,241,0.1);
+    0 28px 70px rgba(0, 0, 0, 0.08),
+    0 0 45px rgba(99, 102, 241, 0.1);
 }
 
-.empty-state h3 {
+.page-medicines .empty-state h3 {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.empty-state p {
+.page-medicines .empty-state p {
   font-size: 14px;
   color: var(--text-muted);
 }
@@ -847,15 +832,15 @@
 
 @media (max-width: 768px) {
 
-  .search-panel {
+  .page-medicines .search-panel {
     padding: 30px;
   }
 
-  .search-grid {
+  .page-medicines .search-grid {
     gap: 20px;
   }
 
-  .empty-state {
+  .page-medicines .empty-state {
     padding: 40px;
   }
 }
@@ -871,7 +856,7 @@
    GRID SYSTEM
 ========================================================== */
 
-.medicine-grid {
+.page-medicines .medicine-grid {
   margin-top: 60px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -883,36 +868,34 @@
    BASE CARD STRUCTURE
 ========================================================== */
 
-.medicine-card {
+.page-medicines .medicine-card {
   position: relative;
   padding: 36px;
   border-radius: 28px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.96),
-    rgba(255,255,255,0.86)
-  );
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(255, 255, 255, 0.86));
 
   backdrop-filter: blur(22px);
 
-  border: 1px solid rgba(255,255,255,0.75);
+  border: 1px solid rgba(255, 255, 255, 0.75);
 
   box-shadow:
-    0 20px 55px rgba(0,0,0,0.06),
-    inset 0 0 55px rgba(255,255,255,0.45);
+    0 20px 55px rgba(0, 0, 0, 0.06),
+    inset 0 0 55px rgba(255, 255, 255, 0.45);
 
-  transition: all 0.45s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
 /* Hover Lift */
 
-.medicine-card:hover {
+.page-medicines .medicine-card:hover {
   transform: translateY(-8px);
   box-shadow:
-    0 30px 80px rgba(0,0,0,0.09),
-    0 0 50px rgba(99,102,241,0.15);
+    0 30px 80px rgba(0, 0, 0, 0.09),
+    0 0 50px rgba(99, 102, 241, 0.15);
 }
 
 
@@ -920,25 +903,23 @@
    SUBTLE BACKGROUND GLOW
 ========================================================== */
 
-.medicine-card::before {
+.page-medicines .medicine-card::before {
   content: "";
   position: absolute;
   top: -150px;
   right: -150px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.18),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(99, 102, 241, 0.18),
+      transparent 70%);
   filter: blur(70px);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
 }
 
-.medicine-card:hover::before {
+.page-medicines .medicine-card:hover::before {
   opacity: 1;
 }
 
@@ -947,13 +928,13 @@
    CARD HEADER
 ========================================================== */
 
-.medicine-card-header {
+.page-medicines .medicine-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.medicine-card-header h3 {
+.page-medicines .medicine-card-header h3 {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -964,19 +945,19 @@
    DETAILS GRID
 ========================================================== */
 
-.medicine-card-details {
+.page-medicines .medicine-card-details {
   margin-top: 26px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
 }
 
-.medicine-card-details label {
+.page-medicines .medicine-card-details label {
   font-size: 12px;
   color: var(--text-muted);
 }
 
-.medicine-card-details p {
+.page-medicines .medicine-card-details p {
   margin-top: 4px;
   font-weight: 600;
   font-size: 14px;
@@ -989,19 +970,19 @@
 
 /* Healthy */
 
-.medicine-card.healthy {
+.page-medicines .medicine-card.healthy {
   border-left: 6px solid #16a34a;
 }
 
 /* Low */
 
-.medicine-card.low {
+.page-medicines .medicine-card.low {
   border-left: 6px solid #f59e0b;
 }
 
 /* Critical */
 
-.medicine-card.critical {
+.page-medicines .medicine-card.critical {
   border-left: 6px solid #ef4444;
 }
 
@@ -1013,22 +994,24 @@
 @keyframes criticalBreath {
   0% {
     box-shadow:
-      0 20px 55px rgba(0,0,0,0.06),
-      0 0 15px rgba(239,68,68,0.3);
+      0 20px 55px rgba(0, 0, 0, 0.06),
+      0 0 15px rgba(239, 68, 68, 0.3);
   }
+
   50% {
     box-shadow:
-      0 20px 55px rgba(0,0,0,0.06),
-      0 0 40px rgba(239,68,68,0.55);
+      0 20px 55px rgba(0, 0, 0, 0.06),
+      0 0 40px rgba(239, 68, 68, 0.55);
   }
+
   100% {
     box-shadow:
-      0 20px 55px rgba(0,0,0,0.06),
-      0 0 15px rgba(239,68,68,0.3);
+      0 20px 55px rgba(0, 0, 0, 0.06),
+      0 0 15px rgba(239, 68, 68, 0.3);
   }
 }
 
-.medicine-card.critical {
+.page-medicines .medicine-card.critical {
   animation: criticalBreath 2.8s ease-in-out infinite;
 }
 
@@ -1037,48 +1020,42 @@
    PROGRESS SYSTEM 2.0
 ========================================================== */
 
-.medicine-progress {
+.page-medicines .medicine-progress {
   margin-top: 26px;
   height: 12px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   overflow: hidden;
   position: relative;
 }
 
-.medicine-progress-bar {
+.page-medicines .medicine-progress-bar {
   height: 100%;
   border-radius: 999px;
   transition: width 0.5s ease;
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6
-  );
-  box-shadow: 0 0 20px rgba(99,102,241,0.4);
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
 }
 
 
 /* Low override */
 
-.medicine-card.low .medicine-progress-bar {
-  background: linear-gradient(
-    90deg,
-    #f59e0b,
-    #f97316
-  );
-  box-shadow: 0 0 20px rgba(245,158,11,0.5);
+.page-medicines .medicine-card.low .medicine-progress-bar {
+  background: linear-gradient(90deg,
+      #f59e0b,
+      #f97316);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
 }
 
 /* Critical override */
 
-.medicine-card.critical .medicine-progress-bar {
-  background: linear-gradient(
-    90deg,
-    #ef4444,
-    #ff4d6d
-  );
-  box-shadow: 0 0 25px rgba(239,68,68,0.6);
+.page-medicines .medicine-card.critical .medicine-progress-bar {
+  background: linear-gradient(90deg,
+      #ef4444,
+      #ff4d6d);
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
 }
 
 
@@ -1086,13 +1063,13 @@
    DAYS REMAINING BADGE
 ========================================================== */
 
-.medicine-days {
+.page-medicines .medicine-days {
   margin-top: 14px;
   font-size: 13px;
   color: var(--text-muted);
 }
 
-.medicine-days strong {
+.page-medicines .medicine-days strong {
   font-size: 15px;
   font-weight: 700;
 }
@@ -1102,14 +1079,14 @@
    ACTION BUTTON SYSTEM
 ========================================================== */
 
-.medicine-actions {
+.page-medicines .medicine-actions {
   margin-top: 28px;
   display: flex;
   justify-content: flex-end;
   gap: 14px;
 }
 
-.medicine-actions button {
+.page-medicines .medicine-actions button {
   padding: 10px 20px;
   border-radius: 999px;
   border: none;
@@ -1121,32 +1098,30 @@
 
 /* Edit Button */
 
-.medicine-actions button:first-child {
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6
-  );
+.page-medicines .medicine-actions button:first-child {
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6);
   color: white;
 }
 
-.medicine-actions button:first-child:hover {
+.page-medicines .medicine-actions button:first-child:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 12px 30px rgba(99,102,241,0.4);
+    0 12px 30px rgba(99, 102, 241, 0.4);
 }
 
 /* Delete Button */
 
-.danger-btn {
+.page-medicines .danger-btn {
   background: #ef4444;
   color: white;
 }
 
-.danger-btn:hover {
+.page-medicines .danger-btn:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 12px 30px rgba(239,68,68,0.5);
+    0 12px 30px rgba(239, 68, 68, 0.5);
 }
 
 
@@ -1159,6 +1134,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1172,15 +1148,15 @@
 
 @media (max-width: 768px) {
 
-  .medicine-card {
+  .page-medicines .medicine-card {
     padding: 26px;
   }
 
-  .medicine-card-details {
+  .page-medicines .medicine-card-details {
     gap: 18px;
   }
 
-  .medicine-grid {
+  .page-medicines .medicine-grid {
     gap: 24px;
   }
 }
@@ -1208,21 +1184,44 @@
    CARD STAGGER ANIMATION SYSTEM
 ========================================================== */
 
-.medicine-card:nth-child(1) { animation-delay: 0.05s; }
-.medicine-card:nth-child(2) { animation-delay: 0.1s; }
-.medicine-card:nth-child(3) { animation-delay: 0.15s; }
-.medicine-card:nth-child(4) { animation-delay: 0.2s; }
-.medicine-card:nth-child(5) { animation-delay: 0.25s; }
-.medicine-card:nth-child(6) { animation-delay: 0.3s; }
-.medicine-card:nth-child(7) { animation-delay: 0.35s; }
-.medicine-card:nth-child(8) { animation-delay: 0.4s; }
+.page-medicines .medicine-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.page-medicines .medicine-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.page-medicines .medicine-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.page-medicines .medicine-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+.page-medicines .medicine-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+.page-medicines .medicine-card:nth-child(6) {
+  animation-delay: 0.3s;
+}
+
+.page-medicines .medicine-card:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+.page-medicines .medicine-card:nth-child(8) {
+  animation-delay: 0.4s;
+}
 
 
 /* ==========================================================
    BUTTON PRESS PHYSICS
 ========================================================== */
 
-button:active {
+.page-medicines button:active {
   transform: scale(0.96);
 }
 
@@ -1235,12 +1234,13 @@ button:active {
   0% {
     background-position: -200px 0;
   }
+
   100% {
     background-position: 200px 0;
   }
 }
 
-.medicine-progress-bar {
+.page-medicines .medicine-progress-bar {
   background-size: 200% 100%;
   animation: progressShimmer 3s linear infinite;
 }
@@ -1251,12 +1251,20 @@ button:active {
 ========================================================== */
 
 @keyframes healthyGlow {
-  0% { box-shadow: 0 20px 55px rgba(0,0,0,0.06); }
-  50% { box-shadow: 0 20px 55px rgba(22,163,74,0.25); }
-  100% { box-shadow: 0 20px 55px rgba(0,0,0,0.06); }
+  0% {
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06);
+  }
+
+  50% {
+    box-shadow: 0 20px 55px rgba(22, 163, 74, 0.25);
+  }
+
+  100% {
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06);
+  }
 }
 
-.medicine-card.healthy:hover {
+.page-medicines .medicine-card.healthy:hover {
   animation: healthyGlow 2.5s ease-in-out infinite;
 }
 
@@ -1270,11 +1278,9 @@ button:active {
 }
 
 .page-medicines::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    #6366f1,
-    #8b5cf6
-  );
+  background: linear-gradient(180deg,
+      #6366f1,
+      #8b5cf6);
   border-radius: 999px;
 }
 
@@ -1287,7 +1293,7 @@ button:active {
    SECTION SPACING CONSISTENCY
 ========================================================== */
 
-.page-medicines > * + * {
+.page-medicines>*+* {
   margin-top: 70px;
 }
 
@@ -1298,40 +1304,40 @@ button:active {
 
 @media (max-width: 640px) {
 
-  .section-title {
+  .page-medicines .section-title {
     font-size: 20px;
   }
 
-  .medicine-card-header h3 {
+  .page-medicines .medicine-card-header h3 {
     font-size: 17px;
   }
 
-  .medicine-card-details {
+  .page-medicines .medicine-card-details {
     grid-template-columns: 1fr;
   }
 
-  .medicine-actions {
+  .page-medicines .medicine-actions {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .medicine-actions button {
+  .page-medicines .medicine-actions button {
     width: 100%;
   }
 
-  .form-actions {
+  .page-medicines .form-actions {
     flex-direction: column;
   }
 
-  .form-actions .btn {
+  .page-medicines .form-actions .btn {
     width: 100%;
   }
 
-  .search-grid {
+  .page-medicines .search-grid {
     grid-template-columns: 1fr;
   }
 
-  .stats-panel {
+  .page-medicines .stats-panel {
     grid-template-columns: 1fr;
   }
 }
@@ -1343,11 +1349,11 @@ button:active {
 
 @media (min-width: 641px) and (max-width: 1024px) {
 
-  .medicine-grid {
+  .page-medicines .medicine-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
-  .form-grid {
+  .page-medicines .form-grid {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
@@ -1358,8 +1364,7 @@ button:active {
 ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-
-  * {
+  .page-medicines * {
     animation: none !important;
     transition: none !important;
   }
@@ -1370,11 +1375,11 @@ button:active {
    FINAL GLASS HARDENING
 ========================================================== */
 
-.medicine-card,
-.search-panel,
-.card,
-.stat-card,
-.smart-box {
+.page-medicines .medicine-card,
+.page-medicines .search-panel,
+.page-medicines .card,
+.page-medicines .stat-card,
+.page-medicines .smart-box {
   will-change: transform;
 }
 
@@ -1383,9 +1388,9 @@ button:active {
    FOCUS ACCESSIBILITY
 ========================================================== */
 
-button:focus,
-input:focus,
-select:focus {
+.page-medicines button:focus,
+.page-medicines input:focus,
+.page-medicines select:focus {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
@@ -1395,7 +1400,6 @@ select:focus {
    POLISHED EMPTY STATE ANIMATION
 ========================================================== */
 
-.empty-state {
+.page-medicines .empty-state {
   animation: medicineFadeIn 0.7s ease forwards;
 }
-
