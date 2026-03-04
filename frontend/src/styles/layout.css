@@ -8,11 +8,9 @@
   padding: 60px 60px;
   position: relative;
 
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: block;
 
-  transition: all 0.3s ease;
+  transition: margin 0.35s cubic-bezier(.4, 0, .2, 1);
 }
 
 /* ===============================
@@ -219,7 +217,7 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-
+  padding: 0 10px;
   animation: pageFade 0.35s ease;
 }
 
@@ -228,6 +226,7 @@
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
