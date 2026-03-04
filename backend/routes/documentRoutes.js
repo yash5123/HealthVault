@@ -30,7 +30,7 @@ router.get("/", protect, getDocuments);
 router.post(
   "/",
   protect,
-  upload.single("file"), // IMPORTANT
+  upload.single("file"),   // field name must match frontend FormData
   uploadDocument
 );
 

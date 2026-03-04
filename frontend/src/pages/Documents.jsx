@@ -51,7 +51,6 @@ export default function Documents() {
     try {
 
       const formData = new FormData();
-
       formData.append("title", title);
       formData.append("type", type);
       formData.append("file", file);
@@ -59,7 +58,8 @@ export default function Documents() {
       await API.post("/documents", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
-        }
+        },
+        transformRequest: (data) => data
       });
 
       alert("Document uploaded successfully!");
@@ -77,13 +77,19 @@ export default function Documents() {
       fetchDocuments();
 
     } catch (err) {
+
       console.error("Upload error:", err);
 
       if (err.response) {
+        console.error("Server error:", err.response.data);
         alert(err.response.data.message || "Upload failed");
+      } else if (err.request) {
+        console.error("Network error:", err.request);
+        alert("Network error while uploading");
       } else {
         alert("Upload failed");
       }
+
     }
   };
 
