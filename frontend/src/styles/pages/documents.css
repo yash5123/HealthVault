@@ -22,12 +22,10 @@
   right: -120px;
   width: 500px;
   height: 500px;
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.15),
-    rgba(139,92,246,0.08),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(99, 102, 241, 0.15),
+      rgba(139, 92, 246, 0.08),
+      transparent 70%);
   filter: blur(80px);
   z-index: 0;
   pointer-events: none;
@@ -40,11 +38,9 @@
   left: -150px;
   width: 500px;
   height: 500px;
-  background: radial-gradient(
-    circle,
-    rgba(0,229,195,0.12),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 229, 195, 0.12),
+      transparent 70%);
   filter: blur(90px);
   z-index: 0;
   pointer-events: none;
@@ -66,12 +62,10 @@
   font-weight: 800;
   letter-spacing: -1px;
 
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6,
-    #06b6d4
-  );
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6,
+      #06b6d4);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -94,14 +88,14 @@
   padding: 30px;
   border-radius: 24px;
 
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(18px);
 
-  border: 1px solid rgba(255,255,255,0.6);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.05),
-    inset 0 0 40px rgba(255,255,255,0.4);
+    0 10px 30px rgba(0, 0, 0, 0.05),
+    inset 0 0 40px rgba(255, 255, 255, 0.4);
 
   transition: all 0.35s ease;
   overflow: hidden;
@@ -110,8 +104,8 @@
 .stat-card:hover {
   transform: translateY(-6px);
   box-shadow:
-    0 18px 45px rgba(0,0,0,0.08),
-    0 0 35px rgba(99,102,241,0.15);
+    0 18px 45px rgba(0, 0, 0, 0.08),
+    0 0 35px rgba(99, 102, 241, 0.15);
 }
 
 
@@ -125,11 +119,9 @@
   width: 4px;
   height: 100%;
   border-radius: 4px;
-  background: linear-gradient(
-    180deg,
-    #6366f1,
-    #8b5cf6
-  );
+  background: linear-gradient(180deg,
+      #6366f1,
+      #8b5cf6);
   opacity: 0.6;
 }
 
@@ -156,15 +148,15 @@
 /* Color Variants */
 
 .stat-card.purple::after {
-  background: linear-gradient(180deg,#8b5cf6,#6366f1);
+  background: linear-gradient(180deg, #8b5cf6, #6366f1);
 }
 
 .stat-card.green::after {
-  background: linear-gradient(180deg,#00e5c3,#3b82f6);
+  background: linear-gradient(180deg, #00e5c3, #3b82f6);
 }
 
 .stat-card.orange::after {
-  background: linear-gradient(180deg,#f59e0b,#f97316);
+  background: linear-gradient(180deg, #f59e0b, #f97316);
 }
 
 /* ==========================================================
@@ -176,19 +168,17 @@
   padding: 45px;
   border-radius: 28px;
 
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.95),
-    rgba(255,255,255,0.85)
-  );
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.85));
 
   backdrop-filter: blur(24px);
 
-  border: 1px solid rgba(255,255,255,0.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 
   box-shadow:
-    0 20px 60px rgba(0,0,0,0.06),
-    inset 0 0 60px rgba(255,255,255,0.4);
+    0 20px 60px rgba(0, 0, 0, 0.06),
+    inset 0 0 60px rgba(255, 255, 255, 0.4);
 
   position: relative;
   overflow: hidden;
@@ -198,8 +188,8 @@
 .page-documents .upload-section:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 30px 70px rgba(0,0,0,0.08),
-    0 0 50px rgba(99,102,241,0.12);
+    0 30px 70px rgba(0, 0, 0, 0.08),
+    0 0 50px rgba(99, 102, 241, 0.12);
 }
 
 
@@ -213,11 +203,9 @@
   top: -120px;
   right: -120px;
 
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.2),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(99, 102, 241, 0.2),
+      transparent 70%);
 
   filter: blur(60px);
   opacity: 0.6;
@@ -232,11 +220,9 @@
   font-weight: 700;
   margin-bottom: 30px;
 
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6
-  );
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6);
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -252,9 +238,9 @@
   padding: 14px 18px;
 
   border-radius: 16px;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
 
   font-size: 14px;
   font-weight: 500;
@@ -268,8 +254,8 @@
 .page-documents .form-input:focus {
   border-color: #6366f1;
   box-shadow:
-    0 0 0 3px rgba(99,102,241,0.15),
-    0 8px 25px rgba(99,102,241,0.1);
+    0 0 0 3px rgba(99, 102, 241, 0.15),
+    0 8px 25px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
 
@@ -285,7 +271,7 @@
 
 .page-documents input[type="file"].form-input {
   padding: 12px;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 
@@ -302,12 +288,10 @@
   font-size: 14px;
   letter-spacing: 0.4px;
 
-  background: linear-gradient(
-    90deg,
-    #6366f1,
-    #8b5cf6,
-    #06b6d4
-  );
+  background: linear-gradient(90deg,
+      #6366f1,
+      #8b5cf6,
+      #06b6d4);
 
   color: white;
   cursor: pointer;
@@ -322,8 +306,8 @@
 .page-documents .btn-primary:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 15px 40px rgba(99,102,241,0.3),
-    0 0 30px rgba(139,92,246,0.25);
+    0 15px 40px rgba(99, 102, 241, 0.3),
+    0 0 30px rgba(139, 92, 246, 0.25);
 }
 
 /* Active Press */
@@ -331,7 +315,7 @@
 .page-documents .btn-primary:active {
   transform: translateY(0px);
   box-shadow:
-    0 8px 20px rgba(99,102,241,0.2);
+    0 8px 20px rgba(99, 102, 241, 0.2);
 }
 
 
@@ -345,12 +329,10 @@
   width: 40%;
   height: 100%;
 
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent);
 
   transition: all 0.6s ease;
 }
@@ -384,15 +366,6 @@
 }
 
 /* ==========================================================
-   DOCUMENT GRID — Spacing Control
-========================================================== */
-
-.page-documents .document-grid {
-  margin-top: 40px;
-}
-
-
-/* ==========================================================
    DOCUMENT CARD — Intelligent Glass Card
 ========================================================== */
 
@@ -417,11 +390,7 @@
 
   transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
   overflow: hidden;
-  cursor: pointer;
 }
-
-
-/* Hover Elevation */
 
 .page-documents .document-card:hover {
   transform: translateY(-6px);
@@ -431,31 +400,68 @@
 }
 
 
-/* Subtle Animated Glow Background */
+/* ==========================================================
+   CARD STAGGER ANIMATION
+========================================================== */
 
-.page-documents .document-card::before {
-  content: "";
-  position: absolute;
-  top: -120px;
-  right: -120px;
-  width: 250px;
-  height: 250px;
+@keyframes docFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.15),
-    transparent 70%
-  );
-
-  filter: blur(50px);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.page-documents .document-card:hover::before {
-  opacity: 1;
+.page-documents .document-card {
+  animation: docFadeIn 0.5s ease forwards;
 }
+
+
+/* ==========================================================
+   EMPTY STATE — Premium Soft Center Panel
+========================================================== */
+
+.page-documents .empty-text {
+  padding: 60px;
+  border-radius: 28px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.05);
+
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+
+/* ==========================================================
+   SCROLL POLISH
+========================================================== */
+
+.page-documents::-webkit-scrollbar {
+  width: 8px;
+}
+
+.page-documents::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+      #6366f1,
+      #8b5cf6);
+  border-radius: 999px;
+}
+
+.page-documents::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 
 
 /* ==========================================================
@@ -487,25 +493,25 @@
 
 
 /* Lab Report Badge */
-
-.page-documents .document-card p:first-of-type:contains("Lab Report") {
-  background: rgba(0,229,195,0.15);
+.badge-lab {
+  background: rgba(0, 229, 195, 0.15);
   color: #00bfa6;
 }
 
-
-/* Prescription Badge */
-
-.page-documents .document-card p:first-of-type:contains("Prescription") {
-  background: rgba(245,158,11,0.15);
+.badge-prescription {
+  background: rgba(245, 158, 11, 0.15);
   color: #f59e0b;
 }
 
+.badge-other {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
 
 /* Fallback Badge */
 
 .page-documents .document-card p:first-of-type {
-  background: rgba(99,102,241,0.12);
+  background: rgba(99, 102, 241, 0.12);
   color: #6366f1;
 }
 
@@ -520,270 +526,6 @@
   margin-top: 8px;
 }
 
-
-/* ==========================================================
-   CARD STAGGER ANIMATION
-========================================================== */
-
-@keyframes docFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-documents .document-card {
-  animation: docFadeIn 0.5s ease forwards;
-}
-
-
-/* ==========================================================
-   EMPTY STATE — Premium Soft Center Panel
-========================================================== */
-
-.page-documents .empty-text {
-  padding: 60px;
-  border-radius: 28px;
-  text-align: center;
-
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(255,255,255,0.7);
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.05);
-
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-
-/* ==========================================================
-   SCROLL POLISH
-========================================================== */
-
-.page-documents::-webkit-scrollbar {
-  width: 8px;
-}
-
-.page-documents::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    #6366f1,
-    #8b5cf6
-  );
-  border-radius: 999px;
-}
-
-.page-documents::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* ==========================================================
-   DOCUMENT GRID — Spacing Control
-========================================================== */
-
-.page-documents .document-grid {
-  margin-top: 40px;
-}
-
-
-/* ==========================================================
-   DOCUMENT CARD — Intelligent Glass Card
-========================================================== */
-
-.page-documents .document-card {
-  position: relative;
-  padding: 30px;
-  border-radius: 24px;
-
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,0.95),
-    rgba(255,255,255,0.85)
-  );
-
-  backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(255,255,255,0.7);
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,0.05),
-    inset 0 0 30px rgba(255,255,255,0.5);
-
-  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-
-/* Hover Elevation */
-
-.page-documents .document-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 22px 60px rgba(0,0,0,0.08),
-    0 0 40px rgba(99,102,241,0.15);
-}
-
-
-/* Subtle Animated Glow Background */
-
-.page-documents .document-card::before {
-  content: "";
-  position: absolute;
-  top: -120px;
-  right: -120px;
-  width: 250px;
-  height: 250px;
-
-  background: radial-gradient(
-    circle,
-    rgba(99,102,241,0.15),
-    transparent 70%
-  );
-
-  filter: blur(50px);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.page-documents .document-card:hover::before {
-  opacity: 1;
-}
-
-
-/* ==========================================================
-   DOCUMENT TITLE
-========================================================== */
-
-.page-documents .document-card strong {
-  display: block;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: #0f172a;
-  margin-bottom: 8px;
-}
-
-
-/* ==========================================================
-   TYPE BADGE SYSTEM
-========================================================== */
-
-.page-documents .document-card p:first-of-type {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-
-/* Lab Report Badge */
-
-.page-documents .document-card p:first-of-type:contains("Lab Report") {
-  background: rgba(0,229,195,0.15);
-  color: #00bfa6;
-}
-
-
-/* Prescription Badge */
-
-.page-documents .document-card p:first-of-type:contains("Prescription") {
-  background: rgba(245,158,11,0.15);
-  color: #f59e0b;
-}
-
-
-/* Fallback Badge */
-
-.page-documents .document-card p:first-of-type {
-  background: rgba(99,102,241,0.12);
-  color: #6366f1;
-}
-
-
-/* ==========================================================
-   DATE TEXT STYLING
-========================================================== */
-
-.page-documents .document-card p:last-of-type {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 8px;
-}
-
-
-/* ==========================================================
-   CARD STAGGER ANIMATION
-========================================================== */
-
-@keyframes docFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-documents .document-card {
-  animation: docFadeIn 0.5s ease forwards;
-}
-
-
-/* ==========================================================
-   EMPTY STATE — Premium Soft Center Panel
-========================================================== */
-
-.page-documents .empty-text {
-  padding: 60px;
-  border-radius: 28px;
-  text-align: center;
-
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(255,255,255,0.7);
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.05);
-
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-
-/* ==========================================================
-   SCROLL POLISH
-========================================================== */
-
-.page-documents::-webkit-scrollbar {
-  width: 8px;
-}
-
-.page-documents::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    #6366f1,
-    #8b5cf6
-  );
-  border-radius: 999px;
-}
-
-.page-documents::-webkit-scrollbar-track {
-  background: transparent;
-}
 
 .message-banner {
   padding: 12px 16px;
@@ -819,12 +561,10 @@
   font-size: 14px;
   letter-spacing: 0.4px;
 
-  background: linear-gradient(
-    90deg,
-    #ff4d4d,
-    #ff1a1a,
-    #dc2626
-  );
+  background: linear-gradient(90deg,
+      #ff4d4d,
+      #ff1a1a,
+      #dc2626);
 
   color: white;
   cursor: pointer;
@@ -862,12 +602,10 @@
   width: 40%;
   height: 100%;
 
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.6),
+      transparent);
 
   transition: all 0.6s ease;
 }
@@ -875,3 +613,34 @@
 .page-documents .btn-danger:hover::after {
   left: 120%;
 }
+
+.document-card .btn-primary,
+.document-card .btn-danger {
+  margin-top: 12px;
+}
+
+/* ===== PREMIUM CARD LIGHT EFFECT ===== */
+
+.page-documents .document-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.45),transparent);
+  opacity:0;
+  transition:opacity .4s ease;
+}
+
+.page-documents .document-card:hover::after{
+  opacity:.8;
+}
+
+
+.page-documents .document-card{
+  transform-style:preserve-3d;
+}
+
+.page-documents .document-card:hover{
+  transform:translateY(-6px) scale(1.02);
+}
+
