@@ -3,6 +3,13 @@ const Document = require("../models/Document");
 
 const uploadDocument = async (req, res) => {
   try {
+
+    if (!req.file) {
+      return res.status(400).json({
+        message: "No file uploaded"
+      });
+    }
+
     const document = await Document.create({
       title: req.body.title,
       type: req.body.type,
@@ -11,12 +18,14 @@ const uploadDocument = async (req, res) => {
     });
 
     res.json(document);
+
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
 const getDocuments = async (req, res) => {
+
   const documents = await Document.find({
     user: new mongoose.Types.ObjectId(req.user.id)
   });
@@ -25,7 +34,9 @@ const getDocuments = async (req, res) => {
 };
 
 const deleteDocument = async (req, res) => {
+
   await Document.findByIdAndDelete(req.params.id);
+
   res.json({ message: "Deleted" });
 };
 
