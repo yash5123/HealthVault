@@ -19,6 +19,19 @@ export default function Documents() {
   const fileInputRef = useRef(null);
 
 
+  /* ================= AUTO CLEAR MESSAGE ================= */
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
+
   /* ================= FETCH DOCUMENTS ================= */
 
   useEffect(() => {
@@ -28,7 +41,7 @@ export default function Documents() {
   const fetchDocuments = async () => {
     try {
       const res = await API.get("/documents");
-      setDocuments(res.data);
+      setDocuments(res.data || []);
     } catch (err) {
       console.error("Fetch documents error:", err);
     }
@@ -113,7 +126,7 @@ export default function Documents() {
         text: "Document deleted successfully"
       });
 
-      fetchDocuments();
+      setDocuments((prev) => prev.filter((doc) => doc._id !== id));
 
     } catch (err) {
 
@@ -133,15 +146,11 @@ export default function Documents() {
 
   const filteredDocs = useMemo(() => {
 
-    let data = [...documents];
+    if (!documents) return [];
 
-    if (search) {
-      data = data.filter((d) =>
-        d.title.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-    return data;
+    return documents.filter((d) =>
+      d.title?.toLowerCase().includes(search.toLowerCase())
+    );
 
   }, [documents, search]);
 
@@ -279,23 +288,25 @@ export default function Documents() {
 
               <p>{new Date(doc.createdAt).toDateString()}</p>
 
-              <a
-                href={doc.fileUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary"
-                style={{ marginTop: "10px", display: "inline-block" }}
-              >
-                View Document
-              </a>
+              <div className="actions">
 
-              <button
-                className="btn-danger"
-                onClick={() => handleDelete(doc._id)}
-                style={{ marginTop: "10px" }}
-              >
-               🗑 Delete
-              </button>
+                <a
+                  href={doc.fileUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-primary action-btn"
+                >
+                  View Document
+                </a>
+
+                <button
+                  className="btn-danger action-btn"
+                  onClick={() => handleDelete(doc._id)}
+                >
+                  🗑 Delete
+                </button>
+
+              </div>
 
             </div>
           ))}

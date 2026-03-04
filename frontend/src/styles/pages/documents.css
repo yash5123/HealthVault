@@ -644,3 +644,29 @@
   transform:translateY(-6px) scale(1.02);
 }
 
+.document-card .actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* ================= ACTION BUTTON HOVER SYSTEM ================= */
+
+.document-card .actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.document-card .action-btn {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.25s ease;
+}
+
+.document-card:hover .action-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
