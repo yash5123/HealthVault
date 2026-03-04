@@ -204,15 +204,25 @@ export default function Documents() {
           )}
 
           {filteredDocs.map((doc) => (
-
             <div key={doc._id} className="card document-card">
 
               <strong>{doc.title}</strong>
+
               <p>{doc.type}</p>
+
               <p>{new Date(doc.createdAt).toDateString()}</p>
 
-            </div>
+              <a
+                href={`https://healthvault-o7bs.onrender.com${doc.fileUrl}`}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary"
+                style={{ marginTop: "10px", display: "inline-block" }}
+              >
+                View Document
+              </a>
 
+            </div>
           ))}
 
         </div>
@@ -221,4 +231,4 @@ export default function Documents() {
 
     </Layout>
   );
-}
+} 

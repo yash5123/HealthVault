@@ -12,7 +12,15 @@ const app = express();
 connectDB();
 
 /* ================= MIDDLEWARE ================= */
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://health-vault-ruddy.vercel.app"
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
