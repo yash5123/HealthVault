@@ -28,6 +28,6 @@ const refillHistorySchema = new mongoose.Schema({
     default: Date.now
   }
 
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("RefillHistory", refillHistorySchema);

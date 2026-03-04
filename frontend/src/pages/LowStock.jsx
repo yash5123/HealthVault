@@ -32,6 +32,7 @@ export default function LowStock() {
   const [filter, setFilter] = useState("ALL");
   const [sort, setSort] = useState("CRITICAL_FIRST");
   const [customAmount, setCustomAmount] = useState({});
+  const [toasts, setToasts] = useState([]);
 
   /* ================= HELPERS ================= */
 
@@ -87,17 +88,31 @@ export default function LowStock() {
 
 
   /* ================= RESTOCK ================= */
+  const showToast = (type, message) => {
+
+    const id = Date.now();
+
+    setToasts((prev) => [...prev, { id, type, message }]);
+
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 3000);
+
+  };
 
   const restockMedicine = async (med, amount) => {
 
-    if (!amount) return;
+    if (!amount) {
+      showToast("reduce", "Please enter a quantity");
+      return;
+    }
 
     const updatedQty = med.quantity + amount;
 
     /* Prevent negative stock */
 
     if (updatedQty < 0) {
-      alert("Stock cannot go below 0");
+      showToast("reduce", "Stock cannot go below 0");
       return;
     }
     await API.put(`/medicines/${med._id}`, {
@@ -112,10 +127,22 @@ export default function LowStock() {
       action: amount > 0 ? "ADD" : "REDUCE"
     });
 
+    if (amount > 0) {
+      showToast("add", `+${amount} units added to ${med.name}`);
+    } else {
+      showToast("reduce", `${Math.abs(amount)} units removed from ${med.name}`);
+    }
+
+    setCustomAmount((prev) => ({
+      ...prev,
+      [med._id]: ""
+    }));
+
     queryClient.invalidateQueries({ queryKey: ["medicines"] });
     queryClient.invalidateQueries({ queryKey: ["refillHistory"] });
 
   };
+
 
   /* ================= FILTER + SORT ================= */
 
@@ -176,7 +203,18 @@ export default function LowStock() {
 
   return (
     <div className="page-lowstock">
-
+      <div className="toast-container">
+        {toasts.map((toast) => (
+          <div
+            key={toast.id}
+            className={`toast ${toast.type === "add" ? "toast-add" : "toast-reduce"
+              }`}
+          >
+            <div className="toast-title">✔ Stock Updated</div>
+            <div className="toast-message">{toast.message}</div>
+          </div>
+        ))}
+      </div>
       {/* HEADER */}
 
       <div className="page-header">

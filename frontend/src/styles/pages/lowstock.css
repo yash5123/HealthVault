@@ -959,3 +959,77 @@
 .page-lowstock .recommended-refill {
   margin-bottom: 16px;
 }
+
+/* ================= TOAST CONTAINER ================= */
+
+.page-lowstock .toast-container{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  z-index: 999;
+}
+
+
+/* ================= TOAST CARD ================= */
+
+.page-lowstock .toast{
+  min-width: 260px;
+
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  background: white;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  animation: lowstockToastSlide .3s ease;
+}
+
+/* ADD SUCCESS */
+
+.page-lowstock .toast-add{
+  border-left: 4px solid #22c55e;
+}
+
+/* REDUCE */
+
+.page-lowstock .toast-reduce{
+  border-left: 4px solid #ef4444;
+}
+
+.page-lowstock .toast-title{
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.page-lowstock .toast-message{
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+@keyframes lowstockToastSlide{
+  from{
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to{
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.page-lowstock .refill-history{
+  max-height:320px;
+  overflow-y:auto;
+}
