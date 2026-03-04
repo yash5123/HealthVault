@@ -24,10 +24,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/* ================= STATIC FILES ================= */
-const uploadsPath = path.resolve(__dirname, "uploads");
-app.use("/uploads", express.static(uploadsPath));
-
 /* ================= ROUTES ================= */
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/medicines", require("./routes/medicineRoutes"));

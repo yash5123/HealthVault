@@ -3,81 +3,37 @@ const Document = require("../models/Document");
 
 const uploadDocument = async (req, res) => {
 
-  console.log("UPLOAD REQUEST BODY:", req.body);
-  console.log("UPLOAD REQUEST FILE:", req.file);
-  console.log("UPLOAD REQUEST USER:", req.user);
-
   try {
 
-    /* ⭐ prevent filename crash */
-    if (!req.file || !req.file.filename) {
-      console.error("File missing from multer:", req.file);
+    console.log("UPLOAD BODY:", req.body);
+    console.log("UPLOAD FILE:", req.file);
+
+    if (!req.file) {
       return res.status(400).json({
-        message: "File upload failed. No file received."
+        message: "No file uploaded"
+      });
+    }
+
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        message: "User authentication failed"
       });
     }
 
     const document = await Document.create({
       title: req.body.title,
       type: req.body.type,
-      fileUrl: `/uploads/${req.file.filename}`,
+      fileUrl: req.file.path,   // Cloudinary URL
       user: new mongoose.Types.ObjectId(req.user.id)
     });
 
-    console.log("DOCUMENT CREATED:", document);
+    console.log("DOCUMENT SAVED:", document);
 
-    res.json(document);
-
-  } catch (err) {
-
-    console.error("DOCUMENT UPLOAD ERROR:");
-    console.error(err);
-
-    res.status(500).json({
-      message: err.message
-    });
-
-  }
-};
-
-const getDocuments = async (req, res) => {
-
-  try {
-
-    console.log("FETCH DOCUMENTS USER:", req.user);
-
-    const documents = await Document.find({
-      user: new mongoose.Types.ObjectId(req.user.id)
-    });
-
-    res.json(documents);
+    res.status(201).json(document);
 
   } catch (err) {
 
-    console.error("FETCH DOCUMENTS ERROR:");
-    console.error(err);
-
-    res.status(500).json({
-      message: err.message
-    });
-
-  }
-};
-
-const deleteDocument = async (req, res) => {
-
-  try {
-
-    console.log("DELETE DOCUMENT ID:", req.params.id);
-
-    await Document.findByIdAndDelete(req.params.id);
-
-    res.json({ message: "Deleted" });
-
-  } catch (err) {
-
-    console.error("DELETE DOCUMENT ERROR:");
-    console.error(err);
+    console.error("UPLOAD ERROR:", err);
 
     res.status(500).json({
       message: err.message

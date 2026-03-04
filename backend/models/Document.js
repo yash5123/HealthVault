@@ -1,42 +1,35 @@
-const express = require("express");
-const router = express.Router();
-const multer = require("multer");
-const path = require("path");
+const mongoose = require("mongoose");
 
-const { protect } = require("../middleware/authMiddleware");
-const {
-  getDocuments,
-  uploadDocument,
-  deleteDocument
-} = require("../controllers/documentController");
+const documentSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true
+    },
 
-/* ================= MULTER CONFIG ================= */
+    type: {
+      type: String,
+      required: true,
+      enum: ["Lab Report", "Prescription", "Other"]
+    },
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../uploads"));
+    fileUrl: {
+      type: String,
+      required: true
+    },
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    }
   },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      Date.now() + path.extname(file.originalname)
-    );
+  {
+    timestamps: true
   }
-});
-
-const upload = multer({ storage });
-
-/* ================= ROUTES ================= */
-
-router.get("/", protect, getDocuments);
-
-router.post(
-  "/",
-  protect,
-  upload.single("file"),   // must match frontend FormData.append("file", file)
-  uploadDocument
 );
 
-router.delete("/:id", protect, deleteDocument);
+const Document = mongoose.model("Document", documentSchema);
 
-module.exports = router;
+module.exports = Document;

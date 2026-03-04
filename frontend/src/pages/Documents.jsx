@@ -9,7 +9,6 @@ export default function Documents() {
 
   const [documents, setDocuments] = useState([]);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("ALL");
 
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Lab Report");
@@ -34,6 +33,20 @@ export default function Documents() {
   };
 
 
+  /* ================= FILE SELECT ================= */
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (!selectedFile) {
+      alert("No file selected");
+      return;
+    }
+
+    setFile(selectedFile);
+  };
+
+
   /* ================= UPLOAD DOCUMENT ================= */
 
   const handleUpload = async () => {
@@ -51,6 +64,7 @@ export default function Documents() {
     try {
 
       const formData = new FormData();
+
       formData.append("title", title);
       formData.append("type", type);
       formData.append("file", file);
@@ -58,8 +72,6 @@ export default function Documents() {
       await API.post("/documents", formData);
 
       alert("Document uploaded successfully!");
-
-      /* reset fields */
 
       setTitle("");
       setType("Lab Report");
@@ -76,11 +88,7 @@ export default function Documents() {
       console.error("Upload error:", err);
 
       if (err.response) {
-        console.error("Server error:", err.response.data);
         alert(err.response.data.message || "Upload failed");
-      } else if (err.request) {
-        console.error("Network error:", err.request);
-        alert("Network error while uploading");
       } else {
         alert("Upload failed");
       }
@@ -101,13 +109,9 @@ export default function Documents() {
       );
     }
 
-    if (filter !== "ALL") {
-      data = data.filter((d) => d.type === filter);
-    }
-
     return data;
 
-  }, [documents, search, filter]);
+  }, [documents, search]);
 
 
   /* ================= STATS ================= */
@@ -186,10 +190,11 @@ export default function Documents() {
               type="file"
               className="form-input"
               ref={fileInputRef}
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileChange}
             />
 
             <button
+              type="button"
               className="btn-primary"
               onClick={handleUpload}
             >
@@ -234,7 +239,7 @@ export default function Documents() {
               <p>{new Date(doc.createdAt).toDateString()}</p>
 
               <a
-                href={`https://healthvault-o7bs.onrender.com${doc.fileUrl}`}
+                href={doc.fileUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary"
