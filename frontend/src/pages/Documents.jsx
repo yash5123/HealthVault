@@ -1,6 +1,5 @@
 import { fetchDocuments } from "../queries/documentsQuery";
 import { useEffect, useState, useMemo, useRef, useCallback } from "react";
-import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import DocumentCard from "../components/documents/DocumentCard";
 import "../styles/pages/documents.css";
@@ -154,8 +153,6 @@ export default function Documents() {
 
   /* ================= STATS ================= */
 
-  /* ================= STATS ================= */
-
   const stats = useMemo(() => {
 
     if (!documents || documents.length === 0) {
@@ -177,7 +174,6 @@ export default function Documents() {
   /* ================= UI ================= */
 
   return (
-    <Layout>
 
       <div className="page-documents">
         <div className="page-content">
@@ -357,6 +353,5 @@ export default function Documents() {
 
       </div>
 
-    </Layout>
   );
 }

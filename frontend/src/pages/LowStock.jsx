@@ -1,22 +1,24 @@
 import { useEffect, useState, useMemo } from "react";
-import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import { fetchMedicines } from "../queries/medicinesQuery";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+
 export default function LowStock() {
 
   /* ================= STATE ================= */
+
   const queryClient = useQueryClient();
+
   const { data: medicines = [] } = useQuery({
     queryKey: ["medicines"],
     queryFn: fetchMedicines,
     staleTime: 1000 * 60 * 5
   });
+
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [sort, setSort] = useState("CRITICAL_FIRST");
   const [refillHistory, setRefillHistory] = useState([]);
-
 
   /* ================= HELPERS ================= */
 
@@ -63,6 +65,7 @@ export default function LowStock() {
   /* ================= FILTER + SORT ================= */
 
   const processedData = useMemo(() => {
+
     let data = [...medicines];
 
     if (search) {
@@ -85,16 +88,19 @@ export default function LowStock() {
             calculateDaysRemaining(b)
         );
         break;
+
       case "ALPHABETICAL":
         data.sort((a, b) =>
           a.name.localeCompare(b.name)
         );
         break;
+
       default:
         break;
     }
 
     return data;
+
   }, [medicines, search, filter, sort]);
 
   /* ================= STATS ================= */
@@ -114,12 +120,14 @@ export default function LowStock() {
   /* ================= RENDER ================= */
 
   return (
-    <Layout>
 
+    <>
       <h2>🚨 Stock Alert System</h2>
 
       {/* SUMMARY */}
+
       <div className="grid">
+
         <div className="card card-critical">
           <h3>Critical</h3>
           <p>{criticalCount}</p>
@@ -134,11 +142,15 @@ export default function LowStock() {
           <h3>Healthy</h3>
           <p>{healthyCount}</p>
         </div>
+
       </div>
 
       {/* CONTROLS */}
+
       <div className="card" style={{ marginTop: 30 }}>
+
         <div className="grid">
+
           <input
             placeholder="Search medicine..."
             value={search}
@@ -162,12 +174,17 @@ export default function LowStock() {
             <option value="CRITICAL_FIRST">Critical First</option>
             <option value="ALPHABETICAL">Alphabetical</option>
           </select>
+
         </div>
+
       </div>
 
       {/* MEDICINE LIST */}
+
       <div style={{ marginTop: 40 }}>
+
         {processedData.map((med) => {
+
           const level = getStockLevel(med);
           const days = calculateDaysRemaining(med);
 
@@ -177,45 +194,59 @@ export default function LowStock() {
           );
 
           return (
+
             <div
               key={med._id}
-              className={`card ${level === "CRITICAL" ? "card-critical" : ""
-                }`}
+              className={`card ${level === "CRITICAL" ? "card-critical" : ""}`}
               style={{ marginBottom: 25 }}
             >
+
               <h3>{med.name}</h3>
 
               <p>Current Quantity: {med.quantity}</p>
               <p>Estimated Days Remaining: {days >= 0 ? days : 0}</p>
 
               {/* PREMIUM PROGRESS BAR */}
+
               <div className="progress-container">
+
                 <div
-                  className={`progress-bar ${level === "CRITICAL"
-                    ? "progress-critical"
-                    : level === "LOW"
+                  className={`progress-bar ${
+                    level === "CRITICAL"
+                      ? "progress-critical"
+                      : level === "LOW"
                       ? "progress-low"
                       : "progress-healthy"
-                    }`}
+                  }`}
                   style={{ width: `${percentage}%` }}
                 />
+
               </div>
 
               <div style={{ marginTop: 18, display: "flex", gap: 12 }}>
+
                 <button onClick={() => restockMedicine(med, 10)}>
                   +10 Refill
                 </button>
+
                 <button onClick={() => restockMedicine(med, 30)}>
                   +30 Refill
                 </button>
+
               </div>
+
             </div>
+
           );
+
         })}
+
       </div>
 
       {/* REFILL HISTORY */}
+
       <div style={{ marginTop: 50 }}>
+
         <h3>📦 Refill History</h3>
 
         {refillHistory.length === 0 && (
@@ -223,15 +254,20 @@ export default function LowStock() {
         )}
 
         {refillHistory.map((item, index) => (
+
           <div key={index} className="card">
+
             <p>
               {item.name} refilled by {item.amount} units
             </p>
-            <p>{item.date.toLocaleString()}</p>
-          </div>
-        ))}
-      </div>
 
-    </Layout>
+            <p>{item.date.toLocaleString()}</p>
+
+          </div>
+
+        ))}
+
+      </div>
+    </>
   );
 }

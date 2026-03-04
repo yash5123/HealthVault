@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-
+import Layout from "./components/layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { MedicineProvider } from "./context/MedicineContext";
 import { DocumentsProvider } from "./context/DocumentsContext";
@@ -32,28 +32,24 @@ function App() {
       <MedicineProvider>
         <DocumentsProvider>
 
-          {/* Floating Orbs */}
-          <div className="floating-orb orb-1"></div>
-          <div className="floating-orb orb-2"></div>
-
-          {/* Subtle Particles */}
-          <div className="particle" style={{ left: "20%" }}></div>
-          <div className="particle" style={{ left: "50%" }}></div>
-          <div className="particle" style={{ left: "80%" }}></div>
-
           <Suspense fallback={<PageLoader />}>
 
             <Routes>
 
+              {/* ===== AUTH ROUTES ===== */}
               <Route path="/auth" element={<Auth />} />
               <Route path="/login" element={<Auth />} />
               <Route path="/register" element={<Auth />} />
+
+              {/* ===== PROTECTED ROUTES ===== */}
 
               <Route
                 path="/"
                 element={
                   <ProtectedRoute>
-                    <Overview />
+                    <Layout>
+                      <Overview />
+                    </Layout>
                   </ProtectedRoute>
                 }
               />
@@ -62,7 +58,9 @@ function App() {
                 path="/documents"
                 element={
                   <ProtectedRoute>
-                    <Documents />
+                    <Layout>
+                      <Documents />
+                    </Layout>
                   </ProtectedRoute>
                 }
               />
@@ -71,7 +69,9 @@ function App() {
                 path="/medicines"
                 element={
                   <ProtectedRoute>
-                    <Medicines />
+                    <Layout>
+                      <Medicines />
+                    </Layout>
                   </ProtectedRoute>
                 }
               />
@@ -80,16 +80,9 @@ function App() {
                 path="/checkups"
                 element={
                   <ProtectedRoute>
-                    <Checkups />
-                  </ProtectedRoute>
-                }
-              />
-
-              <Route
-                path="/hospitals"
-                element={
-                  <ProtectedRoute>
-                    <FindHospitals />
+                    <Layout>
+                      <Checkups />
+                    </Layout>
                   </ProtectedRoute>
                 }
               />
@@ -98,7 +91,20 @@ function App() {
                 path="/lowstock"
                 element={
                   <ProtectedRoute>
-                    <LowStock />
+                    <Layout>
+                      <LowStock />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/hospitals"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <FindHospitals />
+                    </Layout>
                   </ProtectedRoute>
                 }
               />

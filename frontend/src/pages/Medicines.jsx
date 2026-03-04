@@ -1,5 +1,4 @@
 import { useEffect, useState, useMemo } from "react";
-import Layout from "../components/layout/Layout";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchMedicines } from "../queries/medicinesQuery";
 import SectionHeader from "../components/medicines/SectionHeader";
@@ -13,6 +12,7 @@ import API from "../services/api";
 import "../styles/medicine.css";
 
 export default function Medicines() {
+
   /* =====================================================
      STATE
   ====================================================== */
@@ -32,6 +32,7 @@ export default function Medicines() {
     queryFn: fetchMedicines,
     staleTime: 1000 * 60 * 5
   });
+
   /* =====================================================
      CRUD OPERATIONS
   ====================================================== */
@@ -69,9 +70,11 @@ export default function Medicines() {
   ====================================================== */
 
   const processedMedicines = useMemo(() => {
+
     let data = [...medicines];
 
     /* SEARCH */
+
     if (search) {
       data = data.filter((m) =>
         m.name.toLowerCase().includes(search.toLowerCase())
@@ -79,8 +82,11 @@ export default function Medicines() {
     }
 
     /* FILTER */
+
     if (filter !== "ALL") {
+
       data = data.filter((m) => {
+
         if (filter === "HEALTHY")
           return m.quantity > m.lowStockThreshold;
 
@@ -94,10 +100,13 @@ export default function Medicines() {
           return m.quantity === 0;
 
         return true;
+
       });
+
     }
 
     /* SORT */
+
     if (sort === "NAME_ASC") {
       data.sort((a, b) => a.name.localeCompare(b.name));
     }
@@ -107,6 +116,7 @@ export default function Medicines() {
     }
 
     return data;
+
   }, [medicines, search, filter, sort]);
 
   /* =====================================================
@@ -114,7 +124,7 @@ export default function Medicines() {
   ====================================================== */
 
   return (
-    <Layout>
+
       <div className="page-medicines">
 
         <SectionHeader
@@ -162,6 +172,6 @@ export default function Medicines() {
         </Modal>
 
       </div>
-    </Layout>
+
   );
 }

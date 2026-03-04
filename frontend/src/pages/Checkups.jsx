@@ -1,5 +1,4 @@
 import { useEffect, useState, useMemo } from "react";
-import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCheckups } from "../queries/checkupsQuery";
@@ -71,7 +70,7 @@ export default function Checkups() {
   ====================================================== */
 
   const handleAdd = async () => {
-    await API.post("/checkups", form); // ✅ FIXED
+    await API.post("/checkups", form);
     setForm({
       type: "",
       doctor: "",
@@ -158,7 +157,7 @@ export default function Checkups() {
   ====================================================== */
 
   return (
-    <Layout>
+    <>
       <h2>📅 Checkup Reminder System</h2>
 
       {/* SUMMARY */}
@@ -303,6 +302,6 @@ export default function Checkups() {
           );
         })}
       </div>
-    </Layout>
+    </>
   );
 }

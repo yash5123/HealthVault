@@ -1,11 +1,9 @@
 import { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import { useCountUp } from "../hooks/useCountUp";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDashboard } from "../queries/dashboardQuery";
-
 
 export default function Overview() {
   const navigate = useNavigate();
@@ -19,6 +17,7 @@ export default function Overview() {
   const medicines = data?.medicines || [];
   const documents = data?.documents || [];
   const checkups = data?.checkups || [];
+
   /* ================= ANALYTICS ================= */
 
   const healthyCount = useMemo(
@@ -67,17 +66,14 @@ export default function Overview() {
 
   if (loading) {
     return (
-      <Layout>
-        <div className="page-loader-overlay">
-          <div className="page-loader"></div>
-        </div>
-      </Layout>
+      <div className="page-loader-overlay">
+        <div className="page-loader"></div>
+      </div>
     );
   }
 
   return (
-    <Layout>
-
+    <>
       {/* ================= HEADER ================= */}
 
       <div className="page-header">
@@ -190,8 +186,7 @@ export default function Overview() {
           {recentMedicines.map((m) => (
             <div
               key={m._id}
-              className={`card ${m.quantity === 0 ? "card-critical" : ""
-                }`}
+              className={`card ${m.quantity === 0 ? "card-critical" : ""}`}
             >
               <strong>{m.name}</strong>
               <p>Qty: {m.quantity}</p>
@@ -200,8 +195,8 @@ export default function Overview() {
                 {m.quantity === 0
                   ? "❌ Critical"
                   : m.quantity <= m.lowStockThreshold
-                    ? "⚠ Low"
-                    : "✅ Healthy"}
+                  ? "⚠ Low"
+                  : "✅ Healthy"}
               </p>
             </div>
           ))}
@@ -233,7 +228,6 @@ export default function Overview() {
           })}
         </div>
       </div>
-
-    </Layout>
+    </>
   );
 }
