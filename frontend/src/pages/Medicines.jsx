@@ -125,53 +125,56 @@ export default function Medicines() {
 
   return (
 
-      <div className="page-medicines">
+    <div className="page-medicines">
 
-        <SectionHeader
-          title="Medicines Management"
-          subtitle="Track dosage, stock levels and smart consumption insights."
-        />
+      <SectionHeader
+        title="Medicines Management"
+        subtitle="Track dosage, stock levels and smart consumption insights."
+      />
 
-        <StatsPanel medicines={medicines} />
+      <StatsPanel medicines={medicines} />
 
-        <MedicineForm
-          onAdd={handleAdd}
-          onUpdate={handleUpdate}
-          editingMedicine={editingMedicine}
-          clearEdit={() => setEditingMedicine(null)}
-        />
+      <MedicineForm
+        onAdd={handleAdd}
+        onUpdate={handleUpdate}
+        editingMedicine={editingMedicine}
+        clearEdit={() => setEditingMedicine(null)}
+      />
 
-        <SearchPanel
-          search={search}
-          setSearch={setSearch}
-          filter={filter}
-          setFilter={setFilter}
-          sort={sort}
-          setSort={setSort}
-        />
+      <SearchPanel
+        search={search}
+        setSearch={setSearch}
+        filter={filter}
+        setFilter={setFilter}
+        sort={sort}
+        setSort={setSort}
+      />
 
-        <MedicineGrid
-          medicines={processedMedicines}
-          onEdit={(medicine) => setEditingMedicine(medicine)}
-          onDelete={(id) => setDeleteTarget(id)}
-        />
+      <MedicineGrid
+        medicines={processedMedicines}
+        onEdit={(medicine) => setEditingMedicine(medicine)}
+        onDelete={(id) => setDeleteTarget(id)}
+      />
 
-        <Modal
-          isOpen={!!deleteTarget}
-          onClose={() => setDeleteTarget(null)}
-          onConfirm={() => {
-            handleDelete(deleteTarget);
-            setDeleteTarget(null);
-          }}
-          title="Delete Medicine"
-          confirmText="Delete"
-          variant="danger"
-        >
+      <Modal
+        isOpen={Boolean(deleteTarget)}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete Medicine"
+        confirmText="Delete"
+        cancelText="Cancel"
+        variant="danger"
+        onConfirm={() => {
+          handleDelete(deleteTarget);
+          setDeleteTarget(null);
+        }}
+      >
+        <p>
           Are you sure you want to delete this medicine?
           This action cannot be undone.
-        </Modal>
+        </p>
+      </Modal>
 
-      </div>
+    </div>
 
   );
 }
