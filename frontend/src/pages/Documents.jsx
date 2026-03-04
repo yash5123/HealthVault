@@ -56,9 +56,6 @@ export default function Documents() {
       formData.append("file", file);
 
       await API.post("/documents", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        },
         transformRequest: (data) => data
       });
 
