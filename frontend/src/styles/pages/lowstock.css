@@ -505,7 +505,7 @@
 
   box-shadow:
     0 30px 80px rgba(0, 0, 0, .09),
-    0 0 50px rgba(239, 68, 68, .18);
+    0 0 40px rgba(239, 68, 68, .15);
 
 }
 
@@ -613,19 +613,24 @@
 .page-lowstock .medicine-progress-bar {
 
   height: 100%;
-
   border-radius: 999px;
-
   transition: width .5s ease;
 
-  background:
-    linear-gradient(90deg,
-      #ef4444,
-      #ff4d6d);
+}
 
-  box-shadow:
-    0 0 20px rgba(239, 68, 68, .4);
+.page-lowstock .medicine-card.healthy .medicine-progress-bar {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+}
 
+.page-lowstock .medicine-card.low .medicine-progress-bar {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  box-shadow: 0 0 18px rgba(245, 158, 11, 0.35);
+}
+
+.page-lowstock .medicine-card.critical .medicine-progress-bar {
+  background: linear-gradient(90deg, #ef4444, #ff4d6d);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.45);
 }
 
 
@@ -639,9 +644,11 @@
 
   display: flex;
 
-  justify-content: flex-end;
+  align-items: center;
 
-  gap: 14px;
+  gap: 12px;
+
+  flex-wrap: wrap;
 
 }
 
@@ -823,8 +830,10 @@
   display: flex;
 
   justify-content: space-between;
-
+  gap: 10px;
   align-items: center;
+
+  flex-wrap: wrap;
 
   padding: 18px 22px;
 
@@ -875,12 +884,13 @@
 .page-lowstock .medicine-actions input {
 
   width: 70px;
+  text-align: center;
 
   padding: 8px 10px;
 
   border-radius: 10px;
 
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 
   font-size: 13px;
 
@@ -889,14 +899,14 @@
 .page-lowstock .smart-warning {
 
   margin-top: 8px;
-
+  max-width: fit-content;
   font-size: 13px;
 
   font-weight: 600;
 
   color: #ef4444;
 
-  background: rgba(239,68,68,0.08);
+  background: rgba(239, 68, 68, 0.08);
 
   padding: 6px 10px;
 
