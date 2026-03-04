@@ -319,48 +319,49 @@ export default function LowStock() {
 
               <div className="medicine-actions">
 
-                <button onClick={() => restockMedicine(med, 10)}>
-                  +10
-                </button>
+                <div className="quick-refill">
+                  <button onClick={() => restockMedicine(med, 10)}>+10</button>
+                  <button onClick={() => restockMedicine(med, 30)}>+30</button>
+                </div>
 
-                <button onClick={() => restockMedicine(med, 30)}>
-                  +30
-                </button>
+                <div className="custom-refill">
 
-                <input
-                  type="number"
-                  placeholder="Custom"
-                  value={customAmount[med._id] || ""}
-                  onChange={(e) =>
-                    setCustomAmount({
-                      ...customAmount,
-                      [med._id]: e.target.value
-                    })
-                  }
-                />
+                  <input
+                    type="number"
+                    placeholder="Custom"
+                    value={customAmount[med._id] || ""}
+                    onChange={(e) =>
+                      setCustomAmount({
+                        ...customAmount,
+                        [med._id]: e.target.value
+                      })
+                    }
+                  />
 
-                <button
-                  onClick={() =>
-                    restockMedicine(
-                      med,
-                      Math.abs(Number(customAmount[med._id] || 0))
-                    )
-                  }
-                >
-                  Add
-                </button>
+                  <button
+                    onClick={() =>
+                      restockMedicine(
+                        med,
+                        Math.abs(Number(customAmount[med._id] || 0))
+                      )
+                    }
+                  >
+                    Add
+                  </button>
 
-                <button
-                  className="reduce-btn"
-                  onClick={() =>
-                    restockMedicine(
-                      med,
-                      -Number(customAmount[med._id] || 0)
-                    )
-                  }
-                >
-                  Reduce
-                </button>
+                  <button
+                    className="reduce-btn"
+                    onClick={() =>
+                      restockMedicine(
+                        med,
+                        -Number(customAmount[med._id] || 0)
+                      )
+                    }
+                  >
+                    Reduce
+                  </button>
+
+                </div>
 
               </div>
 
@@ -391,7 +392,7 @@ export default function LowStock() {
               {item.name} {item.amount > 0 ? "+" : ""}{item.amount} units
             </p>
 
-            <p>{item.date.toLocaleString()}</p>
+            <p>{new Date(item.date).toLocaleString()}</p>
 
           </div>
 
