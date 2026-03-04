@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import "../styles/pages/documents.css";
@@ -15,6 +15,8 @@ export default function Documents() {
   const [type, setType] = useState("Lab Report");
   const [file, setFile] = useState(null);
 
+  const fileInputRef = useRef(null);
+
 
   /* ================= FETCH DOCUMENTS ================= */
 
@@ -27,7 +29,7 @@ export default function Documents() {
       const res = await API.get("/documents");
       setDocuments(res.data);
     } catch (err) {
-      console.error(err);
+      console.error("Fetch documents error:", err);
     }
   };
 
@@ -36,8 +38,13 @@ export default function Documents() {
 
   const handleUpload = async () => {
 
-    if (!title || !file) {
-      alert("Please fill all fields");
+    if (!title.trim()) {
+      alert("Please enter document title");
+      return;
+    }
+
+    if (!file) {
+      alert("Please select a file");
       return;
     }
 
@@ -51,20 +58,32 @@ export default function Documents() {
 
       await API.post("/documents", formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
+          "Content-Type": "multipart/form-data"
+        }
       });
 
       alert("Document uploaded successfully!");
 
+      /* reset fields */
+
       setTitle("");
+      setType("Lab Report");
       setFile(null);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
 
       fetchDocuments();
 
     } catch (err) {
       console.error("Upload error:", err);
-      alert("Upload failed");
+
+      if (err.response) {
+        alert(err.response.data.message || "Upload failed");
+      } else {
+        alert("Upload failed");
+      }
     }
   };
 
@@ -165,6 +184,7 @@ export default function Documents() {
             <input
               type="file"
               className="form-input"
+              ref={fileInputRef}
               onChange={(e) => setFile(e.target.files[0])}
             />
 
@@ -231,4 +251,4 @@ export default function Documents() {
 
     </Layout>
   );
-} 
+}
