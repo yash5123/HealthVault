@@ -15,6 +15,11 @@ API.interceptors.request.use((req) => {
     req.headers.Authorization = `Bearer ${token}`;
   }
 
+  /* ⭐ IMPORTANT FIX FOR FILE UPLOADS */
+  if (req.data instanceof FormData) {
+    delete req.headers["Content-Type"];
+  }
+
   return req;
 });
 
