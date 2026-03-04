@@ -6,7 +6,11 @@ import "../styles/pages/documents.css";
 
 export default function Documents() {
 
+  /* ================= STATE ================= */
+
   const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [search, setSearch] = useState("");
 
   const [title, setTitle] = useState("");
@@ -32,12 +36,25 @@ export default function Documents() {
   /* ================= FETCH DOCUMENTS ================= */
 
   const fetchDocuments = useCallback(async () => {
+
     try {
+
+      setLoading(true);
+
       const res = await API.get("/documents");
+
       setDocuments(res.data || []);
+
     } catch (err) {
+
       console.error("Fetch documents error:", err);
+
+    } finally {
+
+      setLoading(false);
+
     }
+
   }, []);
 
   useEffect(() => {
@@ -47,6 +64,7 @@ export default function Documents() {
   /* ================= FILE SELECT ================= */
 
   const handleFileChange = (e) => {
+
     const selectedFile = e.target.files[0];
 
     if (!selectedFile) {
@@ -55,6 +73,7 @@ export default function Documents() {
     }
 
     setFile(selectedFile);
+
   };
 
   /* ================= UPLOAD DOCUMENT ================= */
@@ -105,6 +124,7 @@ export default function Documents() {
       });
 
     }
+
   };
 
   /* ================= DELETE DOCUMENT ================= */
@@ -115,12 +135,12 @@ export default function Documents() {
 
       await API.delete(`/documents/${id}`);
 
+      setDocuments((prev) => prev.filter((doc) => doc._id !== id));
+
       setMessage({
         type: "success",
         text: "Document deleted successfully"
       });
-
-      setDocuments((prev) => prev.filter((doc) => doc._id !== id));
 
     } catch (err) {
 
@@ -138,8 +158,6 @@ export default function Documents() {
   /* ================= FILTER DOCUMENTS ================= */
 
   const filteredDocs = useMemo(() => {
-
-    if (!documents) return [];
 
     return documents.filter((d) =>
       d.title?.toLowerCase().includes(search.toLowerCase())
@@ -159,6 +177,8 @@ export default function Documents() {
 
   }, [documents]);
 
+  /* ================= UI ================= */
+
   return (
     <Layout>
 
@@ -172,6 +192,8 @@ export default function Documents() {
             </div>
           )}
 
+          {/* ================= HEADER ================= */}
+
           <div className="page-header">
             <h1 className="page-title">Document Vault</h1>
             <p className="page-subtitle">
@@ -179,24 +201,53 @@ export default function Documents() {
             </p>
           </div>
 
-          <div className="grid">
+          {/* ================= STATS ================= */}
 
-            <div className="stat-card purple">
-              <span>Total Documents</span>
-              <h2>{stats.total}</h2>
+          {loading ? (
+
+            <div className="grid">
+
+              <div className="stat-card purple">
+                <span>Total Documents</span>
+                <h2>...</h2>
+              </div>
+
+              <div className="stat-card green">
+                <span>Lab Reports</span>
+                <h2>...</h2>
+              </div>
+
+              <div className="stat-card orange">
+                <span>Prescriptions</span>
+                <h2>...</h2>
+              </div>
+
             </div>
 
-            <div className="stat-card green">
-              <span>Lab Reports</span>
-              <h2>{stats.lab}</h2>
+          ) : (
+
+            <div className="grid">
+
+              <div className="stat-card purple">
+                <span>Total Documents</span>
+                <h2>{stats.total}</h2>
+              </div>
+
+              <div className="stat-card green">
+                <span>Lab Reports</span>
+                <h2>{stats.lab}</h2>
+              </div>
+
+              <div className="stat-card orange">
+                <span>Prescriptions</span>
+                <h2>{stats.prescription}</h2>
+              </div>
+
             </div>
 
-            <div className="stat-card orange">
-              <span>Prescriptions</span>
-              <h2>{stats.prescription}</h2>
-            </div>
+          )}
 
-          </div>
+          {/* ================= UPLOAD SECTION ================= */}
 
           <div className="card upload-section">
 
@@ -241,6 +292,8 @@ export default function Documents() {
 
           </div>
 
+          {/* ================= SEARCH ================= */}
+
           <div className="search-section">
 
             <input
@@ -253,9 +306,11 @@ export default function Documents() {
 
           </div>
 
+          {/* ================= DOCUMENT LIST ================= */}
+
           <div className="grid document-grid">
 
-            {filteredDocs.length === 0 && (
+            {!loading && filteredDocs.length === 0 && (
               <p className="empty-text">No documents uploaded yet.</p>
             )}
 

@@ -144,11 +144,12 @@
   font-size: 34px;
   font-weight: 800;
   letter-spacing: -1px;
-  color: var(--text-main);
+  color: #0f172a;
   opacity: 1 !important;
   visibility: visible !important;
   will-change: transform;
   transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 
