@@ -1090,11 +1090,9 @@
 }
 
 
-.modal-body {
-  line-height: 1.5;
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 26px;
+.modal-overlay {
+  position: fixed;
+  inset: 0;
 }
 
 .page-medicines .btn-danger {
