@@ -55,9 +55,7 @@ export default function Documents() {
       formData.append("type", type);
       formData.append("file", file);
 
-      await API.post("/documents", formData, {
-        transformRequest: (data) => data
-      });
+      await API.post("/documents", formData);
 
       alert("Document uploaded successfully!");
 
