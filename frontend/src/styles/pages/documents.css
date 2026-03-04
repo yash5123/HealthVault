@@ -809,9 +809,12 @@
    DELETE CONFIRMATION MODAL
 ========================================================== */
 
-.page-documents .modal-overlay {
+.modal-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 
   background: rgba(15, 23, 42, 0.45);
   backdrop-filter: blur(6px);
@@ -820,15 +823,14 @@
   align-items: center;
   justify-content: center;
 
-  z-index: 9999;
+  z-index: 99999;
 }
 
-.page-documents .delete-modal {
+.delete-modal {
+  width: min(520px, 90%);
+  padding: 40px;
 
-  width: 420px;
-  padding: 32px;
-
-  border-radius: 24px;
+  border-radius: 26px;
 
   background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.95),
@@ -844,13 +846,12 @@
 
   text-align: center;
 
-  animation: modalAppear .25s ease;
+  animation: modalAppear .25s cubic-bezier(.2, .8, .2, 1);
 }
 
-.page-documents .delete-modal h3 {
-  font-size: 20px;
+.delete-modal h3 {
   font-weight: 700;
-
+  font-size: 22px;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -858,19 +859,19 @@
   margin-bottom: 12px;
 }
 
-.page-documents .delete-modal p {
+.delete-modal p {
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 26px;
 }
 
-.page-documents .modal-actions {
+.modal-actions {
   display: flex;
   justify-content: center;
   gap: 16px;
 }
 
-.page-documents .modal-cancel {
+.modal-cancel {
   padding: 12px 22px;
   border-radius: 999px;
   border: none;
@@ -881,7 +882,7 @@
   cursor: pointer;
 }
 
-.page-documents .modal-delete {
+.modal-delete {
   padding: 12px 22px;
   border-radius: 999px;
   border: none;
