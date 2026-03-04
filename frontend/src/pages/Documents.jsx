@@ -11,14 +11,16 @@ export default function Documents() {
   /* ================= STATE ================= */
 
   const queryClient = useQueryClient();
-
   const {
     data: documents = [],
-    isLoading: loading
+    isLoading,
+    isFetching
   } = useQuery({
     queryKey: ["documents"],
     queryFn: fetchDocuments,
-    staleTime: 1000 * 60 * 5
+    staleTime: 1000 * 60 * 5,
+    keepPreviousData: true,
+    refetchOnWindowFocus: false
   });
 
   const [search, setSearch] = useState("");
@@ -152,7 +154,17 @@ export default function Documents() {
 
   /* ================= STATS ================= */
 
+  /* ================= STATS ================= */
+
   const stats = useMemo(() => {
+
+    if (!documents || documents.length === 0) {
+      return {
+        total: 0,
+        lab: 0,
+        prescription: 0
+      };
+    }
 
     return {
       total: documents.length,
@@ -187,7 +199,7 @@ export default function Documents() {
 
           {/* ================= STATS ================= */}
 
-          {loading ? (
+          {(isLoading || isFetching) ? (
 
             <div className="grid">
 
