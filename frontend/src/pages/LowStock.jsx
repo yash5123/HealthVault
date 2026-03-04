@@ -1,27 +1,22 @@
 import { useEffect, useState, useMemo } from "react";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
-
+import { fetchMedicines } from "../queries/medicinesQuery";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 export default function LowStock() {
 
   /* ================= STATE ================= */
-
-  const [medicines, setMedicines] = useState([]);
+  const queryClient = useQueryClient();
+  const { data: medicines = [] } = useQuery({
+    queryKey: ["medicines"],
+    queryFn: fetchMedicines,
+    staleTime: 1000 * 60 * 5
+  });
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [sort, setSort] = useState("CRITICAL_FIRST");
   const [refillHistory, setRefillHistory] = useState([]);
 
-  /* ================= FETCH ================= */
-
-  useEffect(() => {
-    fetchMedicines();
-  }, []);
-
-  const fetchMedicines = async () => {
-    const res = await API.get("/medicines");
-    setMedicines(res.data);
-  };
 
   /* ================= HELPERS ================= */
 
@@ -62,7 +57,7 @@ export default function LowStock() {
       },
     ]);
 
-    fetchMedicines();
+    queryClient.invalidateQueries({ queryKey: ["medicines"] });
   };
 
   /* ================= FILTER + SORT ================= */
@@ -197,10 +192,10 @@ export default function LowStock() {
               <div className="progress-container">
                 <div
                   className={`progress-bar ${level === "CRITICAL"
-                      ? "progress-critical"
-                      : level === "LOW"
-                        ? "progress-low"
-                        : "progress-healthy"
+                    ? "progress-critical"
+                    : level === "LOW"
+                      ? "progress-low"
+                      : "progress-healthy"
                     }`}
                   style={{ width: `${percentage}%` }}
                 />

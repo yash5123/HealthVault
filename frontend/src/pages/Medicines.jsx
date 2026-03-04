@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import Layout from "../components/layout/Layout";
-
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchMedicines } from "../queries/medicinesQuery";
 import SectionHeader from "../components/medicines/SectionHeader";
 import StatsPanel from "../components/medicines/StatsPanel";
 import MedicineForm from "../components/forms/MedicineForm";
@@ -16,7 +17,6 @@ export default function Medicines() {
      STATE
   ====================================================== */
 
-  const [medicines, setMedicines] = useState([]);
   const [editingMedicine, setEditingMedicine] = useState(null);
 
   const [search, setSearch] = useState("");
@@ -25,23 +25,13 @@ export default function Medicines() {
 
   const [deleteTarget, setDeleteTarget] = useState(null);
 
-  /* =====================================================
-     FETCH MEDICINES
-  ====================================================== */
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    fetchMedicines();
-  }, []);
-
-  const fetchMedicines = async () => {
-    try {
-      const res = await API.get("/medicines");
-      setMedicines(res.data);
-    } catch (err) {
-      console.error("Fetch medicines error:", err);
-    }
-  };
-
+  const { data: medicines = [] } = useQuery({
+    queryKey: ["medicines"],
+    queryFn: fetchMedicines,
+    staleTime: 1000 * 60 * 5
+  });
   /* =====================================================
      CRUD OPERATIONS
   ====================================================== */
@@ -49,7 +39,7 @@ export default function Medicines() {
   const handleAdd = async (data) => {
     try {
       await API.post("/medicines", data);
-      fetchMedicines();
+      queryClient.invalidateQueries({ queryKey: ["medicines"] });
     } catch (err) {
       console.error("Add medicine error:", err);
     }
@@ -59,7 +49,7 @@ export default function Medicines() {
     try {
       await API.put(`/medicines/${id}`, data);
       setEditingMedicine(null);
-      fetchMedicines();
+      queryClient.invalidateQueries({ queryKey: ["medicines"] });
     } catch (err) {
       console.error("Update medicine error:", err);
     }
@@ -68,7 +58,7 @@ export default function Medicines() {
   const handleDelete = async (id) => {
     try {
       await API.delete(`/medicines/${id}`);
-      fetchMedicines();
+      queryClient.invalidateQueries({ queryKey: ["medicines"] });
     } catch (err) {
       console.error("Delete medicine error:", err);
     }

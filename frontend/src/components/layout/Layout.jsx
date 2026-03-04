@@ -1,6 +1,13 @@
 import { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
+
+import { fetchMedicines } from "../../queries/medicinesQuery";
+import { fetchDocuments } from "../../queries/documentsQuery";
+import { fetchCheckups } from "../../queries/checkupsQuery";
+import { fetchDashboard } from "../../queries/dashboardQuery";
+
 import "../../styles/layout.css";
 
 export default function Layout({ children }) {
@@ -8,6 +15,39 @@ export default function Layout({ children }) {
 
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const prefetchMedicines = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["medicines"],
+      queryFn: fetchMedicines,
+      staleTime: 1000 * 60 * 5
+    });
+  };
+
+  const prefetchDocuments = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["documents"],
+      queryFn: fetchDocuments,
+      staleTime: 1000 * 60 * 5
+    });
+  };
+
+  const prefetchCheckups = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["checkups"],
+      queryFn: fetchCheckups,
+      staleTime: 1000 * 60 * 5
+    });
+  };
+
+  const prefetchDashboard = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["dashboard"],
+      queryFn: fetchDashboard,
+      staleTime: 1000 * 60 * 5
+    });
+  };
 
   const handleLogout = () => {
     logout();
@@ -42,27 +82,27 @@ export default function Layout({ children }) {
         {/* NAVIGATION */}
         <nav className="nav-links">
 
-          <NavLink to="/" end>
+          <NavLink to="/" end onMouseEnter={prefetchDashboard}>
             <span className="icon">📊</span>
             {!collapsed && <span>Dashboard</span>}
           </NavLink>
 
-          <NavLink to="/documents">
+          <NavLink to="/documents" onMouseEnter={prefetchDocuments}>
             <span className="icon">📂</span>
             {!collapsed && <span>Document Vault</span>}
           </NavLink>
 
-          <NavLink to="/medicines">
+          <NavLink to="/medicines" onMouseEnter={prefetchMedicines}>
             <span className="icon">💊</span>
             {!collapsed && <span>Medicine Timer</span>}
           </NavLink>
 
-          <NavLink to="/lowstock">
+          <NavLink to="/lowstock" onMouseEnter={prefetchMedicines}>
             <span className="icon">🚨</span>
             {!collapsed && <span>Stock Alert</span>}
           </NavLink>
 
-          <NavLink to="/checkups">
+          <NavLink to="/checkups" onMouseEnter={prefetchCheckups}>
             <span className="icon">📅</span>
             {!collapsed && <span>Checkup Reminders</span>}
           </NavLink>

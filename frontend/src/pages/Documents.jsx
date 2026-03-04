@@ -1,15 +1,25 @@
+import { fetchDocuments } from "../queries/documentsQuery";
 import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import DocumentCard from "../components/documents/DocumentCard";
 import "../styles/pages/documents.css";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function Documents() {
 
   /* ================= STATE ================= */
 
-  const [documents, setDocuments] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
+
+  const {
+    data: documents = [],
+    isLoading: loading
+  } = useQuery({
+    queryKey: ["documents"],
+    queryFn: fetchDocuments,
+    staleTime: 1000 * 60 * 5
+  });
 
   const [search, setSearch] = useState("");
 
@@ -33,33 +43,6 @@ export default function Documents() {
     return () => clearTimeout(timer);
   }, [message]);
 
-  /* ================= FETCH DOCUMENTS ================= */
-
-  const fetchDocuments = useCallback(async () => {
-
-    try {
-
-      setLoading(true);
-
-      const res = await API.get("/documents");
-
-      setDocuments(res.data || []);
-
-    } catch (err) {
-
-      console.error("Fetch documents error:", err);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  }, []);
-
-  useEffect(() => {
-    fetchDocuments();
-  }, [fetchDocuments]);
 
   /* ================= FILE SELECT ================= */
 
@@ -112,7 +95,7 @@ export default function Documents() {
         fileInputRef.current.value = "";
       }
 
-      fetchDocuments();
+      queryClient.invalidateQueries({ queryKey: ["documents"] });
 
     } catch (err) {
 
@@ -135,7 +118,9 @@ export default function Documents() {
 
       await API.delete(`/documents/${id}`);
 
-      setDocuments((prev) => prev.filter((doc) => doc._id !== id));
+      queryClient.setQueryData(["documents"], (old = []) =>
+        old.filter((doc) => doc._id !== id)
+      );
 
       setMessage({
         type: "success",
@@ -182,8 +167,7 @@ export default function Documents() {
   return (
     <Layout>
 
-      <div className="page-container page-documents">
-
+      <div className="page-documents">
         <div className="page-content">
 
           {message && (

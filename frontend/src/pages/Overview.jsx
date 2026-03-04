@@ -3,39 +3,22 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
 import { useCountUp } from "../hooks/useCountUp";
+import { useQuery } from "@tanstack/react-query";
+import { fetchDashboard } from "../queries/dashboardQuery";
+
 
 export default function Overview() {
   const navigate = useNavigate();
 
-  const [medicines, setMedicines] = useState([]);
-  const [documents, setDocuments] = useState([]);
-  const [checkups, setCheckups] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { data, isLoading: loading } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: fetchDashboard,
+    staleTime: 1000 * 60 * 5
+  });
 
-  /* ================= FETCH ================= */
-
-  useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const [medRes, docRes, checkRes] = await Promise.all([
-          API.get("/medicines"),
-          API.get("/documents"),
-          API.get("/checkups"),
-        ]);
-
-        setMedicines(medRes.data);
-        setDocuments(docRes.data);
-        setCheckups(checkRes.data);
-      } catch (err) {
-        console.log("Dashboard fetch error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAll();
-  }, []);
-
+  const medicines = data?.medicines || [];
+  const documents = data?.documents || [];
+  const checkups = data?.checkups || [];
   /* ================= ANALYTICS ================= */
 
   const healthyCount = useMemo(

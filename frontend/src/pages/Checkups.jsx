@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchCheckups } from "../queries/checkupsQuery";
 
 export default function Checkups() {
 
@@ -8,7 +10,6 @@ export default function Checkups() {
      STATE
   ====================================================== */
 
-  const [checkups, setCheckups] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [history, setHistory] = useState([]);
@@ -21,18 +22,13 @@ export default function Checkups() {
     notes: "",
   });
 
-  /* ======================================================
-     FETCH
-  ====================================================== */
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    fetchCheckups();
-  }, []);
-
-  const fetchCheckups = async () => {
-    const res = await API.get("/checkups"); // ✅ FIXED
-    setCheckups(res.data);
-  };
+  const { data: checkups = [] } = useQuery({
+    queryKey: ["checkups"],
+    queryFn: fetchCheckups,
+    staleTime: 1000 * 60 * 5
+  });
 
   /* ======================================================
      HELPERS
@@ -83,7 +79,7 @@ export default function Checkups() {
       intervalMonths: "",
       notes: "",
     });
-    fetchCheckups();
+    queryClient.invalidateQueries({ queryKey: ["checkups"] })
   };
 
   /* ======================================================
@@ -99,8 +95,8 @@ export default function Checkups() {
       },
     ]);
 
-    await API.patch(`/checkups/${checkup._id}/complete`); // ✅ FIXED
-    fetchCheckups();
+    await API.patch(`/checkups/${checkup._id}/complete`);
+    queryClient.invalidateQueries({ queryKey: ["checkups"] });
   };
 
   /* ======================================================
