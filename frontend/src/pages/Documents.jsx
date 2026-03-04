@@ -1,11 +1,10 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import Layout from "../components/layout/Layout";
 import API from "../services/api";
+import DocumentCard from "../components/documents/DocumentCard";
 import "../styles/pages/documents.css";
 
 export default function Documents() {
-
-  /* ================= STATE ================= */
 
   const [documents, setDocuments] = useState([]);
   const [search, setSearch] = useState("");
@@ -18,7 +17,6 @@ export default function Documents() {
 
   const fileInputRef = useRef(null);
 
-
   /* ================= AUTO CLEAR MESSAGE ================= */
 
   useEffect(() => {
@@ -30,7 +28,6 @@ export default function Documents() {
       return () => clearTimeout(timer);
     }
   }, [message]);
-
 
   /* ================= FETCH DOCUMENTS ================= */
 
@@ -47,7 +44,6 @@ export default function Documents() {
     }
   };
 
-
   /* ================= FILE SELECT ================= */
 
   const handleFileChange = (e) => {
@@ -60,7 +56,6 @@ export default function Documents() {
 
     setFile(selectedFile);
   };
-
 
   /* ================= UPLOAD DOCUMENT ================= */
 
@@ -112,7 +107,6 @@ export default function Documents() {
     }
   };
 
-
   /* ================= DELETE DOCUMENT ================= */
 
   const handleDelete = async (id) => {
@@ -141,7 +135,6 @@ export default function Documents() {
 
   };
 
-
   /* ================= FILTER DOCUMENTS ================= */
 
   const filteredDocs = useMemo(() => {
@@ -154,22 +147,16 @@ export default function Documents() {
 
   }, [documents, search]);
 
-
   /* ================= STATS ================= */
 
   const total = documents.length;
   const lab = documents.filter(d => d.type === "Lab Report").length;
   const prescription = documents.filter(d => d.type === "Prescription").length;
 
-
-  /* ================= UI ================= */
-
   return (
     <Layout>
 
       <div className="page-container page-documents">
-
-        {/* ================= MESSAGE ================= */}
 
         {message && (
           <div className={`message-banner ${message.type}`}>
@@ -177,18 +164,12 @@ export default function Documents() {
           </div>
         )}
 
-
-        {/* ================= HEADER ================= */}
-
         <div className="page-header">
           <h1 className="page-title">Document Vault</h1>
           <p className="page-subtitle">
             Securely manage prescriptions, lab reports and medical records.
           </p>
         </div>
-
-
-        {/* ================= STATS ================= */}
 
         <div className="grid">
 
@@ -208,9 +189,6 @@ export default function Documents() {
           </div>
 
         </div>
-
-
-        {/* ================= UPLOAD SECTION ================= */}
 
         <div className="card upload-section">
 
@@ -255,9 +233,6 @@ export default function Documents() {
 
         </div>
 
-
-        {/* ================= SEARCH ================= */}
-
         <div className="search-section">
 
           <input
@@ -270,9 +245,6 @@ export default function Documents() {
 
         </div>
 
-
-        {/* ================= DOCUMENT GRID ================= */}
-
         <div className="grid document-grid">
 
           {filteredDocs.length === 0 && (
@@ -280,35 +252,11 @@ export default function Documents() {
           )}
 
           {filteredDocs.map((doc) => (
-            <div key={doc._id} className="card document-card">
-
-              <strong>{doc.title}</strong>
-
-              <p>{doc.type}</p>
-
-              <p>{new Date(doc.createdAt).toDateString()}</p>
-
-              <div className="actions">
-
-                <a
-                  href={doc.fileUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-primary action-btn"
-                >
-                  View Document
-                </a>
-
-                <button
-                  className="btn-danger action-btn"
-                  onClick={() => handleDelete(doc._id)}
-                >
-                  🗑 Delete
-                </button>
-
-              </div>
-
-            </div>
+            <DocumentCard
+              key={doc._id}
+              doc={doc}
+              onDelete={handleDelete}
+            />
           ))}
 
         </div>

@@ -653,11 +653,6 @@
 
 /* ================= ACTION BUTTON HOVER SYSTEM ================= */
 
-.document-card .actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 14px;
-}
 
 .document-card .action-btn {
   opacity: 0;

@@ -1,21 +1,34 @@
-export default function DocumentCard({ doc }) {
+export default function DocumentCard({ doc, onDelete }) {
+
   return (
-    <div className="modern-doc-card">
-      <div className="doc-top">
-        <span className="doc-badge">{doc.type}</span>
-      </div>
+    <div className="card document-card">
 
-      <h4>{doc.title}</h4>
+      <strong>{doc.title}</strong>
 
-      <p>
-        {new Date(doc.createdAt).toLocaleDateString()}
-      </p>
+      <p>{doc.type}</p>
 
-      <div className="doc-actions">
-        <a href={doc.fileUrl} target="_blank" rel="noreferrer">
-          View
+      <p>{new Date(doc.createdAt).toDateString()}</p>
+
+      <div className="actions">
+
+        <a
+          href={doc.fileUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="btn-primary action-btn"
+        >
+          View Document
         </a>
+
+        <button
+          className="btn-danger action-btn"
+          onClick={() => onDelete(doc._id)}
+        >
+          🗑 Delete
+        </button>
+
       </div>
+
     </div>
   );
 }
