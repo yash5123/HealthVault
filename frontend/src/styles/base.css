@@ -65,12 +65,6 @@ p {
   }
 }
 
-/* Animate inner page content instead of container */
-
-.page-content {
-  animation: pageEnter 0.6s ease forwards;
-}
-
 
 /* ===================================
    FLOATING BACKGROUND GLOW ORBS
