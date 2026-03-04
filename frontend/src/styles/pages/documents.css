@@ -652,7 +652,6 @@
    ENTRY ANIMATION FOR DOCUMENT PAGE ELEMENTS
 ========================================================== */
 
-.stat-card,
 .upload-section,
 .document-card {
   animation: docFadeIn 0.5s ease forwards;
