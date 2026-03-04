@@ -9,9 +9,11 @@ const uploadDocument = async (req, res) => {
 
   try {
 
-    if (!req.file) {
+    /* ⭐ prevent filename crash */
+    if (!req.file || !req.file.filename) {
+      console.error("File missing from multer:", req.file);
       return res.status(400).json({
-        message: "No file uploaded"
+        message: "File upload failed. No file received."
       });
     }
 
