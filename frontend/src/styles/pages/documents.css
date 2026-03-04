@@ -651,17 +651,3 @@
   margin-top: 14px;
 }
 
-/* ================= ACTION BUTTON HOVER SYSTEM ================= */
-
-
-.document-card .action-btn {
-  opacity: 0;
-  transform: translateY(6px);
-  transition: all 0.25s ease;
-}
-
-.document-card:hover .action-btn {
-  opacity: 1;
-  transform: translateY(0);
-}
-
