@@ -21,7 +21,18 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
+/* ⭐ Added safe config but kept everything else */
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
+  fileFilter: (req, file, cb) => {
+    if (!file) {
+      return cb(new Error("No file received"));
+    }
+    cb(null, true);
+  }
+});
 
 /* ================= ROUTES ================= */
 
