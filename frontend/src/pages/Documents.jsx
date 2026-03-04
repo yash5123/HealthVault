@@ -271,12 +271,21 @@ export default function Documents() {
                 <option>Other</option>
               </select>
 
-              <input
-                type="file"
-                className="form-input"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-              />
+              <div className="file-upload">
+                <input
+                  type="file"
+                  id="fileUpload"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                />
+
+                <label
+                  htmlFor="fileUpload"
+                  className={`file-upload-label ${file ? "selected" : ""}`}
+                >
+                  📄 {file ? file.name : "Choose document file"}
+                </label>
+              </div>
 
               <button
                 type="button"

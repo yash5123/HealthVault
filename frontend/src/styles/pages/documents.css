@@ -366,6 +366,54 @@
   font-size: 15px;
 }
 
+.page-documents .file-upload {
+  position: relative;
+  width: 100%;
+}
+
+.page-documents .file-upload input {
+  display: none;
+}
+
+.page-documents .file-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 14px 18px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px dashed rgba(0, 0, 0, 0.12);
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+
+.page-documents .file-upload-label:hover {
+  border-color: #6366f1;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    0 8px 20px rgba(99, 102, 241, 0.12);
+}
+
+/* File Selected */
+
+.page-documents .file-upload-label.selected {
+  border-color: #00e5c3;
+  color: #065f46;
+}
 
 /* ==========================================================
    GRID REFINEMENT
@@ -663,9 +711,6 @@
   transform-style: preserve-3d;
 }
 
-.page-documents .document-card:hover {
-  transform: translateY(-6px) scale(1.02);
-}
 
 .page-documents .document-card .actions {
   display: flex;
