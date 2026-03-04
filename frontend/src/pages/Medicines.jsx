@@ -25,6 +25,19 @@ export default function Medicines() {
 
   const [deleteTarget, setDeleteTarget] = useState(null);
 
+  useEffect(() => {
+    if (deleteTarget) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+
+    return () => {
+      document.body.classList.remove("modal-open");
+    };
+  }, [deleteTarget]);
+
+
   const queryClient = useQueryClient();
 
   const { data: medicines = [] } = useQuery({

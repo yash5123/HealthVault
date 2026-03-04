@@ -1029,7 +1029,7 @@
    Scoped Only To Medicines Page
 ========================================================== */
 
-.page-medicines .modal-overlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -1050,7 +1050,7 @@
   pointer-events: all;
 }
 
-.page-medicines .modal-container {
+.modal-container {
   width: min(520px, 90%);
   padding: 40px;
 
@@ -1073,15 +1073,12 @@
   animation: medicineModalAppear .25s cubic-bezier(.2, .8, .2, 1);
 }
 
-.page-medicines .modal-header {
+.modal-header {
   margin-bottom: 8px;
 }
 
-.page-medicines .modal-body {
-  line-height: 1.5;
-}
 
-.page-medicines .modal-header h3 {
+.modal-header h3 {
   font-weight: 700;
   font-size: 22px;
 
@@ -1093,7 +1090,8 @@
 }
 
 
-.page-medicines .modal-body {
+.modal-body {
+  line-height: 1.5;
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 26px;
@@ -1108,25 +1106,18 @@
   color: white;
 }
 
-.page-medicines .btn-danger:hover {
+.btn-danger:hover {
   transform: translateY(-2px);
   box-shadow:
     0 12px 30px rgba(239, 68, 68, .5);
 }
 
-.page-medicines .modal-actions {
+.modal-actions {
   display: flex;
   justify-content: center;
   gap: 16px;
 }
 
-
-
-.page-medicines .modal-delete:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 12px 30px rgba(239, 68, 68, .5);
-}
 
 /* Modal Animation */
 @keyframes medicineModalAppear {
@@ -1139,4 +1130,9 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
 }
