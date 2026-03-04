@@ -10,16 +10,28 @@ export default function LowStock() {
 
   const queryClient = useQueryClient();
 
+  /* MEDICINES QUERY */
+
   const { data: medicines = [] } = useQuery({
     queryKey: ["medicines"],
     queryFn: fetchMedicines,
     staleTime: 1000 * 60 * 5
   });
 
+  /* REFILL HISTORY QUERY */
+
+  const { data: refillHistory = [] } = useQuery({
+    queryKey: ["refillHistory"],
+    queryFn: async () => {
+      const res = await API.get("/refills");
+      return res.data;
+    }
+  });
+
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [sort, setSort] = useState("CRITICAL_FIRST");
-  const [refillHistory, setRefillHistory] = useState([]);
+  const [customAmount, setCustomAmount] = useState({});
 
   /* ================= HELPERS ================= */
 
@@ -41,26 +53,68 @@ export default function LowStock() {
     return "HEALTHY";
   };
 
+  /* ================= SMART ALERTS ================= */
+
+  const calculateRecommendedRefill = (med) => {
+
+    const perDay = calculateConsumptionPerDay(med.frequencyPerDay);
+
+    if (!perDay) return 0;
+
+    const targetDays = 30; // keep 30 days stock
+
+    const requiredStock = perDay * targetDays;
+
+    const refill = requiredStock - med.quantity;
+
+    return refill > 0 ? refill : 0;
+  };
+
+  const getSmartWarning = (med) => {
+
+    const days = calculateDaysRemaining(med);
+
+    if (days <= 3) {
+      return `⚠ Will run out in ${days} days`;
+    }
+
+    if (days <= 7) {
+      return `⚠ Low stock — ${days} days remaining`;
+    }
+
+    return null;
+  };
+
+
   /* ================= RESTOCK ================= */
 
   const restockMedicine = async (med, amount) => {
+
+    if (!amount) return;
+
     const updatedQty = med.quantity + amount;
 
+    /* Prevent negative stock */
+
+    if (updatedQty < 0) {
+      alert("Stock cannot go below 0");
+      return;
+    }
     await API.put(`/medicines/${med._id}`, {
       ...med,
       quantity: updatedQty,
     });
 
-    setRefillHistory((prev) => [
-      ...prev,
-      {
-        name: med.name,
-        amount,
-        date: new Date(),
-      },
-    ]);
+    await API.post("/refills", {
+      medicineId: med._id,
+      name: med.name,
+      amount,
+      action: amount > 0 ? "ADD" : "REDUCE"
+    });
 
     queryClient.invalidateQueries({ queryKey: ["medicines"] });
+    queryClient.invalidateQueries({ queryKey: ["refillHistory"] });
+
   };
 
   /* ================= FILTER + SORT ================= */
@@ -197,7 +251,7 @@ export default function LowStock() {
         </div>
 
       </div>
-      
+
       {processedData.length === 0 && (
         <div className="empty-state">
           <h3>No medicines found</h3>
@@ -213,6 +267,7 @@ export default function LowStock() {
 
           const level = getStockLevel(med);
           const days = calculateDaysRemaining(med);
+          const warning = getSmartWarning(med);
 
           const percentage = Math.min(
             (med.quantity / med.lowStockThreshold) * 100,
@@ -230,6 +285,11 @@ export default function LowStock() {
                 <h3>{med.name}</h3>
               </div>
 
+              {warning && (
+                <div className="smart-warning">
+                  {warning}
+                </div>
+              )}
               <div className="medicine-card-details">
 
                 <div>
@@ -246,27 +306,60 @@ export default function LowStock() {
 
 
               <div className="medicine-progress">
-
                 <div
                   className="medicine-progress-bar"
                   style={{ width: `${percentage}%` }}
                 />
+              </div>
 
+              <div className="recommended-refill">
+                Recommended refill: +{calculateRecommendedRefill(med)}
               </div>
 
 
               <div className="medicine-actions">
 
+                <button onClick={() => restockMedicine(med, 10)}>
+                  +10
+                </button>
+
+                <button onClick={() => restockMedicine(med, 30)}>
+                  +30
+                </button>
+
+                <input
+                  type="number"
+                  placeholder="Custom"
+                  value={customAmount[med._id] || ""}
+                  onChange={(e) =>
+                    setCustomAmount({
+                      ...customAmount,
+                      [med._id]: e.target.value
+                    })
+                  }
+                />
+
                 <button
-                  onClick={() => restockMedicine(med, 10)}
+                  onClick={() =>
+                    restockMedicine(
+                      med,
+                      Math.abs(Number(customAmount[med._id] || 0))
+                    )
+                  }
                 >
-                  +10 Refill
+                  Add
                 </button>
 
                 <button
-                  onClick={() => restockMedicine(med, 30)}
+                  className="reduce-btn"
+                  onClick={() =>
+                    restockMedicine(
+                      med,
+                      -Number(customAmount[med._id] || 0)
+                    )
+                  }
                 >
-                  +30 Refill
+                  Reduce
                 </button>
 
               </div>
@@ -292,10 +385,10 @@ export default function LowStock() {
 
         {refillHistory.map((item, index) => (
 
-          <div key={index} className="history-item">
+          <div key={item._id} className="history-item">
 
-            <p>
-              {item.name} refilled by {item.amount} units
+            <p className={item.amount > 0 ? "add" : "reduce"}>
+              {item.name} {item.amount > 0 ? "+" : ""}{item.amount} units
             </p>
 
             <p>{item.date.toLocaleString()}</p>

@@ -29,7 +29,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/medicines", require("./routes/medicineRoutes"));
 app.use("/api/documents", require("./routes/documentRoutes"));
 app.use("/api/checkups", require("./routes/checkupRoutes"));
-
+app.use("/refills", require("./routes/refillRoutes"));
 /* ================= TEST ROUTE ================= */
 app.get("/", (req, res) => {
   res.send("HealthVault API Running 🚀");
