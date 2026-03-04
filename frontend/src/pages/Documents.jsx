@@ -294,7 +294,7 @@ export default function Documents() {
                 onClick={() => handleDelete(doc._id)}
                 style={{ marginTop: "10px" }}
               >
-                Delete
+               🗑 Delete
               </button>
 
             </div>

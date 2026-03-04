@@ -806,36 +806,72 @@
 
 /* ================= DELETE BUTTON ================= */
 
-.btn-danger {
-  background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+/* ==========================================================
+   DELETE BUTTON — PREMIUM ACTION BUTTON
+========================================================== */
+
+.page-documents .btn-danger {
+  padding: 14px 24px;
+  border-radius: 999px;
   border: none;
+
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+
+  background: linear-gradient(
+    90deg,
+    #ff4d4d,
+    #ff1a1a,
+    #dc2626
+  );
+
   color: white;
-  padding: 8px 14px;
-  margin-left: 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
   cursor: pointer;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.25);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  margin-left: 12px;
 }
 
-.btn-danger:hover {
-  background: linear-gradient(135deg, #ff1a1a, #cc0000);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(255, 0, 0, 0.35);
+/* Hover Lift */
+
+.page-documents .btn-danger:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 15px 40px rgba(255, 0, 0, 0.35),
+    0 0 30px rgba(255, 50, 50, 0.25);
 }
 
-.btn-danger:active {
-  transform: scale(0.96);
+/* Active Press */
+
+.page-documents .btn-danger:active {
+  transform: translateY(0px);
+  box-shadow:
+    0 8px 20px rgba(255, 0, 0, 0.25);
 }
 
-.btn-danger:focus {
-  outline: none;
+/* Shine Effect */
+
+.page-documents .btn-danger::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+
+  transition: all 0.6s ease;
 }
 
+.page-documents .btn-danger:hover::after {
+  left: 120%;
+}
