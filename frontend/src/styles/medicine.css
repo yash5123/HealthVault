@@ -1,23 +1,15 @@
-/* ==========================================================
-   MEDICINE TIMER — PREMIUM GLASS SYSTEM
-   Brand: Unified With Documents
-   Personality: Intelligent • Calm • Medical • Structured
-   Glass Depth: Level 3
-========================================================== */
-
-
-/* ==========================================================
-   PAGE PERSONALITY LAYER
-========================================================== */
-
+/* ========================================================== MEDICINE TIMER — PREMIUM GLASS SYSTEM Brand: Unified With Documents Personality: Intelligent • Calm • Medical • Structured Glass Depth: Level 3 ========================================================== */
+/* ========================================================== PAGE PERSONALITY LAYER ========================================================== */
 .page-medicines {
   position: relative;
   padding-bottom: 120px;
   animation: pageFadeIn 0.6s ease;
+
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* Ambient Medical Glow */
-
 .page-medicines::before {
   content: "";
   position: absolute;
@@ -25,10 +17,7 @@
   right: -120px;
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle,
-      rgba(99, 102, 241, 0.15),
-      rgba(139, 92, 246, 0.08),
-      transparent 70%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.08), transparent 70%);
   filter: blur(90px);
   z-index: 0;
   pointer-events: none;
@@ -41,26 +30,19 @@
   left: -150px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle,
-      rgba(0, 229, 195, 0.12),
-      transparent 70%);
+  background: radial-gradient(circle, rgba(0, 229, 195, 0.12), transparent 70%);
   filter: blur(110px);
   z-index: 0;
   pointer-events: none;
 }
 
 /* Ensure content stays above glow */
-
 .page-medicines>* {
   position: relative;
   z-index: 2;
 }
 
-
-/* ==========================================================
-   SECTION RHYTHM SYSTEM
-========================================================== */
-
+/* ========================================================== SECTION RHYTHM SYSTEM ========================================================== */
 .page-medicines section,
 .page-medicines .card,
 .page-medicines .search-panel,
@@ -68,46 +50,33 @@
   margin-top: 50px;
 }
 
-
-/* ==========================================================
-   STATS PANEL — GLASS LEVEL 2
-========================================================== */
-
+/* ========================================================== STATS PANEL — GLASS LEVEL 2 ========================================================== */
 .page-medicines .stats-panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 30px;
   margin-top: 40px;
 }
 
 .page-medicines .stat-card {
   position: relative;
-  padding: 32px;
+  padding: 20px;
+  /* change this */
   border-radius: 26px;
-
   backdrop-filter: blur(20px);
-
   border: none;
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.12);
-
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
   transition: all 0.4s ease;
   overflow: hidden;
 }
 
 /* Hover Lift */
-
 .page-medicines .stat-card:hover {
   transform: translateY(-6px);
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.08),
-    0 0 40px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.08), 0 0 40px rgba(99, 102, 241, 0.15);
 }
 
-
 /* Accent Line */
-
 .page-medicines .stat-card::after {
   content: "";
   position: absolute;
@@ -120,7 +89,6 @@
 }
 
 /* Variants */
-
 .page-medicines .stat-card.total::after {
   background: linear-gradient(180deg, #6366f1, #8b5cf6);
 }
@@ -138,8 +106,7 @@
 }
 
 /* === STAT CARD COLORED BACKGROUNDS === */
-
-.page-medicines .stat-card.total{
+.page-medicines .stat-card.total {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
 }
@@ -154,18 +121,15 @@
   color: white;
 }
 
-.page-medicines .stat-card.critical{
+.page-medicines .stat-card.critical {
   background: linear-gradient(135deg, #ef4444, #ff4d6d);
   color: white;
 }
 
-
 /* Typography */
-
-.page-medicines .stat-title{
+.page-medicines .stat-title {
   font-size: 15px;
   font-weight: 900;
-  letter-spacing: 0.8px;
   color: #ffffff !important;
   opacity: 1 !important;
   text-transform: uppercase;
@@ -173,8 +137,8 @@
   opacity: 0.95;
 }
 
-.page-medicines .stat-value{
-  margin-top: 14px;
+.page-medicines .stat-value {
+  margin-top: 8px;
   font-size: 40px;
   font-weight: 900;
   letter-spacing: -1px;
@@ -194,7 +158,6 @@
 }
 
 /* Subtle Breathing Effect for Critical */
-
 @keyframes subtleCriticalBreath {
   0% {
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
@@ -213,60 +176,33 @@
   animation: subtleCriticalBreath 3s ease-in-out infinite;
 }
 
-
-/* ==========================================================
-   BASE CARD SYSTEM (FORM WRAPPER)
-========================================================== */
-
+/* ========================================================== BASE CARD SYSTEM (FORM WRAPPER) ========================================================== */
 .page-medicines .card {
   border-radius: 28px;
   padding: 50px;
-
-  background: linear-gradient(145deg,
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.85));
-
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
   backdrop-filter: blur(24px);
-
   border: 1px solid rgba(255, 255, 255, 0.75);
-
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.06),
-    inset 0 0 60px rgba(255, 255, 255, 0.4);
-
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06), inset 0 0 60px rgba(255, 255, 255, 0.4);
   transition: all 0.4s ease;
 }
 
 .page-medicines .card:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 28px 75px rgba(0, 0, 0, 0.08),
-    0 0 45px rgba(99, 102, 241, 0.12);
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.08), 0 0 45px rgba(99, 102, 241, 0.12);
 }
 
-
-/* ==========================================================
-   SECTION TITLE SYSTEM
-========================================================== */
-
+/* ========================================================== SECTION TITLE SYSTEM ========================================================== */
 .page-medicines .section-title {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 35px;
-
-  background: linear-gradient(90deg,
-      #6366f1,
-      #8b5cf6);
-
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-
-/* ==========================================================
-   PAGE FADE IN
-========================================================== */
-
+/* ========================================================== PAGE FADE IN ========================================================== */
 @keyframes pageFadeIn {
   from {
     opacity: 0;
@@ -279,17 +215,8 @@
   }
 }
 
-
-/* ==========================================================
-   ADVANCED FORM SYSTEM — GLASS LEVEL 3
-   Intelligent • Clean • Structured • Responsive
-========================================================== */
-
-
-/* ==========================================================
-   FORM CARD WRAPPER
-========================================================== */
-
+/* ========================================================== ADVANCED FORM SYSTEM — GLASS LEVEL 3 Intelligent • Clean • Structured • Responsive ========================================================== */
+/* ========================================================== FORM CARD WRAPPER ========================================================== */
 .page-medicines .form-card {
   position: relative;
   margin-top: 60px;
@@ -297,7 +224,6 @@
 }
 
 /* Soft glow accent */
-
 .page-medicines .form-card::before {
   content: "";
   position: absolute;
@@ -305,30 +231,20 @@
   height: 350px;
   top: -140px;
   right: -140px;
-  background: radial-gradient(circle,
-      rgba(99, 102, 241, 0.18),
-      transparent 70%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18), transparent 70%);
   filter: blur(60px);
   opacity: 0.6;
   pointer-events: none;
 }
 
-
-/* ==========================================================
-   FORM GRID LAYOUT
-========================================================== */
-
-.page-medicines .form-grid{
+/* ========================================================== FORM GRID LAYOUT ========================================================== */
+.page-medicines .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
 }
 
-
-/* ==========================================================
-   FIELD BLOCK
-========================================================== */
-
+/* ========================================================== FIELD BLOCK ========================================================== */
 .page-medicines .field {
   display: flex;
   flex-direction: column;
@@ -343,51 +259,35 @@
   letter-spacing: 0.4px;
 }
 
-
-/* ==========================================================
-   INPUT SYSTEM
-========================================================== */
-
+/* ========================================================== INPUT SYSTEM ========================================================== */
 .page-medicines .input,
 .page-medicines .select {
   width: 100%;
   padding: 14px 18px;
-
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-
   background: rgba(255, 255, 255, 0.9);
-
   font-size: 14px;
   font-weight: 500;
-
   transition: all 0.3s ease;
   outline: none;
 }
 
 /* Hover */
-
 .page-medicines .input:hover,
 .page-medicines .select:hover {
   border-color: rgba(99, 102, 241, 0.4);
 }
 
 /* Focus */
-
 .page-medicines .input:focus,
 .page-medicines .select:focus {
   border-color: #6366f1;
-  box-shadow:
-    0 0 0 3px rgba(99, 102, 241, 0.15),
-    0 8px 25px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 8px 25px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
 
-
-/* ==========================================================
-   INLINE GROUP (DOSAGE / FREQUENCY / DURATION)
-========================================================== */
-
+/* ========================================================== INLINE GROUP (DOSAGE / FREQUENCY / DURATION) ========================================================== */
 .page-medicines .inline-group {
   display: flex;
   gap: 14px;
@@ -395,7 +295,12 @@
 }
 
 .page-medicines .inline-group .input {
-  flex: 1;
+  flex: 2;
+}
+
+.page-medicines .inline-group .select {
+  flex: 0 0 90px;
+  min-width: 80px;
 }
 
 .page-medicines .inline-text {
@@ -404,40 +309,24 @@
   color: var(--text-muted);
 }
 
-
-/* ==========================================================
-   SELECT DROPDOWN POLISH
-========================================================== */
-
+/* ========================================================== SELECT DROPDOWN POLISH ========================================================== */
 .page-medicines .select {
   cursor: pointer;
   appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #6366f1 50%),
-    linear-gradient(135deg, #6366f1 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) calc(50% - 4px),
-    calc(100% - 12px) calc(50% - 4px);
+  background-image: linear-gradient(45deg, transparent 50%, #6366f1 50%), linear-gradient(135deg, #6366f1 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% - 4px), calc(100% - 12px) calc(50% - 4px);
   background-size: 6px 6px;
   background-repeat: no-repeat;
 }
 
-
-/* ==========================================================
-   HELPER TEXT
-========================================================== */
-
+/* ========================================================== HELPER TEXT ========================================================== */
 .page-medicines .helper {
   margin-top: 8px;
   font-size: 12px;
   color: var(--text-muted);
 }
 
-
-/* ==========================================================
-   ERROR STATE SYSTEM
-========================================================== */
-
+/* ========================================================== ERROR STATE SYSTEM ========================================================== */
 .page-medicines .error {
   margin-top: 6px;
   font-size: 12px;
@@ -451,34 +340,21 @@
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 
-
-/* ==========================================================
-   SMART CALCULATION BOX
-========================================================== */
+/* ========================================================== SMART CALCULATION BOX ========================================================== */
 .page-medicines .smart-box {
   margin-top: 45px;
   padding: 30px;
   border-radius: 22px;
-
-  background: linear-gradient(135deg,
-      rgba(99, 102, 241, 0.08),
-      rgba(139, 92, 246, 0.06));
-
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.06));
   border: 1px solid rgba(99, 102, 241, 0.2);
-
-  box-shadow:
-    0 20px 60px rgba(99, 102, 241, 0.12);
-
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.12);
   backdrop-filter: blur(18px);
-
   transition: all 0.35s ease;
 }
 
 .page-medicines .smart-box:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.08),
-    0 0 35px rgba(99, 102, 241, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 0 35px rgba(99, 102, 241, 0.12);
 }
 
 .page-medicines .smart-box h4 {
@@ -497,15 +373,10 @@
 .page-medicines .smart-box strong {
   font-size: 15px;
   font-weight: 700;
-  color: #0f172a;
   color: #111827;
 }
 
-
-/* ==========================================================
-   FORM ACTIONS
-========================================================== */
-
+/* ========================================================== FORM ACTIONS ========================================================== */
 .page-medicines .form-actions {
   margin-top: 35px;
   display: flex;
@@ -514,7 +385,6 @@
 }
 
 /* Base button */
-
 .page-medicines .btn {
   padding: 14px 26px;
   border-radius: 999px;
@@ -527,33 +397,23 @@
   overflow: hidden;
 }
 
-
 /* Primary */
-
 .page-medicines .btn-primary {
-  background: linear-gradient(90deg,
-      #6366f1,
-      #8b5cf6,
-      #06b6d4);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
   color: white;
 }
 
 .page-medicines .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 15px 40px rgba(99, 102, 241, 0.35),
-    0 0 30px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.35), 0 0 30px rgba(139, 92, 246, 0.3);
 }
 
 .page-medicines .btn-primary:active {
   transform: translateY(0);
-  box-shadow:
-    0 8px 20px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
 }
 
-
 /* Secondary */
-
 .page-medicines .btn-secondary {
   background: rgba(0, 0, 0, 0.05);
   color: #0f172a;
@@ -564,9 +424,7 @@
   transform: translateY(-2px);
 }
 
-
 /* Shine effect */
-
 .page-medicines .btn-primary::after {
   content: "";
   position: absolute;
@@ -574,10 +432,7 @@
   left: -40%;
   width: 40%;
   height: 100%;
-  background: linear-gradient(120deg,
-      transparent,
-      rgba(255, 255, 255, 0.6),
-      transparent);
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
   transition: all 0.6s ease;
 }
 
@@ -585,11 +440,7 @@
   left: 120%;
 }
 
-
-/* ==========================================================
-   RESPONSIVE FORM TUNING
-========================================================== */
-
+/* ========================================================== RESPONSIVE FORM TUNING ========================================================== */
 @media (max-width: 768px) {
   .page-medicines .card {
     padding: 30px;
@@ -604,16 +455,8 @@
   }
 }
 
-/* ==========================================================
-   SEARCH & FILTER SYSTEM — GLASS LEVEL 2
-   Structured • Clean • Intelligent Controls
-========================================================== */
-
-
-/* ==========================================================
-   SEARCH PANEL WRAPPER
-========================================================== */
-
+/* ========================================================== SEARCH & FILTER SYSTEM — GLASS LEVEL 2 Structured • Clean • Intelligent Controls ========================================================== */
+/* ========================================================== SEARCH PANEL WRAPPER ========================================================== */
 .page-medicines .search-panel {
   margin-top: 60px;
   padding: 45px;
@@ -622,30 +465,14 @@
   background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.94),
       rgba(255, 255, 255, 0.84));
-
-  backdrop-filter: blur(20px);
-
-  border: 1px solid rgba(255, 255, 255, 0.75);
-
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.05),
-    inset 0 0 50px rgba(255, 255, 255, 0.45);
-
-  position: relative;
-  overflow: hidden;
-  transition: all 0.35s ease;
 }
 
 .page-medicines .search-panel:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.08),
-    0 0 45px rgba(99, 102, 241, 0.12);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.08), 0 0 45px rgba(99, 102, 241, 0.12);
 }
 
-
 /* Subtle glow overlay */
-
 .page-medicines .search-panel::before {
   content: "";
   position: absolute;
@@ -653,19 +480,13 @@
   height: 280px;
   top: -120px;
   right: -120px;
-  background: radial-gradient(circle,
-      rgba(139, 92, 246, 0.18),
-      transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18), transparent 70%);
   filter: blur(70px);
   opacity: 0.6;
   pointer-events: none;
 }
 
-
-/* ==========================================================
-   SEARCH HEADER
-========================================================== */
-
+/* ========================================================== SEARCH HEADER ========================================================== */
 .page-medicines .search-header {
   margin-bottom: 30px;
 }
@@ -673,11 +494,7 @@
 .page-medicines .search-header h3 {
   font-size: 20px;
   font-weight: 700;
-
-  background: linear-gradient(90deg,
-      #6366f1,
-      #8b5cf6);
-
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -688,22 +505,14 @@
   color: var(--text-muted);
 }
 
-
-/* ==========================================================
-   SEARCH GRID LAYOUT
-========================================================== */
-
+/* ========================================================== SEARCH GRID LAYOUT ========================================================== */
 .page-medicines .search-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 28px;
 }
 
-
-/* ==========================================================
-   SEARCH FIELD
-========================================================== */
-
+/* ========================================================== SEARCH FIELD ========================================================== */
 .page-medicines .search-field {
   display: flex;
   flex-direction: column;
@@ -716,11 +525,7 @@
   color: var(--text-muted);
 }
 
-
-/* ==========================================================
-   SEARCH INPUT STYLING
-========================================================== */
-
+/* ========================================================== SEARCH INPUT STYLING ========================================================== */
 .page-medicines .search-field input,
 .page-medicines .search-field select {
   padding: 14px 18px;
@@ -734,84 +539,52 @@
 }
 
 /* Hover */
-
 .page-medicines .search-field input:hover,
 .page-medicines .search-field select:hover {
   border-color: rgba(99, 102, 241, 0.4);
 }
 
 /* Focus */
-
 .page-medicines .search-field input:focus,
 .page-medicines .search-field select:focus {
   border-color: #6366f1;
-  box-shadow:
-    0 0 0 3px rgba(99, 102, 241, 0.15),
-    0 8px 25px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 8px 25px rgba(99, 102, 241, 0.1);
   transform: translateY(-2px);
 }
 
-
-/* ==========================================================
-   SELECT DROPDOWN ICON REFINEMENT
-========================================================== */
-
+/* ========================================================== SELECT DROPDOWN ICON REFINEMENT ========================================================== */
 .page-medicines .search-field select {
   cursor: pointer;
   appearance: none;
-  background-image:
-    linear-gradient(45deg, transparent 50%, #6366f1 50%),
-    linear-gradient(135deg, #6366f1 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) calc(50% - 4px),
-    calc(100% - 12px) calc(50% - 4px);
+  background-image: linear-gradient(45deg, transparent 50%, #6366f1 50%), linear-gradient(135deg, #6366f1 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% - 4px), calc(100% - 12px) calc(50% - 4px);
   background-size: 6px 6px;
   background-repeat: no-repeat;
 }
 
-
-/* ==========================================================
-   FILTER ACTIVE VISUAL FEEDBACK (OPTIONAL FUTURE)
-========================================================== */
-
+/* ========================================================== FILTER ACTIVE VISUAL FEEDBACK (OPTIONAL FUTURE) ========================================================== */
 /* This is ready if you later add active filter chips */
-
 .page-medicines .filter-active {
   border-color: #6366f1 !important;
-  box-shadow:
-    0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
-
-/* ==========================================================
-   EMPTY STATE (UPGRADED)
-========================================================== */
-
+/* ========================================================== EMPTY STATE (UPGRADED) ========================================================== */
 .page-medicines .empty-state {
   margin-top: 70px;
   padding: 70px;
   text-align: center;
   border-radius: 28px;
-
-  background: linear-gradient(145deg,
-      rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.85));
-
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
   backdrop-filter: blur(20px);
-
   border: 1px solid rgba(255, 255, 255, 0.75);
-
-  box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.05);
-
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.05);
   transition: all 0.35s ease;
 }
 
 .page-medicines .empty-state:hover {
   transform: translateY(-4px);
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.08),
-    0 0 45px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.08), 0 0 45px rgba(99, 102, 241, 0.1);
 }
 
 .page-medicines .empty-state h3 {
@@ -825,13 +598,8 @@
   color: var(--text-muted);
 }
 
-
-/* ==========================================================
-   SEARCH PANEL RESPONSIVE
-========================================================== */
-
+/* ========================================================== SEARCH PANEL RESPONSIVE ========================================================== */
 @media (max-width: 768px) {
-
   .page-medicines .search-panel {
     padding: 30px;
   }
@@ -845,17 +613,8 @@
   }
 }
 
-
-/* ==========================================================
-   MEDICINE CARD ULTRA SYSTEM
-   Glass Level 3 • Intelligent Severity Engine
-========================================================== */
-
-
-/* ==========================================================
-   GRID SYSTEM
-========================================================== */
-
+/* ========================================================== MEDICINE CARD ULTRA SYSTEM Glass Level 3 • Intelligent Severity Engine ========================================================== */
+/* ========================================================== GRID SYSTEM ========================================================== */
 .page-medicines .medicine-grid {
   margin-top: 60px;
   display: grid;
@@ -863,46 +622,26 @@
   gap: 36px;
 }
 
-
-/* ==========================================================
-   BASE CARD STRUCTURE
-========================================================== */
-
+/* ========================================================== BASE CARD STRUCTURE ========================================================== */
 .page-medicines .medicine-card {
   position: relative;
   padding: 36px;
   border-radius: 28px;
-
-  background: linear-gradient(145deg,
-      rgba(255, 255, 255, 0.96),
-      rgba(255, 255, 255, 0.86));
-
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.86));
   backdrop-filter: blur(22px);
-
   border: 1px solid rgba(255, 255, 255, 0.75);
-
-  box-shadow:
-    0 20px 55px rgba(0, 0, 0, 0.06),
-    inset 0 0 55px rgba(255, 255, 255, 0.45);
-
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06), inset 0 0 55px rgba(255, 255, 255, 0.45);
   transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
 /* Hover Lift */
-
 .page-medicines .medicine-card:hover {
   transform: translateY(-8px);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.09),
-    0 0 50px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.09), 0 0 50px rgba(99, 102, 241, 0.15);
 }
 
-
-/* ==========================================================
-   SUBTLE BACKGROUND GLOW
-========================================================== */
-
+/* ========================================================== SUBTLE BACKGROUND GLOW ========================================================== */
 .page-medicines .medicine-card::before {
   content: "";
   position: absolute;
@@ -910,9 +649,7 @@
   right: -150px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle,
-      rgba(99, 102, 241, 0.18),
-      transparent 70%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18), transparent 70%);
   filter: blur(70px);
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -923,11 +660,7 @@
   opacity: 1;
 }
 
-
-/* ==========================================================
-   CARD HEADER
-========================================================== */
-
+/* ========================================================== CARD HEADER ========================================================== */
 .page-medicines .medicine-card-header {
   display: flex;
   justify-content: space-between;
@@ -940,11 +673,7 @@
   letter-spacing: -0.3px;
 }
 
-
-/* ==========================================================
-   DETAILS GRID
-========================================================== */
-
+/* ========================================================== DETAILS GRID ========================================================== */
 .page-medicines .medicine-card-details {
   margin-top: 26px;
   display: grid;
@@ -963,51 +692,34 @@
   font-size: 14px;
 }
 
-
-/* ==========================================================
-   SEVERITY SYSTEM
-========================================================== */
-
+/* ========================================================== SEVERITY SYSTEM ========================================================== */
 /* Healthy */
-
 .page-medicines .medicine-card.healthy {
   border-left: 6px solid #16a34a;
 }
 
 /* Low */
-
 .page-medicines .medicine-card.low {
   border-left: 6px solid #f59e0b;
 }
 
 /* Critical */
-
 .page-medicines .medicine-card.critical {
   border-left: 6px solid #ef4444;
 }
 
-
-/* ==========================================================
-   CRITICAL BREATHING ANIMATION
-========================================================== */
-
+/* ========================================================== CRITICAL BREATHING ANIMATION ========================================================== */
 @keyframes criticalBreath {
   0% {
-    box-shadow:
-      0 20px 55px rgba(0, 0, 0, 0.06),
-      0 0 15px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06), 0 0 15px rgba(239, 68, 68, 0.3);
   }
 
   50% {
-    box-shadow:
-      0 20px 55px rgba(0, 0, 0, 0.06),
-      0 0 40px rgba(239, 68, 68, 0.55);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06), 0 0 40px rgba(239, 68, 68, 0.55);
   }
 
   100% {
-    box-shadow:
-      0 20px 55px rgba(0, 0, 0, 0.06),
-      0 0 15px rgba(239, 68, 68, 0.3);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06), 0 0 15px rgba(239, 68, 68, 0.3);
   }
 }
 
@@ -1015,11 +727,7 @@
   animation: criticalBreath 2.8s ease-in-out infinite;
 }
 
-
-/* ==========================================================
-   PROGRESS SYSTEM 2.0
-========================================================== */
-
+/* ========================================================== PROGRESS SYSTEM 2.0 ========================================================== */
 .page-medicines .medicine-progress {
   margin-top: 26px;
   height: 12px;
@@ -1033,36 +741,23 @@
   height: 100%;
   border-radius: 999px;
   transition: width 0.5s ease;
-  background: linear-gradient(90deg,
-      #6366f1,
-      #8b5cf6);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
 }
 
-
 /* Low override */
-
 .page-medicines .medicine-card.low .medicine-progress-bar {
-  background: linear-gradient(90deg,
-      #f59e0b,
-      #f97316);
+  background: linear-gradient(90deg, #f59e0b, #f97316);
   box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
 }
 
 /* Critical override */
-
 .page-medicines .medicine-card.critical .medicine-progress-bar {
-  background: linear-gradient(90deg,
-      #ef4444,
-      #ff4d6d);
+  background: linear-gradient(90deg, #ef4444, #ff4d6d);
   box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
 }
 
-
-/* ==========================================================
-   DAYS REMAINING BADGE
-========================================================== */
-
+/* ========================================================== DAYS REMAINING BADGE ========================================================== */
 .page-medicines .medicine-days {
   margin-top: 14px;
   font-size: 13px;
@@ -1074,11 +769,7 @@
   font-weight: 700;
 }
 
-
-/* ==========================================================
-   ACTION BUTTON SYSTEM
-========================================================== */
-
+/* ========================================================== ACTION BUTTON SYSTEM ========================================================== */
 .page-medicines .medicine-actions {
   margin-top: 28px;
   display: flex;
@@ -1097,22 +788,17 @@
 }
 
 /* Edit Button */
-
 .page-medicines .medicine-actions button:first-child {
-  background: linear-gradient(90deg,
-      #6366f1,
-      #8b5cf6);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   color: white;
 }
 
 .page-medicines .medicine-actions button:first-child:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 12px 30px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
 }
 
 /* Delete Button */
-
 .page-medicines .danger-btn {
   background: #ef4444;
   color: white;
@@ -1120,15 +806,10 @@
 
 .page-medicines .danger-btn:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 12px 30px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.5);
 }
 
-
-/* ==========================================================
-   CARD ENTRY ANIMATION
-========================================================== */
-
+/* ========================================================== CARD ENTRY ANIMATION ========================================================== */
 @keyframes medicineFadeIn {
   from {
     opacity: 0;
@@ -1141,13 +822,8 @@
   }
 }
 
-
-/* ==========================================================
-   RESPONSIVE ADJUSTMENTS
-========================================================== */
-
+/* ========================================================== RESPONSIVE ADJUSTMENTS ========================================================== */
 @media (max-width: 768px) {
-
   .page-medicines .medicine-card {
     padding: 26px;
   }
@@ -1161,17 +837,13 @@
   }
 }
 
-/* ==========================================================
-   MICRO ANIMATION LIBRARY
-   Motion Physics • Subtle Intelligence
-========================================================== */
-
-
-/* ==========================================================
-   GLOBAL SMOOTH TRANSITIONS
-========================================================== */
-
-.page-medicines * {
+/* ========================================================== MICRO ANIMATION LIBRARY Motion Physics • Subtle Intelligence ========================================================== */
+.page-medicines .card,
+.page-medicines .medicine-card,
+.page-medicines .stat-card,
+.page-medicines .btn,
+.page-medicines .input,
+.page-medicines .select {
   transition:
     box-shadow 0.3s ease,
     transform 0.3s ease,
@@ -1179,11 +851,7 @@
     background 0.3s ease;
 }
 
-
-/* ==========================================================
-   CARD STAGGER ANIMATION SYSTEM
-========================================================== */
-
+/* ========================================================== CARD STAGGER ANIMATION SYSTEM ========================================================== */
 .page-medicines .medicine-card:nth-child(1) {
   animation-delay: 0.05s;
 }
@@ -1216,20 +884,12 @@
   animation-delay: 0.4s;
 }
 
-
-/* ==========================================================
-   BUTTON PRESS PHYSICS
-========================================================== */
-
+/* ========================================================== BUTTON PRESS PHYSICS ========================================================== */
 .page-medicines button:active {
   transform: scale(0.96);
 }
 
-
-/* ==========================================================
-   PROGRESS SHIMMER EFFECT
-========================================================== */
-
+/* ========================================================== PROGRESS SHIMMER EFFECT ========================================================== */
 @keyframes progressShimmer {
   0% {
     background-position: -200px 0;
@@ -1245,11 +905,7 @@
   animation: progressShimmer 3s linear infinite;
 }
 
-
-/* ==========================================================
-   HOVER GLOW BREATH FOR HEALTHY
-========================================================== */
-
+/* ========================================================== HOVER GLOW BREATH FOR HEALTHY ========================================================== */
 @keyframes healthyGlow {
   0% {
     box-shadow: 0 20px 55px rgba(0, 0, 0, 0.06);
@@ -1268,19 +924,13 @@
   animation: healthyGlow 2.5s ease-in-out infinite;
 }
 
-
-/* ==========================================================
-   SCROLLBAR POLISH
-========================================================== */
-
+/* ========================================================== SCROLLBAR POLISH ========================================================== */
 .page-medicines::-webkit-scrollbar {
   width: 8px;
 }
 
 .page-medicines::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,
-      #6366f1,
-      #8b5cf6);
+  background: linear-gradient(180deg, #6366f1, #8b5cf6);
   border-radius: 999px;
 }
 
@@ -1288,22 +938,13 @@
   background: transparent;
 }
 
-
-/* ==========================================================
-   SECTION SPACING CONSISTENCY
-========================================================== */
-
+/* ========================================================== SECTION SPACING CONSISTENCY ========================================================== */
 .page-medicines>*+* {
   margin-top: 70px;
 }
 
-
-/* ==========================================================
-   MOBILE OPTIMIZATION
-========================================================== */
-
+/* ========================================================== MOBILE OPTIMIZATION ========================================================== */
 @media (max-width: 640px) {
-
   .page-medicines .section-title {
     font-size: 20px;
   }
@@ -1342,27 +983,18 @@
   }
 }
 
-
-/* ==========================================================
-   TABLET OPTIMIZATION
-========================================================== */
-
+/* ========================================================== TABLET OPTIMIZATION ========================================================== */
 @media (min-width: 641px) and (max-width: 1024px) {
-
   .page-medicines .medicine-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
   .page-medicines .form-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
 
-
-/* ==========================================================
-   REDUCED MOTION ACCESSIBILITY
-========================================================== */
-
+/* ========================================================== REDUCED MOTION ACCESSIBILITY ========================================================== */
 @media (prefers-reduced-motion: reduce) {
   .page-medicines * {
     animation: none !important;
@@ -1370,11 +1002,7 @@
   }
 }
 
-
-/* ==========================================================
-   FINAL GLASS HARDENING
-========================================================== */
-
+/* ========================================================== FINAL GLASS HARDENING ========================================================== */
 .page-medicines .medicine-card,
 .page-medicines .search-panel,
 .page-medicines .card,
@@ -1383,11 +1011,7 @@
   will-change: transform;
 }
 
-
-/* ==========================================================
-   FOCUS ACCESSIBILITY
-========================================================== */
-
+/* ========================================================== FOCUS ACCESSIBILITY ========================================================== */
 .page-medicines button:focus,
 .page-medicines input:focus,
 .page-medicines select:focus {
@@ -1395,11 +1019,7 @@
   outline-offset: 2px;
 }
 
-
-/* ==========================================================
-   POLISHED EMPTY STATE ANIMATION
-========================================================== */
-
+/* ========================================================== POLISHED EMPTY STATE ANIMATION ========================================================== */
 .page-medicines .empty-state {
   animation: medicineFadeIn 0.7s ease forwards;
 }
