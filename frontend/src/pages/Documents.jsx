@@ -183,7 +183,9 @@ export default function Documents() {
         <div className="page-content">
 
           {message && (
-            <div className={`message-banner ${message.type}`}>
+            <div className={`glass-toast ${message.type}`}>
+              {message.type === "success" && "✔ "}
+              {message.type === "error" && "⚠ "}
               {message.text}
             </div>
           )}
