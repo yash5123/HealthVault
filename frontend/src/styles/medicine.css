@@ -419,7 +419,7 @@
   color: #0f172a;
 }
 
-.btn-secondary:hover {
+.page-medicines .btn-secondary:hover {
   background: rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
@@ -1050,17 +1050,15 @@
   pointer-events: all;
 }
 
-.page-medicines .delete-modal {
+.page-medicines .modal-container {
   width: min(520px, 90%);
   padding: 40px;
 
   border-radius: 26px;
 
-  background: linear-gradient(
-      145deg,
+  background: linear-gradient(145deg,
       rgba(255, 255, 255, 0.95),
-      rgba(255, 255, 255, 0.85)
-  );
+      rgba(255, 255, 255, 0.85));
 
   backdrop-filter: blur(20px);
 
@@ -1075,7 +1073,15 @@
   animation: medicineModalAppear .25s cubic-bezier(.2, .8, .2, 1);
 }
 
-.page-medicines .delete-modal h3 {
+.page-medicines .modal-header {
+  margin-bottom: 8px;
+}
+
+.page-medicines .modal-body {
+  line-height: 1.5;
+}
+
+.page-medicines .modal-header h3 {
   font-weight: 700;
   font-size: 22px;
 
@@ -1086,10 +1092,26 @@
   margin-bottom: 12px;
 }
 
-.page-medicines .delete-modal p {
+
+.page-medicines .modal-body {
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 26px;
+}
+
+.page-medicines .btn-danger {
+  background: linear-gradient(90deg,
+      #ff4d4d,
+      #ff1a1a,
+      #dc2626);
+
+  color: white;
+}
+
+.page-medicines .btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 30px rgba(239, 68, 68, .5);
 }
 
 .page-medicines .modal-actions {
@@ -1114,12 +1136,10 @@
   border-radius: 999px;
   border: none;
 
-  background: linear-gradient(
-      90deg,
+  background: linear-gradient(90deg,
       #ff4d4d,
       #ff1a1a,
-      #dc2626
-  );
+      #dc2626);
 
   color: white;
   font-weight: 600;
@@ -1131,7 +1151,7 @@
 .page-medicines .modal-delete:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 12px 30px rgba(239,68,68,.5);
+    0 12px 30px rgba(239, 68, 68, .5);
 }
 
 /* Modal Animation */
@@ -1140,6 +1160,7 @@
     opacity: 0;
     transform: scale(.92);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
