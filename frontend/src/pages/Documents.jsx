@@ -306,7 +306,7 @@ export default function Documents() {
 
           <div className="grid document-grid">
 
-            {!loading && filteredDocs.length === 0 && (
+            {!(isLoading || isFetching) && filteredDocs.length === 0 && (
               <p className="empty-text">No documents uploaded yet.</p>
             )}
 
