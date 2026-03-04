@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Document = require("../models/Document");
 
-const uploadDocument = async (req, res) => {
+/* ================= UPLOAD DOCUMENT ================= */
 
+const uploadDocument = async (req, res) => {
   try {
 
     console.log("UPLOAD BODY:", req.body);
@@ -14,16 +15,10 @@ const uploadDocument = async (req, res) => {
       });
     }
 
-    if (!req.user || !req.user.id) {
-      return res.status(401).json({
-        message: "User authentication failed"
-      });
-    }
-
     const document = await Document.create({
       title: req.body.title,
       type: req.body.type,
-      fileUrl: req.file.path,   // Cloudinary URL
+      fileUrl: req.file.path, // Cloudinary URL
       user: new mongoose.Types.ObjectId(req.user.id)
     });
 
@@ -41,6 +36,53 @@ const uploadDocument = async (req, res) => {
 
   }
 };
+
+
+/* ================= GET DOCUMENTS ================= */
+
+const getDocuments = async (req, res) => {
+  try {
+
+    const documents = await Document.find({
+      user: new mongoose.Types.ObjectId(req.user.id)
+    }).sort({ createdAt: -1 });
+
+    res.json(documents);
+
+  } catch (err) {
+
+    console.error("FETCH DOCUMENT ERROR:", err);
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};
+
+
+/* ================= DELETE DOCUMENT ================= */
+
+const deleteDocument = async (req, res) => {
+  try {
+
+    await Document.findByIdAndDelete(req.params.id);
+
+    res.json({ message: "Deleted" });
+
+  } catch (err) {
+
+    console.error("DELETE DOCUMENT ERROR:", err);
+
+    res.status(500).json({
+      message: err.message
+    });
+
+  }
+};
+
+
+/* ================= EXPORT ================= */
 
 module.exports = {
   uploadDocument,
