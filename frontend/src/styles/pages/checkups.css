@@ -1,39 +1,1562 @@
-/* ======================================================
-   CHECKUPS PAGE PERSONALITY
-   Calm & Structured
-====================================================== */
+/* ==========================================================
+   CHECKUPS PAGE — PREVENTIVE HEALTH DASHBOARD
+   Personality: Calm • Preventive • Intelligent • Medical
+   Glass Depth: Level 3
+========================================================== */
+
+
+/* ==========================================================
+   PAGE PERSONALITY LAYER
+========================================================== */
 
 .page-checkups {
+
   position: relative;
+
+  padding-bottom: 120px;
+
+  animation: checkupsPageEnter .6s ease;
+
 }
 
-/* Header Tone */
-.page-checkups .page-title {
-  background: linear-gradient(
-    90deg,
-    #0ea5e9,
-    #6366f1
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
-/* Clean Aura */
+/* ==========================================================
+   AMBIENT MEDICAL AURA
+========================================================== */
+
 .page-checkups::before {
+
   content: "";
+
   position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(14,165,233,0.05),
-    transparent 60%
-  );
+
+  top: -200px;
+
+  right: -140px;
+
+  width: 600px;
+
+  height: 600px;
+
+  background:
+    radial-gradient(circle,
+      rgba(14,165,233,.18),
+      rgba(99,102,241,.08),
+      transparent 70%);
+
+  filter: blur(90px);
+
   pointer-events: none;
+
+  z-index: 0;
+
 }
 
-/* Controlled Hover */
-.page-checkups .card:hover {
+
+.page-checkups::after {
+
+  content: "";
+
+  position: absolute;
+
+  bottom: -260px;
+
+  left: -160px;
+
+  width: 600px;
+
+  height: 600px;
+
+  background:
+    radial-gradient(circle,
+      rgba(16,185,129,.12),
+      transparent 70%);
+
+  filter: blur(110px);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+}
+
+
+/* Ensure content above glow */
+
+.page-checkups .page-content {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+
+/* ==========================================================
+   PAGE HEADER
+========================================================== */
+
+.page-checkups .page-header {
+
+  margin-bottom: 60px;
+
+}
+
+.page-checkups .page-title {
+
+  font-size: 40px;
+
+  font-weight: 800;
+
+  letter-spacing: -1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0ea5e9,
+      #6366f1,
+      #06b6d4
+    );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+.page-checkups .page-subtitle {
+
+  margin-top: 10px;
+
+  font-size: 16px;
+
+  color: var(--text-muted);
+
+  max-width: 640px;
+
+}
+
+
+/* ==========================================================
+   STATS PANEL
+========================================================== */
+
+.page-checkups .stats-panel {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(230px,1fr));
+
+  gap: 30px;
+
+  margin-top: 40px;
+
+}
+
+
+/* ==========================================================
+   STAT CARDS — GLASS LEVEL 2
+========================================================== */
+
+.page-checkups .stat-card {
+
+  position: relative;
+
+  padding: 28px;
+
+  border-radius: 26px;
+
+  backdrop-filter: blur(20px);
+
+  border: none;
+
   box-shadow:
-    0 18px 45px rgba(0,0,0,0.08),
-    0 0 20px rgba(14,165,233,0.12);
+    0 20px 60px rgba(0,0,0,.12);
+
+  transition: all .4s ease;
+
+  overflow: hidden;
+
+}
+
+
+/* Hover Lift */
+
+.page-checkups .stat-card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 28px 70px rgba(0,0,0,.08),
+    0 0 40px rgba(14,165,233,.25);
+
+}
+
+
+/* Accent Line */
+
+.page-checkups .stat-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 0;
+
+  width: 6px;
+
+  height: 100%;
+
+  border-radius: 6px;
+
+}
+
+
+/* TOTAL */
+
+.page-checkups .stat-card.total {
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #0ea5e9);
+
+  color: white;
+
+}
+
+.page-checkups .stat-card.total::after {
+
+  background:
+    linear-gradient(
+      180deg,
+      #0ea5e9,
+      #6366f1);
+
+}
+
+
+/* OVERDUE */
+
+.page-checkups .stat-card.overdue {
+
+  background:
+    linear-gradient(
+      135deg,
+      #ef4444,
+      #f97316);
+
+  color: white;
+
+}
+
+.page-checkups .stat-card.overdue::after {
+
+  background:
+    linear-gradient(
+      180deg,
+      #f97316,
+      #ef4444);
+
+}
+
+
+/* UPCOMING */
+
+.page-checkups .stat-card.upcoming {
+
+  background:
+    linear-gradient(
+      135deg,
+      #10b981,
+      #06b6d4);
+
+  color: white;
+
+}
+
+.page-checkups .stat-card.upcoming::after {
+
+  background:
+    linear-gradient(
+      180deg,
+      #06b6d4,
+      #10b981);
+
+}
+
+
+/* Typography */
+
+.page-checkups .stat-title {
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  opacity: .95;
+
+}
+
+.page-checkups .stat-card h2 {
+
+  margin-top: 12px;
+
+  font-size: 40px;
+
+  font-weight: 900;
+
+  letter-spacing: -1px;
+
+  text-shadow:
+    0 8px 25px rgba(0,0,0,.25);
+
+}
+
+/* ==========================================================
+   ADD CHECKUP PANEL — GLASS LEVEL 3
+========================================================== */
+
+.page-checkups .checkup-form {
+
+  margin-top: 60px;
+
+  padding: 45px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.95),
+      rgba(255,255,255,.85)
+    );
+
+  backdrop-filter: blur(24px);
+
+  border:
+    1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.06),
+    inset 0 0 60px rgba(255,255,255,.4);
+
+  transition: all .4s ease;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+
+/* Hover Lift */
+
+.page-checkups .checkup-form:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.08),
+    0 0 50px rgba(14,165,233,.12);
+
+}
+
+
+/* Soft Glow */
+
+.page-checkups .checkup-form::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 320px;
+
+  height: 320px;
+
+  top: -140px;
+
+  right: -140px;
+
+  background:
+    radial-gradient(circle,
+      rgba(14,165,233,.2),
+      transparent 70%);
+
+  filter: blur(60px);
+
+  opacity: .6;
+
+  pointer-events: none;
+
+}
+
+
+/* ==========================================================
+   FORM TITLE
+========================================================== */
+
+.page-checkups .form-title {
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  margin-bottom: 30px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0ea5e9,
+      #6366f1);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+}
+
+
+/* ==========================================================
+   FORM GRID
+========================================================== */
+
+.page-checkups .form-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(240px,1fr));
+
+  gap: 28px;
+
+}
+
+
+/* ==========================================================
+   FORM FIELD
+========================================================== */
+
+.page-checkups .form-field {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.page-checkups .form-field label {
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
+  color: var(--text-muted);
+
+}
+
+
+/* ==========================================================
+   INPUT SYSTEM
+========================================================== */
+
+.page-checkups .form-input {
+
+  padding: 14px 18px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  background:
+    rgba(255,255,255,.92);
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  transition: all .3s ease;
+
+  outline: none;
+
+}
+
+
+/* Hover */
+
+.page-checkups .form-input:hover {
+
+  border-color:
+    rgba(14,165,233,.35);
+
+}
+
+
+/* Focus */
+
+.page-checkups .form-input:focus {
+
+  border-color:
+    #0ea5e9;
+
+  box-shadow:
+    0 0 0 3px rgba(14,165,233,.15),
+    0 8px 25px rgba(14,165,233,.12);
+
+  transform: translateY(-2px);
+
+}
+
+
+/* ==========================================================
+   TEXTAREA
+========================================================== */
+
+.page-checkups textarea.form-input {
+
+  resize: none;
+
+  min-height: 90px;
+
+}
+
+
+/* ==========================================================
+   DATE INPUT POLISH
+========================================================== */
+
+.page-checkups input[type="date"].form-input {
+
+  cursor: pointer;
+
+}
+
+
+/* ==========================================================
+   HELPER TEXT
+========================================================== */
+
+.page-checkups .helper-text {
+
+  margin-top: 6px;
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+
+}
+
+
+/* ==========================================================
+   FORM ACTIONS
+========================================================== */
+
+.page-checkups .form-actions {
+
+  margin-top: 35px;
+
+  display: flex;
+
+  gap: 16px;
+
+  flex-wrap: wrap;
+
+}
+
+
+/* ==========================================================
+   SUBMIT BUTTON POLISH
+========================================================== */
+
+.page-checkups .btn-primary {
+
+  background:
+    linear-gradient(
+      90deg,
+      #0ea5e9,
+      #6366f1);
+
+  color: white;
+
+}
+
+
+/* Hover */
+
+.page-checkups .btn-primary:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 40px rgba(14,165,233,.35),
+    0 0 30px rgba(99,102,241,.25);
+
+}
+
+
+/* Press */
+
+.page-checkups .btn-primary:active {
+
+  transform: translateY(0);
+
+  box-shadow:
+    0 8px 20px rgba(14,165,233,.25);
+
+}
+
+
+/* Shine Effect */
+
+.page-checkups .btn-primary::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -40%;
+
+  width: 40%;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.6),
+      transparent);
+
+  transition: all .6s ease;
+
+}
+
+.page-checkups .btn-primary:hover::after {
+
+  left: 120%;
+
+}
+
+/* ==========================================================
+   SEARCH PANEL — GLASS LEVEL 2
+========================================================== */
+
+.page-checkups .search-panel {
+
+  margin-top: 60px;
+
+  padding: 40px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.95),
+      rgba(255,255,255,.85)
+    );
+
+  backdrop-filter: blur(22px);
+
+  border:
+    1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.06),
+    inset 0 0 60px rgba(255,255,255,.4);
+
+  transition: all .4s ease;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+
+/* Hover Lift */
+
+.page-checkups .search-panel:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.08),
+    0 0 50px rgba(14,165,233,.12);
+
+}
+
+
+/* Panel Glow */
+
+.page-checkups .search-panel::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+
+  height: 280px;
+
+  top: -120px;
+
+  right: -120px;
+
+  background:
+    radial-gradient(circle,
+      rgba(99,102,241,.2),
+      transparent 70%);
+
+  filter: blur(70px);
+
+  opacity: .6;
+
+  pointer-events: none;
+
+}
+
+
+/* ==========================================================
+   SEARCH GRID
+========================================================== */
+
+.page-checkups .search-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(240px,1fr));
+
+  gap: 28px;
+
+}
+
+
+/* ==========================================================
+   SEARCH FIELD
+========================================================== */
+
+.page-checkups .search-field {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.page-checkups .search-field label {
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
+  color: var(--text-muted);
+
+}
+
+
+/* ==========================================================
+   SEARCH INPUT
+========================================================== */
+
+.page-checkups .search-field input,
+.page-checkups .search-field select {
+
+  padding: 14px 18px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid rgba(0,0,0,.08);
+
+  background:
+    rgba(255,255,255,.92);
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  transition: all .3s ease;
+
+  outline: none;
+
+}
+
+
+/* Hover */
+
+.page-checkups .search-field input:hover,
+.page-checkups .search-field select:hover {
+
+  border-color:
+    rgba(14,165,233,.35);
+
+}
+
+
+/* Focus */
+
+.page-checkups .search-field input:focus,
+.page-checkups .search-field select:focus {
+
+  border-color:
+    #0ea5e9;
+
+  box-shadow:
+    0 0 0 3px rgba(14,165,233,.15),
+    0 8px 25px rgba(14,165,233,.1);
+
+  transform: translateY(-2px);
+
+}
+
+
+/* ==========================================================
+   CHECKUP GRID
+========================================================== */
+
+.page-checkups .checkup-grid {
+
+  margin-top: 60px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(340px,1fr));
+
+  gap: 36px;
+
+}
+
+
+/* ==========================================================
+   CHECKUP CARD
+========================================================== */
+
+.page-checkups .checkup-card {
+
+  position: relative;
+
+  padding: 36px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.96),
+      rgba(255,255,255,.86)
+    );
+
+  backdrop-filter: blur(22px);
+
+  border:
+    1px solid rgba(255,255,255,.75);
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.06),
+    inset 0 0 55px rgba(255,255,255,.45);
+
+  transition:
+    all .45s cubic-bezier(.4,0,.2,1);
+
+  overflow: hidden;
+
+}
+
+
+/* Hover */
+
+.page-checkups .checkup-card:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.09),
+    0 0 40px rgba(14,165,233,.15);
+
+}
+
+
+/* ==========================================================
+   CARD HEADER
+========================================================== */
+
+.page-checkups .checkup-card-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+.page-checkups .checkup-card-header h3 {
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  letter-spacing: -.3px;
+
+}
+
+
+/* ==========================================================
+   DETAILS GRID
+========================================================== */
+
+.page-checkups .checkup-card-details {
+
+  margin-top: 26px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2,1fr);
+
+  gap: 22px;
+
+}
+
+.page-checkups .checkup-card-details label {
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+
+}
+
+.page-checkups .checkup-card-details p {
+
+  margin-top: 4px;
+
+  font-weight: 600;
+
+  font-size: 14px;
+
+}
+
+
+/* ==========================================================
+   PRIORITY SYSTEM
+========================================================== */
+
+/* NORMAL */
+
+.page-checkups .checkup-card.normal {
+
+  border-left: 6px solid #10b981;
+
+}
+
+/* IMPORTANT */
+
+.page-checkups .checkup-card.important {
+
+  border-left: 6px solid #f59e0b;
+
+}
+
+/* CRITICAL */
+
+.page-checkups .checkup-card.critical {
+
+  border-left: 6px solid #f97316;
+
+}
+
+/* OVERDUE */
+
+.page-checkups .checkup-card.overdue {
+
+  border-left: 6px solid #ef4444;
+
+}
+
+
+/* ==========================================================
+   PRIORITY BADGE
+========================================================== */
+
+.page-checkups .priority-badge {
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+.page-checkups .priority-badge.normal {
+
+  background: rgba(16,185,129,.15);
+
+  color: #10b981;
+
+}
+
+.page-checkups .priority-badge.important {
+
+  background: rgba(245,158,11,.15);
+
+  color: #f59e0b;
+
+}
+
+.page-checkups .priority-badge.critical {
+
+  background: rgba(249,115,22,.15);
+
+  color: #f97316;
+
+}
+
+.page-checkups .priority-badge.overdue {
+
+  background: rgba(239,68,68,.15);
+
+  color: #ef4444;
+
+}
+
+
+/* ==========================================================
+   DAYS REMAINING
+========================================================== */
+
+.page-checkups .days-remaining {
+
+  margin-top: 18px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+.page-checkups .days-remaining span {
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+}
+
+/* ==========================================================
+   ACTION BUTTONS
+========================================================== */
+
+.page-checkups .checkup-actions {
+
+  margin-top: 28px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid rgba(0,0,0,.05);
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+}
+
+
+/* Complete Button */
+
+.page-checkups .complete-btn {
+
+  padding: 10px 20px;
+
+  border-radius: 999px;
+
+  border: none;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+  background:
+    linear-gradient(
+      90deg,
+      #10b981,
+      #06b6d4);
+
+  color: white;
+
+}
+
+.page-checkups .complete-btn:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 30px rgba(16,185,129,.35);
+
+}
+
+.page-checkups .complete-btn:active {
+
+  transform: translateY(0);
+
+  box-shadow:
+    0 8px 20px rgba(16,185,129,.25);
+
+}
+
+
+/* ==========================================================
+   TIMELINE PROGRESS BAR
+========================================================== */
+
+.page-checkups .checkup-progress {
+
+  margin-top: 24px;
+
+  height: 12px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(0,0,0,.05);
+
+  overflow: hidden;
+
+}
+
+.page-checkups .checkup-progress-bar {
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  transition: width .5s ease;
+
+}
+
+
+/* Normal */
+
+.page-checkups .checkup-card.normal
+.checkup-progress-bar {
+
+  background:
+    linear-gradient(
+      90deg,
+      #10b981,
+      #059669);
+
+  box-shadow:
+    0 0 18px rgba(16,185,129,.35);
+
+}
+
+
+/* Important */
+
+.page-checkups .checkup-card.important
+.checkup-progress-bar {
+
+  background:
+    linear-gradient(
+      90deg,
+      #f59e0b,
+      #f97316);
+
+  box-shadow:
+    0 0 18px rgba(245,158,11,.35);
+
+}
+
+
+/* Critical */
+
+.page-checkups .checkup-card.critical
+.checkup-progress-bar {
+
+  background:
+    linear-gradient(
+      90deg,
+      #f97316,
+      #ef4444);
+
+  box-shadow:
+    0 0 20px rgba(249,115,22,.4);
+
+}
+
+
+/* Overdue */
+
+.page-checkups .checkup-card.overdue
+.checkup-progress-bar {
+
+  background:
+    linear-gradient(
+      90deg,
+      #ef4444,
+      #ff4d6d);
+
+  box-shadow:
+    0 0 22px rgba(239,68,68,.45);
+
+}
+
+
+/* ==========================================================
+   OVERDUE BREATHING ANIMATION
+========================================================== */
+
+@keyframes overduePulse {
+
+  0% {
+
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.06),
+      0 0 12px rgba(239,68,68,.35);
+
+  }
+
+  50% {
+
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.06),
+      0 0 35px rgba(239,68,68,.55);
+
+  }
+
+  100% {
+
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.06),
+      0 0 12px rgba(239,68,68,.35);
+
+  }
+
+}
+
+.page-checkups .checkup-card.overdue {
+
+  animation: overduePulse 3s ease-in-out infinite;
+
+}
+
+
+/* ==========================================================
+   EMPTY STATE PANEL
+========================================================== */
+
+.page-checkups .empty-state {
+
+  margin-top: 70px;
+
+  padding: 70px;
+
+  text-align: center;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.95),
+      rgba(255,255,255,.85)
+    );
+
+  backdrop-filter: blur(20px);
+
+  border:
+    1px solid rgba(255,255,255,.75);
+
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.05);
+
+}
+
+.page-checkups .empty-state h3 {
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+
+}
+
+.page-checkups .empty-state p {
+
+  font-size: 14px;
+
+  color: var(--text-muted);
+
+}
+
+
+/* ==========================================================
+   COMPLETED HISTORY
+========================================================== */
+
+.page-checkups .history-panel {
+
+  margin-top: 70px;
+
+  padding: 45px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.95),
+      rgba(255,255,255,.85)
+    );
+
+  backdrop-filter: blur(20px);
+
+  border:
+    1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.06);
+
+}
+
+.page-checkups .history-panel h3 {
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  margin-bottom: 20px;
+
+}
+
+.page-checkups .history-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 16px 20px;
+
+  border-radius: 14px;
+
+  margin-top: 12px;
+
+  background:
+    rgba(0,0,0,.04);
+
+  transition: all .25s ease;
+
+}
+
+.page-checkups .history-item:hover {
+
+  transform: translateY(-2px);
+
+  background:
+    rgba(14,165,233,.08);
+
+}
+
+
+/* ==========================================================
+   TOAST NOTIFICATION
+========================================================== */
+
+.page-checkups .toast-container {
+
+  position: fixed;
+
+  top: 20px;
+
+  right: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  z-index: 999;
+
+}
+
+.page-checkups .toast {
+
+  min-width: 260px;
+
+  padding: 14px 18px;
+
+  border-radius: 12px;
+
+  background: white;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.12);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  animation: checkupToastSlide .3s ease;
+
+}
+
+.page-checkups .toast-success {
+
+  border-left: 4px solid #10b981;
+
+}
+
+.page-checkups .toast-title {
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+}
+
+.page-checkups .toast-message {
+
+  font-size: 13px;
+
+  color: var(--text-muted);
+
+}
+
+@keyframes checkupToastSlide {
+
+  from {
+
+    transform: translateX(100%);
+
+    opacity: 0;
+
+  }
+
+  to {
+
+    transform: translateX(0);
+
+    opacity: 1;
+
+  }
+
+}
+
+
+/* ==========================================================
+   PAGE ENTRY ANIMATION
+========================================================== */
+
+@keyframes checkupsPageEnter {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(12px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE DESIGN
+========================================================== */
+
+@media (max-width:768px) {
+
+  .page-checkups .checkup-card {
+
+    padding: 26px;
+
+  }
+
+  .page-checkups .checkup-card-details {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .page-checkups .search-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .page-checkups .stats-panel {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+.page-checkups button:focus,
+.page-checkups input:focus,
+.page-checkups select:focus {
+
+  outline: 2px solid #0ea5e9;
+
+  outline-offset: 2px;
+
+}
+
+
+/* ==========================================================
+   PERFORMANCE OPTIMIZATION
+========================================================== */
+
+.page-checkups .checkup-card,
+.page-checkups .search-panel,
+.page-checkups .checkup-form {
+
+  will-change: transform;
+
 }

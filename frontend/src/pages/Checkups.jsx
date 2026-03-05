@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import API from "../services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCheckups } from "../queries/checkupsQuery";
+import "../styles/pages/checkups.css";
 
 export default function Checkups() {
 
@@ -86,6 +87,7 @@ export default function Checkups() {
   ====================================================== */
 
   const markCompleted = async (checkup) => {
+
     setHistory((prev) => [
       ...prev,
       {
@@ -95,7 +97,9 @@ export default function Checkups() {
     ]);
 
     await API.patch(`/checkups/${checkup._id}/complete`);
+
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
+
   };
 
   /* ======================================================
@@ -103,6 +107,7 @@ export default function Checkups() {
   ====================================================== */
 
   const processed = useMemo(() => {
+
     let data = [...checkups];
 
     if (search) {
@@ -113,27 +118,36 @@ export default function Checkups() {
 
     if (filter !== "ALL") {
       data = data.filter((c) => {
+
         const next = calculateNextVisit(
           c.lastVisit,
           c.intervalMonths
         );
+
         const days = getDaysRemaining(next);
+
         const priority = getPriority(days);
 
         if (filter === "UPCOMING") return days >= 0;
         if (filter === "OVERDUE") return days < 0;
         if (filter === "CRITICAL") return priority === "CRITICAL";
+
         return true;
+
       });
     }
 
     data.sort((a, b) => {
+
       const nextA = calculateNextVisit(a.lastVisit, a.intervalMonths);
       const nextB = calculateNextVisit(b.lastVisit, b.intervalMonths);
+
       return nextA - nextB;
+
     });
 
     return data;
+
   }, [checkups, search, filter]);
 
   /* ======================================================
@@ -143,13 +157,19 @@ export default function Checkups() {
   const total = checkups.length;
 
   const overdueCount = checkups.filter((c) => {
+
     const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
+
     return getDaysRemaining(next) < 0;
+
   }).length;
 
   const upcomingCount = checkups.filter((c) => {
+
     const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
+
     return getDaysRemaining(next) >= 0;
+
   }).length;
 
   /* ======================================================
@@ -157,33 +177,58 @@ export default function Checkups() {
   ====================================================== */
 
   return (
-    <>
-      <h2>📅 Checkup Reminder System</h2>
 
-      {/* SUMMARY */}
-      <div className="grid">
-        <div className="card dashboard-card">
-          <h3>Total Checkups</h3>
-          <p>{total}</p>
-        </div>
+    <div className="page-checkups page-content">
 
-        <div className="card dashboard-card danger">
-          <h3>Overdue</h3>
-          <p>{overdueCount}</p>
-        </div>
+      {/* HEADER */}
 
-        <div className="card dashboard-card">
-          <h3>Upcoming</h3>
-          <p>{upcomingCount}</p>
-        </div>
+      <div className="page-header">
+
+        <h2 className="page-title">
+          📅 Checkup Reminder System
+        </h2>
+
+        <p className="page-subtitle">
+          Track preventive medical visits and never miss an important health check.
+        </p>
+
       </div>
 
-      {/* ADD FORM */}
-      <div className="card" style={{ marginTop: 30 }}>
-        <h3>Add Checkup</h3>
 
-        <div className="grid">
+      {/* SUMMARY */}
+
+      <div className="stats-panel">
+
+        <div className="stat-card total">
+          <span className="stat-title">Total Checkups</span>
+          <h2>{total}</h2>
+        </div>
+
+        <div className="stat-card overdue">
+          <span className="stat-title">Overdue</span>
+          <h2>{overdueCount}</h2>
+        </div>
+
+        <div className="stat-card upcoming">
+          <span className="stat-title">Upcoming</span>
+          <h2>{upcomingCount}</h2>
+        </div>
+
+      </div>
+
+
+      {/* ADD FORM */}
+
+      <div className="checkup-form">
+
+        <h3 className="form-title">
+          Add Checkup
+        </h3>
+
+        <div className="form-grid">
+
           <input
+            className="form-input"
             placeholder="Checkup Type"
             value={form.type}
             onChange={(e) =>
@@ -192,6 +237,7 @@ export default function Checkups() {
           />
 
           <input
+            className="form-input"
             placeholder="Doctor Name"
             value={form.doctor}
             onChange={(e) =>
@@ -200,6 +246,7 @@ export default function Checkups() {
           />
 
           <input
+            className="form-input"
             type="date"
             value={form.lastVisit}
             onChange={(e) =>
@@ -211,6 +258,7 @@ export default function Checkups() {
           />
 
           <input
+            className="form-input"
             type="number"
             placeholder="Interval (Months)"
             value={form.intervalMonths}
@@ -223,6 +271,7 @@ export default function Checkups() {
           />
 
           <textarea
+            className="form-input"
             placeholder="Notes"
             value={form.notes}
             onChange={(e) =>
@@ -232,20 +281,31 @@ export default function Checkups() {
               })
             }
           />
+
         </div>
 
-        <button
-          style={{ marginTop: 15 }}
-          onClick={handleAdd}
-        >
-          Add Checkup
-        </button>
+        <div className="form-actions">
+
+          <button
+            className="btn btn-primary"
+            onClick={handleAdd}
+          >
+            Add Checkup
+          </button>
+
+        </div>
+
       </div>
 
+
       {/* FILTER */}
-      <div className="card" style={{ marginTop: 30 }}>
-        <div className="grid">
+
+      <div className="search-panel">
+
+        <div className="search-grid">
+
           <input
+            className="form-input"
             placeholder="Search checkup..."
             value={search}
             onChange={(e) =>
@@ -254,54 +314,126 @@ export default function Checkups() {
           />
 
           <select
+            className="form-input"
             value={filter}
             onChange={(e) =>
               setFilter(e.target.value)
             }
           >
+
             <option value="ALL">All</option>
             <option value="UPCOMING">Upcoming</option>
             <option value="OVERDUE">Overdue</option>
             <option value="CRITICAL">Critical (7 days)</option>
+
           </select>
+
         </div>
+
       </div>
 
+
       {/* LIST */}
-      <div style={{ marginTop: 40 }}>
+
+      <div className="checkup-grid">
+
+        {processed.length === 0 && (
+
+          <div className="empty-state">
+
+            <h3>No Checkups Found</h3>
+
+            <p>
+              Add your first medical checkup above.
+            </p>
+
+          </div>
+
+        )}
+
         {processed.map((c) => {
+
           const next = calculateNextVisit(
             c.lastVisit,
             c.intervalMonths
           );
 
           const days = getDaysRemaining(next);
+
           const priority = getPriority(days);
+
           const color = getPriorityColor(priority);
 
           return (
+
             <div
               key={c._id}
-              className="card"
-              style={{
-                marginBottom: 25,
-                borderLeft: `6px solid ${color}`,
-              }}
+              className={`checkup-card ${priority.toLowerCase()}`}
             >
-              <h3>{c.type}</h3>
-              <p>Doctor: {c.doctor}</p>
-              <p>Next Visit: {next.toDateString()}</p>
-              <p>Days Remaining: {days}</p>
 
-              <div style={{ marginTop: 15 }}>
-                <button onClick={() => markCompleted(c)}>
+              <div className="checkup-card-header">
+
+                <h3>{c.type}</h3>
+
+                <span
+                  className={`priority-badge ${priority.toLowerCase()}`}
+                >
+                  {priority}
+                </span>
+
+              </div>
+
+              <div className="checkup-card-details">
+
+                <div>
+                  <label>Doctor</label>
+                  <p>{c.doctor}</p>
+                </div>
+
+                <div>
+                  <label>Next Visit</label>
+                  <p>{next.toDateString()}</p>
+                </div>
+
+              </div>
+
+              <div className="days-remaining">
+                Days Remaining:
+                <span> {days}</span>
+              </div>
+
+              <div className="checkup-progress">
+
+                <div
+                  className="checkup-progress-bar"
+                  style={{
+                    width: `${Math.max(0, 100 - days)}%`
+                  }}
+                />
+
+              </div>
+
+              <div className="checkup-actions">
+
+                <button
+                  className="complete-btn"
+                  onClick={() => markCompleted(c)}
+                >
                   Mark Completed
                 </button>
+
               </div>
+
             </div>
+
           );
+
         })}
+
       </div>
-    </>
+
+    </div>
+
   );
+
 }
