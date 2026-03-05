@@ -15,13 +15,13 @@ export default function DocumentCard({ doc, onDelete }) {
           href={doc.fileUrl}
           target="_blank"
           rel="noreferrer"
-          className="btn-primary action-btn"
+          className="btn btn-primary"
         >
           View Document
         </a>
 
         <button
-          className="btn-danger action-btn"
+          className="btn btn-danger"
           onClick={() => onDelete(doc._id)}
         >
           🗑 Delete
