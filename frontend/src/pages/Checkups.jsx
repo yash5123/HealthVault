@@ -70,20 +70,16 @@ export default function Checkups() {
 
   useEffect(() => {
 
-    checkups?.forEach((c) => {
+    if (!checkups?.length) return;
 
+    const overdue = checkups.find((c) => {
       const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
-      const days = getDaysRemaining(next);
-
-      if (days === 0 && !toast) {
-        showToast(`Checkup due today: ${c.type}`, "warning");
-      }
-
-      if (days < 0 && !toast) {
-        showToast(`Checkup overdue: ${c.type}`, "error");
-      }
-
+      return getDaysRemaining(next) < 0;
     });
+
+    if (overdue && !toast) {
+      showToast(`Checkup overdue: ${overdue.type}`, "error");
+    }
 
   }, [checkups]);
 
@@ -91,7 +87,15 @@ export default function Checkups() {
      ADD CHECKUP
   ====================================================== */
 
+
+
   const handleAdd = async () => {
+
+
+    if (!form.type || !form.doctorName || !form.lastVisit || !form.intervalMonths) {
+      showToast("Please fill all required fields", "error");
+      return;
+    }
 
     await API.post("/checkups", form);
 
@@ -125,7 +129,7 @@ export default function Checkups() {
 
     await API.patch(`/checkups/${checkup._id}/complete`);
 
-    showToast("Checkup marked as completed");
+    showToast(`${checkup.type} completed`);
 
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
 
@@ -137,11 +141,13 @@ export default function Checkups() {
 
   const deleteCheckup = async (id) => {
 
-    if (!window.confirm("Delete this checkup?")) return;
+    const confirmDelete = window.confirm("Delete this checkup permanently?");
+
+    if (!confirmDelete) return;
 
     await API.delete(`/checkups/${id}`);
 
-    showToast("Checkup deleted", "error");
+    showToast("Checkup deleted successfully", "error");
 
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
 
@@ -154,18 +160,23 @@ export default function Checkups() {
   const editCheckupDate = async (checkup) => {
 
     const newDate = prompt(
-      "Enter new last visit date (YYYY-MM-DD)",
+      "Update last visit date (YYYY-MM-DD)",
       checkup.lastVisit?.slice(0, 10)
     );
 
     if (!newDate) return;
+
+    if (isNaN(new Date(newDate).getTime())) {
+      showToast("Invalid date format", "error");
+      return;
+    }
 
     await API.put(`/checkups/${checkup._id}`, {
       ...checkup,
       lastVisit: newDate
     });
 
-    showToast("Checkup updated");
+    showToast("Checkup updated successfully");
 
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
 
@@ -309,13 +320,16 @@ export default function Checkups() {
           <input
             className="form-input"
             type="number"
+            min="1"
             placeholder="Interval (Months)"
             value={form.intervalMonths}
             onChange={(e) =>
-              setForm({ ...form, intervalMonths: e.target.value })
+              setForm({
+                ...form,
+                intervalMonths: Math.max(1, Number(e.target.value))
+              })
             }
           />
-
           <textarea
             className="form-input"
             placeholder="Notes"
@@ -369,7 +383,12 @@ export default function Checkups() {
       </div>
 
       <div className="checkup-grid">
-
+        {processed.length === 0 && (
+          <div className="empty-state">
+            <h3>No Checkups Found</h3>
+            <p>Add your first medical checkup above.</p>
+          </div>
+        )}
         {processed.map((c) => {
 
           const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
@@ -420,21 +439,21 @@ export default function Checkups() {
                   className="complete-btn"
                   onClick={() => markCompleted(c)}
                 >
-                  Done
+                  ✔ Done
                 </button>
 
                 <button
                   className="edit-btn"
                   onClick={() => editCheckupDate(c)}
                 >
-                  Edit
+                  ✏ Edit
                 </button>
 
                 <button
                   className="delete-btn"
                   onClick={() => deleteCheckup(c._id)}
                 >
-                  Delete
+                  🗑 Delete
                 </button>
 
               </div>
@@ -454,6 +473,7 @@ export default function Checkups() {
       )}
 
     </div>
+
 
   );
 
