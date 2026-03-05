@@ -185,7 +185,8 @@ export default function Checkups() {
       <div className="page-header">
 
         <h2 className="page-title">
-          📅 Checkup Reminder System
+          <span className="title-icon">📅</span>
+          Checkup Reminder System
         </h2>
 
         <p className="page-subtitle">
@@ -222,6 +223,7 @@ export default function Checkups() {
       <div className="checkup-form">
 
         <h3 className="form-title">
+          <span className="form-icon">🩺</span>
           Add Checkup
         </h3>
 
