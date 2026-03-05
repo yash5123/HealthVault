@@ -90,7 +90,7 @@ export default function LowStock() {
   /* ================= RESTOCK ================= */
   const showToast = (type, message) => {
 
-    const id = Date.now();
+    const id = crypto.randomUUID();
 
     setToasts((prev) => [...prev, { id, type, message }]);
 
@@ -115,17 +115,25 @@ export default function LowStock() {
       showToast("reduce", "Stock cannot go below 0");
       return;
     }
-    await API.put(`/medicines/${med._id}`, {
-      ...med,
-      quantity: updatedQty,
-    });
 
-    await API.post("/refills", {
-      medicineId: med._id,
-      name: med.name,
-      amount,
-      action: amount > 0 ? "ADD" : "REDUCE"
-    });
+    try {
+      await API.put(`/medicines/${med._id}`, {
+        quantity: updatedQty
+      });
+
+      await API.post("/refills", {
+        medicineId: med._id,
+        name: med.name,
+        amount,
+        action: amount > 0 ? "ADD" : "REDUCE"
+      });
+
+    } catch (err) {
+      console.error(err);
+      showToast("reduce", "Update failed");
+      return;
+    }
+
 
     if (amount > 0) {
       showToast("add", `+${amount} units added to ${med.name}`);
@@ -203,242 +211,244 @@ export default function LowStock() {
 
   return (
     <div className="page-lowstock">
-      <div className="toast-container">
-        {toasts.map((toast) => (
-          <div
-            key={toast.id}
-            className={`toast ${toast.type === "add" ? "toast-add" : "toast-reduce"
-              }`}
-          >
-            <div className="toast-title">✔ Stock Updated</div>
-            <div className="toast-message">{toast.message}</div>
-          </div>
-        ))}
-      </div>
-      {/* HEADER */}
-
-      <div className="page-header">
-        <h1 className="page-title">🚨 Stock Alert System</h1>
-        <p className="page-subtitle">
-          Monitor medicine inventory and refill before it runs out.
-        </p>
-      </div>
-
-
-      {/* STATS */}
-
-      <div className="stats-panel">
-
-        <div className="stat-card critical">
-          <span className="stat-title">CRITICAL</span>
-          <h2>{criticalCount}</h2>
-        </div>
-
-        <div className="stat-card low">
-          <span className="stat-title">LOW</span>
-          <h2>{lowCount}</h2>
-        </div>
-
-        <div className="stat-card healthy">
-          <span className="stat-title">HEALTHY</span>
-          <h2>{healthyCount}</h2>
-        </div>
-
-      </div>
-
-
-      {/* SEARCH PANEL */}
-
-      <div className="search-panel">
-
-        <div className="search-grid">
-
-          <div className="search-field">
-            <label>Search Medicine</label>
-            <input
-              placeholder="Search medicine..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          <div className="search-field">
-            <label>Status</label>
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="ALL">All</option>
-              <option value="CRITICAL">Critical</option>
-              <option value="LOW">Low</option>
-              <option value="HEALTHY">Healthy</option>
-            </select>
-          </div>
-
-          <div className="search-field">
-            <label>Sort</label>
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-            >
-              <option value="CRITICAL_FIRST">Critical First</option>
-              <option value="ALPHABETICAL">Alphabetical</option>
-            </select>
-          </div>
-
-        </div>
-
-      </div>
-
-      {processedData.length === 0 && (
-        <div className="empty-state">
-          <h3>No medicines found</h3>
-          <p>Try adjusting search or filter settings.</p>
-        </div>
-      )}
-
-      {/* MEDICINE LIST */}
-
-      <div className="medicine-grid">
-
-        {processedData.map((med) => {
-
-          const level = getStockLevel(med);
-          const days = calculateDaysRemaining(med);
-          const warning = getSmartWarning(med);
-
-          const percentage = Math.min(
-            (med.quantity / med.lowStockThreshold) * 100,
-            100
-          );
-
-          return (
-
+      <div className="page-content">
+        <div className="toast-container">
+          {toasts.map((toast) => (
             <div
-              key={med._id}
-              className={`medicine-card ${level.toLowerCase()}`}
+              key={toast.id}
+              className={`toast ${toast.type === "add" ? "toast-add" : "toast-reduce"
+                }`}
             >
+              <div className="toast-title">✔ Stock Updated</div>
+              <div className="toast-message">{toast.message}</div>
+            </div>
+          ))}
+        </div>
+        {/* HEADER */}
 
-              <div className="medicine-card-header">
-                <h3>{med.name}</h3>
-              </div>
+        <div className="page-header">
+          <h1 className="page-title">🚨 Stock Alert System</h1>
+          <p className="page-subtitle">
+            Monitor medicine inventory and refill before it runs out.
+          </p>
+        </div>
 
-              {warning && (
-                <div className="smart-warning">
-                  {warning}
+
+        {/* STATS */}
+
+        <div className="stats-panel">
+
+          <div className="stat-card critical">
+            <span className="stat-title">CRITICAL</span>
+            <h2>{criticalCount}</h2>
+          </div>
+
+          <div className="stat-card low">
+            <span className="stat-title">LOW</span>
+            <h2>{lowCount}</h2>
+          </div>
+
+          <div className="stat-card healthy">
+            <span className="stat-title">HEALTHY</span>
+            <h2>{healthyCount}</h2>
+          </div>
+
+        </div>
+
+
+        {/* SEARCH PANEL */}
+
+        <div className="search-panel">
+
+          <div className="search-grid">
+
+            <div className="search-field">
+              <label>Search Medicine</label>
+              <input
+                placeholder="Search medicine..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+
+            <div className="search-field">
+              <label>Status</label>
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <option value="ALL">All</option>
+                <option value="CRITICAL">Critical</option>
+                <option value="LOW">Low</option>
+                <option value="HEALTHY">Healthy</option>
+              </select>
+            </div>
+
+            <div className="search-field">
+              <label>Sort</label>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+              >
+                <option value="CRITICAL_FIRST">Critical First</option>
+                <option value="ALPHABETICAL">Alphabetical</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+
+        {processedData.length === 0 && (
+          <div className="empty-state">
+            <h3>No medicines found</h3>
+            <p>Try adjusting search or filter settings.</p>
+          </div>
+        )}
+
+        {/* MEDICINE LIST */}
+
+        <div className="medicine-grid">
+
+          {processedData.map((med) => {
+
+            const level = getStockLevel(med);
+            const days = calculateDaysRemaining(med);
+            const warning = getSmartWarning(med);
+
+            const percentage = Math.min(
+              (med.quantity / med.lowStockThreshold) * 100,
+              100
+            );
+
+            return (
+
+              <div
+                key={med._id}
+                className={`medicine-card ${level.toLowerCase()}`}
+              >
+
+                <div className="medicine-card-header">
+                  <h3>{med.name}</h3>
                 </div>
-              )}
-              <div className="medicine-card-details">
 
-                <div>
-                  <label>Quantity</label>
-                  <p>{med.quantity}</p>
+                {warning && (
+                  <div className="smart-warning">
+                    {warning}
+                  </div>
+                )}
+                <div className="medicine-card-details">
+
+                  <div>
+                    <label>Quantity</label>
+                    <p>{med.quantity}</p>
+                  </div>
+
+                  <div>
+                    <label>Days Remaining</label>
+                    <p>{days >= 0 ? days : 0}</p>
+                  </div>
+
                 </div>
 
-                <div>
-                  <label>Days Remaining</label>
-                  <p>{days >= 0 ? days : 0}</p>
-                </div>
 
-              </div>
-
-
-              <div className="medicine-progress">
-                <div
-                  className="medicine-progress-bar"
-                  style={{ width: `${percentage}%` }}
-                />
-              </div>
-
-              <div className="recommended-refill">
-                Recommended refill: +{calculateRecommendedRefill(med)}
-              </div>
-
-
-              <div className="medicine-actions">
-
-                <div className="quick-refill">
-                  <button onClick={() => restockMedicine(med, 10)}>+10</button>
-                  <button onClick={() => restockMedicine(med, 30)}>+30</button>
-                </div>
-
-                <div className="custom-refill">
-
-                  <input
-                    type="number"
-                    min="0"
-                    placeholder="Custom"
-                    value={customAmount[med._id] || ""}
-                    onChange={(e) =>
-                      setCustomAmount({
-                        ...customAmount,
-                        [med._id]: e.target.value
-                      })
-                    }
+                <div className="medicine-progress">
+                  <div
+                    className="medicine-progress-bar"
+                    style={{ width: `${percentage}%` }}
                   />
+                </div>
 
-                  <button
-                    onClick={() =>
-                      restockMedicine(
-                        med,
-                        Math.abs(Number(customAmount[med._id] || 0))
-                      )
-                    }
-                  >
-                    Add
-                  </button>
+                <div className="recommended-refill">
+                  Recommended refill: +{calculateRecommendedRefill(med)}
+                </div>
 
-                  <button
-                    className="reduce-btn"
-                    onClick={() =>
-                      restockMedicine(
-                        med,
-                        -Math.abs(Number(customAmount[med._id] || 0))
-                      )
-                    }
-                  >
-                    Reduce
-                  </button>
+
+                <div className="medicine-actions">
+
+                  <div className="quick-refill">
+                    <button onClick={() => restockMedicine(med, 10)}>+10</button>
+                    <button onClick={() => restockMedicine(med, 30)}>+30</button>
+                  </div>
+
+                  <div className="custom-refill">
+
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="Custom"
+                      value={customAmount[med._id] || ""}
+                      onChange={(e) =>
+                        setCustomAmount({
+                          ...customAmount,
+                          [med._id]: e.target.value
+                        })
+                      }
+                    />
+
+                    <button
+                      onClick={() =>
+                        restockMedicine(
+                          med,
+                          Math.abs(parseInt(customAmount[med._id] || 0))
+                        )
+                      }
+                    >
+                      Add
+                    </button>
+
+                    <button
+                      className="reduce-btn"
+                      onClick={() =>
+                        restockMedicine(
+                          med,
+                          -Math.abs(parseInt(customAmount[med._id] || 0))
+                        )
+                      }
+                    >
+                      Reduce
+                    </button>
+
+                  </div>
 
                 </div>
 
               </div>
+
+            );
+
+          })}
+
+        </div>
+
+
+        {/* REFILL HISTORY */}
+
+        <div className="refill-history">
+
+          <h3>📦 Refill History</h3>
+
+          {refillHistory.length === 0 && (
+            <p>No refills yet.</p>
+          )}
+
+          {refillHistory.map((item) => (
+
+            <div key={item._id} className="history-item">
+
+              <p className={item.amount > 0 ? "add" : "reduce"}>
+                {item.name} {item.amount > 0 ? "+" : ""}{item.amount} units
+              </p>
+
+              <p>{new Date(item.date).toLocaleString()}</p>
 
             </div>
 
-          );
+          ))}
 
-        })}
-
+        </div>
       </div>
-
-
-      {/* REFILL HISTORY */}
-
-      <div className="refill-history">
-
-        <h3>📦 Refill History</h3>
-
-        {refillHistory.length === 0 && (
-          <p>No refills yet.</p>
-        )}
-
-        {refillHistory.map((item, index) => (
-
-          <div key={item._id} className="history-item">
-
-            <p className={item.amount > 0 ? "add" : "reduce"}>
-              {item.name} {item.amount > 0 ? "+" : ""}{item.amount} units
-            </p>
-
-            <p>{new Date(item.date).toLocaleString()}</p>
-
-          </div>
-
-        ))}
-
-      </div>
-
     </div>
+
   );
 }

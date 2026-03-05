@@ -1,12 +1,5 @@
-/* ========================================================== MEDICINE TIMER — PREMIUM GLASS SYSTEM Brand: Unified With Documents Personality: Intelligent • Calm • Medical • Structured Glass Depth: Level 3 ========================================================== */
-/* ========================================================== PAGE PERSONALITY LAYER ========================================================== */
 .page-medicines {
   position: relative;
-  padding-bottom: 120px;
-  animation: pageFadeIn 0.6s ease;
-
-  max-width: 1100px;
-  margin: 0 auto;
 }
 
 /* Ambient Medical Glow */
@@ -382,46 +375,6 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-}
-
-/* Base button */
-.page-medicines .btn {
-  padding: 14px 26px;
-  border-radius: 999px;
-  border: none;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Primary */
-.page-medicines .btn-primary {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
-  color: white;
-}
-
-.page-medicines .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.35), 0 0 30px rgba(139, 92, 246, 0.3);
-}
-
-.page-medicines .btn-primary:active {
-  transform: translateY(0);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
-}
-
-/* Secondary */
-.page-medicines .btn-secondary {
-  background: rgba(0, 0, 0, 0.05);
-  color: #0f172a;
-}
-
-.page-medicines .btn-secondary:hover {
-  background: rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
 }
 
 /* Shine effect */
@@ -924,19 +877,6 @@
   animation: healthyGlow 2.5s ease-in-out infinite;
 }
 
-/* ========================================================== SCROLLBAR POLISH ========================================================== */
-.page-medicines::-webkit-scrollbar {
-  width: 8px;
-}
-
-.page-medicines::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #6366f1, #8b5cf6);
-  border-radius: 999px;
-}
-
-.page-medicines::-webkit-scrollbar-track {
-  background: transparent;
-}
 
 /* ========================================================== SECTION SPACING CONSISTENCY ========================================================== */
 .page-medicines>*+* {
@@ -1030,10 +970,6 @@
 ========================================================== */
 
 
-body.modal-open {
-  overflow: hidden;
-  height: 100vh;
-}
 
 /* ==========================================================
    FLOATING GLASS TOAST

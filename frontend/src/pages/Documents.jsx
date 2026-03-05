@@ -18,7 +18,7 @@ export default function Documents() {
     queryKey: ["documents"],
     queryFn: fetchDocuments,
     staleTime: 1000 * 60 * 5,
-    keepPreviousData: true,
+    placeholderData: (prev) => prev,
     refetchOnWindowFocus: false
   });
 
@@ -52,7 +52,7 @@ export default function Documents() {
 
   const handleFileChange = (e) => {
 
-    const selectedFile = e.target.files[0];
+    const selectedFile = e.target.files?.[0];
 
     if (!selectedFile) {
       setMessage({ type: "error", text: "No file selected" });
@@ -316,7 +316,7 @@ export default function Documents() {
 
             <button
               type="button"
-              className="btn-primary"
+              className="btn btn-primary"
               onClick={handleUpload}
             >
               Upload Document

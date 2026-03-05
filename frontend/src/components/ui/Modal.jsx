@@ -59,19 +59,21 @@ export default function Modal({
         </div>
 
         <div className="modal-actions">
+
           <button
-            className="btn-secondary"
+            className="btn btn-secondary"
             onClick={onClose}
           >
             {cancelText}
           </button>
 
           <button
-            className={variant === "danger" ? "btn-danger" : "btn-primary"}
+            className={`btn ${variant === "danger" ? "btn-danger" : "btn-primary"}`}
             onClick={onConfirm}
           >
             {confirmText}
           </button>
+
         </div>
       </div>
     </div>

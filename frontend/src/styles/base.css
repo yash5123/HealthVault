@@ -1,3 +1,14 @@
+:root {
+
+  --bg-main: #f8fafc;
+
+  --text-main: #0f172a;
+
+  --text-muted: #64748b;
+
+}
+
+
 /* ===========================
    GLOBAL RESET
 =========================== */
@@ -9,6 +20,7 @@
 }
 
 body {
+
   font-family: "Inter", sans-serif;
   color: var(--text-main);
   background:
@@ -160,9 +172,6 @@ p {
 
 /* ===== REACT NAVIGATION ANIMATION FIX ===== */
 
-.page-documents * {
-  opacity: 1 !important;
-}
 
 @keyframes toastSlide {
   from {
@@ -175,3 +184,85 @@ p {
     opacity: 1;
   }
 }
+
+
+body.modal-open {
+  overflow: hidden;
+  padding-right: 8px;
+}
+
+
+/* ===============================
+   GLOBAL BUTTON SYSTEM
+================================ */
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all .25s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(99, 102, 241, .3);
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, .05);
+  color: #0f172a;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 0, 0, .08);
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 30px rgba(239, 68, 68, .35);
+}
+
+/* ===============================
+   GLOBAL PAGE CONTAINER
+================================ */
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 30px;
+  position: relative;
+}
+
+/* ===============================
+   GLOBAL GRID SYSTEM
+================================ */
+
+.grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+

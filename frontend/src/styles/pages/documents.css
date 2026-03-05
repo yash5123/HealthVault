@@ -284,33 +284,6 @@
   background: rgba(255, 255, 255, 0.85);
 }
 
-
-/* ==========================================================
-   PRIMARY BUTTON — Intelligent Action Button
-========================================================== */
-
-.page-documents .btn-primary {
-  padding: 14px 24px;
-  border-radius: 999px;
-  border: none;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-
-  background: linear-gradient(90deg,
-      #6366f1,
-      #8b5cf6,
-      #06b6d4);
-
-  color: white;
-  cursor: pointer;
-
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-
 /* Hover Lift */
 
 .page-documents .btn-primary:hover {
@@ -449,7 +422,7 @@
 
   background: rgba(99, 102, 241, 0.08);
   border: 1px solid rgba(99, 102, 241, 0.15);
-
+  animation: filePop .25s ease;
   font-size: 13px;
   color: #4338ca;
 
@@ -556,20 +529,6 @@
    SCROLL POLISH
 ========================================================== */
 
-.page-documents::-webkit-scrollbar {
-  width: 8px;
-}
-
-.page-documents::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,
-      #6366f1,
-      #8b5cf6);
-  border-radius: 999px;
-}
-
-.page-documents::-webkit-scrollbar-track {
-  background: transparent;
-}
 
 
 
@@ -598,6 +557,8 @@
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 12px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
 }
 
 
@@ -617,12 +578,6 @@
   color: #6366f1;
 }
 
-/* Fallback Badge */
-
-.page-documents .document-card p:first-of-type {
-  background: rgba(99, 102, 241, 0.12);
-  color: #6366f1;
-}
 
 
 /* ==========================================================
@@ -691,28 +646,6 @@
    DELETE BUTTON — PREMIUM ACTION BUTTON
 ========================================================== */
 
-.page-documents .btn-danger {
-  padding: 14px 24px;
-  border-radius: 999px;
-  border: none;
-
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.4px;
-
-  background: linear-gradient(90deg,
-      #ff4d4d,
-      #ff1a1a,
-      #dc2626);
-
-  color: white;
-  cursor: pointer;
-
-  transition: all 0.35s ease;
-  position: relative;
-  overflow: hidden;
-  margin-left: 12px;
-}
 
 /* Hover Lift */
 
@@ -758,10 +691,6 @@
   margin-top: 12px;
 }
 
-.page-documents .document-card:hover::after {
-  opacity: .8;
-}
-
 
 .page-documents .document-card {
   transform-style: preserve-3d;
@@ -775,11 +704,6 @@
   margin-top: 14px;
 }
 
-/* File chip animation */
-
-.page-documents .file-chip {
-  animation: filePop .25s ease;
-}
 
 @keyframes filePop {
 

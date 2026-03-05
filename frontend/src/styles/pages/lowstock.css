@@ -4,25 +4,9 @@
    Glass Depth: Level 3
 ========================================================== */
 
-
-/* ==========================================================
-   PAGE PERSONALITY LAYER
-========================================================== */
-
 .page-lowstock {
-
   position: relative;
-
-  padding-bottom: 120px;
-
-  animation: lowstockPageEnter 0.6s ease;
-
-  max-width: 1100px;
-
-  margin: 0 auto;
-
 }
-
 
 /* Ambient Alert Aura */
 
@@ -46,7 +30,7 @@
       rgba(239, 68, 68, 0.08),
       transparent 70%);
 
-  filter: blur(100px);
+  filter: blur(80px);
 
   z-index: 0;
 
@@ -84,7 +68,7 @@
 
 /* Ensure content above glow */
 
-.page-lowstock>* {
+.page-lowstock .page-content {
 
   position: relative;
 
@@ -711,33 +695,6 @@
 }
 
 
-/* ==========================================================
-   SCROLLBAR
-========================================================== */
-
-.page-lowstock::-webkit-scrollbar {
-
-  width: 8px;
-
-}
-
-.page-lowstock::-webkit-scrollbar-thumb {
-
-  background:
-    linear-gradient(180deg,
-      #ef4444,
-      #ff4d6d);
-
-  border-radius: 999px;
-
-}
-
-.page-lowstock::-webkit-scrollbar-track {
-
-  background: transparent;
-
-}
-
 
 /* ==========================================================
    PAGE ENTRY
@@ -961,7 +918,7 @@
 
 /* ================= TOAST CONTAINER ================= */
 
-.page-lowstock .toast-container{
+.page-lowstock .toast-container {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -976,7 +933,7 @@
 
 /* ================= TOAST CARD ================= */
 
-.page-lowstock .toast{
+.page-lowstock .toast {
   min-width: 260px;
 
   padding: 14px 18px;
@@ -985,7 +942,7 @@
 
   background: white;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 
   display: flex;
   flex-direction: column;
@@ -996,39 +953,48 @@
 
 /* ADD SUCCESS */
 
-.page-lowstock .toast-add{
+.page-lowstock .toast-add {
   border-left: 4px solid #22c55e;
 }
 
 /* REDUCE */
 
-.page-lowstock .toast-reduce{
+.page-lowstock .toast-reduce {
   border-left: 4px solid #ef4444;
 }
 
-.page-lowstock .toast-title{
+.page-lowstock .toast-title {
   font-weight: 700;
   font-size: 14px;
 }
 
-.page-lowstock .toast-message{
+.page-lowstock .toast-message {
   font-size: 13px;
   color: var(--text-muted);
 }
 
-@keyframes lowstockToastSlide{
-  from{
+@keyframes lowstockToastSlide {
+  from {
     transform: translateX(100%);
     opacity: 0;
   }
 
-  to{
+  to {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
-.page-lowstock .refill-history{
-  max-height:320px;
-  overflow-y:auto;
+.page-lowstock .refill-history {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.page-lowstock .reduce-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.page-lowstock .reduce-btn:hover {
+  box-shadow: 0 10px 25px rgba(239, 68, 68, .35);
 }

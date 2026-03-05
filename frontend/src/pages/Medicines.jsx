@@ -155,64 +155,64 @@ export default function Medicines() {
   return (
 
     <div className="page-medicines">
+      <div className="page-content">
+        {message && (
+          <div className={`glass-toast ${message.type}`}>
+            {message.type === "success" && "✔ "}
+            {message.type === "error" && "⚠ "}
+            {message.text}
+          </div>
+        )}
 
-      {message && (
-        <div className={`glass-toast ${message.type}`}>
-          {message.type === "success" && "✔ "}
-          {message.type === "error" && "⚠ "}
-          {message.text}
-        </div>
-      )}
+        <SectionHeader
+          title="Medicines Management"
+          subtitle="Track dosage, stock levels and smart consumption insights."
+        />
 
-      <SectionHeader
-        title="Medicines Management"
-        subtitle="Track dosage, stock levels and smart consumption insights."
-      />
+        <StatsPanel medicines={medicines} />
 
-      <StatsPanel medicines={medicines} />
+        <MedicineForm
+          onAdd={handleAdd}
+          onUpdate={handleUpdate}
+          editingMedicine={editingMedicine}
+          clearEdit={() => setEditingMedicine(null)}
+        />
 
-      <MedicineForm
-        onAdd={handleAdd}
-        onUpdate={handleUpdate}
-        editingMedicine={editingMedicine}
-        clearEdit={() => setEditingMedicine(null)}
-      />
+        <SearchPanel
+          search={search}
+          setSearch={setSearch}
+          filter={filter}
+          setFilter={setFilter}
+          sort={sort}
+          setSort={setSort}
+        />
 
-      <SearchPanel
-        search={search}
-        setSearch={setSearch}
-        filter={filter}
-        setFilter={setFilter}
-        sort={sort}
-        setSort={setSort}
-      />
+        <MedicineGrid
+          medicines={processedMedicines}
+          onEdit={(medicine) => setEditingMedicine(medicine)}
+          onDelete={(id) => setDeleteTarget(id)}
+        />
 
-      <MedicineGrid
-        medicines={processedMedicines}
-        onEdit={(medicine) => setEditingMedicine(medicine)}
-        onDelete={(id) => setDeleteTarget(id)}
-      />
+        <Modal
+          isOpen={Boolean(deleteTarget)}
+          onClose={() => setDeleteTarget(null)}
+          title="Delete Medicine"
+          confirmText="Delete"
+          cancelText="Cancel"
+          variant="danger"
+          onConfirm={() => {
+            if (!deleteTarget) return;
 
-      <Modal
-        isOpen={Boolean(deleteTarget)}
-        onClose={() => setDeleteTarget(null)}
-        title="Delete Medicine"
-        confirmText="Delete"
-        cancelText="Cancel"
-        variant="danger"
-        onConfirm={() => {
-          if (!deleteTarget) return;
-
-          handleDelete(deleteTarget);
-          setDeleteTarget(null);
-        }}
-      >
-        <p>
-          Are you sure you want to delete this medicine?
-          This action cannot be undone.
-        </p>
-      </Modal>
-
+            handleDelete(deleteTarget);
+            setDeleteTarget(null);
+          }}
+        >
+          <p>
+            Are you sure you want to delete this medicine?
+            This action cannot be undone.
+          </p>
+        </Modal>
+      </div>
     </div>
 
   );
