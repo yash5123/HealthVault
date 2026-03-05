@@ -683,17 +683,7 @@
 
 /* Animation */
 
-@keyframes toastSlide {
-  from {
-    transform: translateX(120%);
-    opacity: 0;
-  }
 
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 /* ================= DELETE BUTTON ================= */
 
@@ -809,7 +799,7 @@
    DELETE CONFIRMATION MODAL
 ========================================================== */
 
-.modal-overlay {
+.page-documents .modal-overlay {
   position: fixed;
   inset: 0;
 
@@ -828,7 +818,7 @@
   pointer-events: all;
 }
 
-.modal-container {
+.page-documents .modal-container {
   width: min(520px, 90%);
   padding: 40px;
 
@@ -851,7 +841,7 @@
   animation: modalAppear .25s cubic-bezier(.2, .8, .2, 1);
 }
 
-.modal-container h3 {
+.page-documents .modal-container h3 {
   font-weight: 700;
   font-size: 22px;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
@@ -861,18 +851,18 @@
   margin-bottom: 12px;
 }
 
-.modal-body {
+.page-documents .modal-body {
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 26px;
 }
-.modal-actions {
+.page-documents .modal-actions {
   display: flex;
   justify-content: center;
   gap: 16px;
 }
 
-.modal-cancel {
+.page-documents .modal-cancel { 
   padding: 12px 22px;
   border-radius: 999px;
   border: none;
@@ -883,7 +873,7 @@
   cursor: pointer;
 }
 
-.modal-delete {
+.page-documents .modal-delete {
   padding: 12px 22px;
   border-radius: 999px;
   border: none;
@@ -895,7 +885,7 @@
   cursor: pointer;
 }
 
-.modal-delete:hover {
+.page-documents .modal-delete:hover {
   transform: translateY(-2px);
 
   box-shadow:
