@@ -16,7 +16,7 @@ export default function Checkups() {
 
   const [form, setForm] = useState({
     type: "",
-    doctor: "",
+    doctorName: "",
     lastVisit: "",
     intervalMonths: "",
     notes: "",
@@ -74,7 +74,7 @@ export default function Checkups() {
     await API.post("/checkups", form);
     setForm({
       type: "",
-      doctor: "",
+      doctorName: "",
       lastVisit: "",
       intervalMonths: "",
       notes: "",
@@ -241,9 +241,9 @@ export default function Checkups() {
           <input
             className="form-input"
             placeholder="Doctor Name"
-            value={form.doctor}
+            value={form.doctorName}
             onChange={(e) =>
-              setForm({ ...form, doctor: e.target.value })
+              setForm({ ...form, doctorName: e.target.value })
             }
           />
 
@@ -389,7 +389,7 @@ export default function Checkups() {
 
                 <div>
                   <label>Doctor</label>
-                  <p>{c.doctor}</p>
+                  <p>{c.doctorName}</p>
                 </div>
 
                 <div>
