@@ -30,6 +30,18 @@ export default function Modal({
     };
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+
+    return () => {
+      document.body.classList.remove("modal-open");
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const modalContent = (
@@ -48,18 +60,14 @@ export default function Modal({
 
         <div className="modal-actions">
           <button
-            className="btn btn-secondary"
+            className="btn-secondary"
             onClick={onClose}
           >
             {cancelText}
           </button>
 
           <button
-            className={`btn ${
-              variant === "danger"
-                ? "btn-danger"
-                : "btn-primary"
-            }`}
+            className={variant === "danger" ? "btn-danger" : "btn-primary"}
             onClick={onConfirm}
           >
             {confirmText}

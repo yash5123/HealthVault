@@ -4,7 +4,7 @@ import API from "../services/api";
 import DocumentCard from "../components/documents/DocumentCard";
 import "../styles/pages/documents.css";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
+import Modal from "../components/ui/Modal";
 export default function Documents() {
 
   /* ================= STATE ================= */
@@ -46,20 +46,6 @@ export default function Documents() {
   }, [message]);
 
   /* ================= LOCK SCROLL WHEN MODAL OPEN ================= */
-
-  useEffect(() => {
-
-    if (deleteId) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-
-  }, [deleteId]);
 
 
   /* ================= FILE SELECT ================= */
@@ -190,7 +176,10 @@ export default function Documents() {
     };
 
   }, [documents]);
-
+  const deleteDoc = useMemo(
+    () => documents.find(d => d._id === deleteId),
+    [documents, deleteId]
+  );
   /* ================= UI ================= */
 
   return (
@@ -369,45 +358,17 @@ export default function Documents() {
 
         </div>
 
-        {deleteId && (
-          <div
-            className="modal-overlay"
-            onClick={() => setDeleteId(null)}
-          >
-
-            <div
-              className="delete-modal"
-              onClick={(e) => e.stopPropagation()}
-            >
-
-              <h3>
-                Delete "{documents.find(d => d._id === deleteId)?.title}"?
-              </h3>
-
-              <p>This action cannot be undone.</p>
-
-              <div className="modal-actions">
-
-                <button
-                  className="modal-cancel"
-                  onClick={() => setDeleteId(null)}
-                >
-                  Cancel
-                </button>
-
-                <button
-                  className="modal-delete"
-                  onClick={confirmDelete}
-                >
-                  Delete
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-        )}
+        <Modal
+          isOpen={Boolean(deleteId)}
+          onClose={() => setDeleteId(null)}
+          title={`Delete "${deleteDoc?.title}"?`}
+          confirmText="Delete"
+          cancelText="Cancel"
+          variant="danger"
+          onConfirm={confirmDelete}
+        >
+          <p>This action cannot be undone.</p>
+        </Modal>
       </div>
 
     </div>

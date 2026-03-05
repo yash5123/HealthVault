@@ -26,17 +26,6 @@ export default function Medicines() {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [message, setMessage] = useState(null);
 
-  useEffect(() => {
-    if (deleteTarget) {
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.classList.remove("modal-open");
-    }
-
-    return () => {
-      document.body.classList.remove("modal-open");
-    };
-  }, [deleteTarget]);
 
 
   useEffect(() => {
@@ -114,8 +103,10 @@ export default function Medicines() {
     /* SEARCH */
 
     if (search) {
+      const searchTerm = search.toLowerCase();
+
       data = data.filter((m) =>
-        m.name.toLowerCase().includes(search.toLowerCase())
+        m.name.toLowerCase().includes(searchTerm)
       );
     }
 
@@ -210,6 +201,8 @@ export default function Medicines() {
         cancelText="Cancel"
         variant="danger"
         onConfirm={() => {
+          if (!deleteTarget) return;
+
           handleDelete(deleteTarget);
           setDeleteTarget(null);
         }}
