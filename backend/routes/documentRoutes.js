@@ -18,7 +18,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "healthvault_documents",
-    resource_type: "raw" // allows PDF upload
+     resource_type: "auto"
   }
 });
 

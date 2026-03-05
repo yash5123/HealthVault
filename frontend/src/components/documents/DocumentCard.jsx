@@ -12,7 +12,7 @@ export default function DocumentCard({ doc, onDelete }) {
       <div className="actions">
 
         <a
-          href={doc.fileUrl}
+          href={`${doc.fileUrl}#toolbar=0`}
           target="_blank"
           rel="noreferrer"
           className="btn btn-primary"
