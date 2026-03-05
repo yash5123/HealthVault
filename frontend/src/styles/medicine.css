@@ -1123,3 +1123,56 @@ body.modal-open {
   overflow: hidden;
   height: 100vh;
 }
+
+/* ==========================================================
+   FLOATING GLASS TOAST
+========================================================== */
+
+.page-medicines .glass-toast {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 20px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,0.6);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.15),
+    inset 0 0 30px rgba(255,255,255,0.4);
+
+  font-weight: 500;
+  font-size: 14px;
+
+  animation: toastSlide .35s ease;
+}
+
+.page-medicines .glass-toast.success {
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+.page-medicines .glass-toast.error {
+  color: #7f1d1d;
+  border-left: 4px solid #ef4444;
+}
+
+@keyframes toastSlide {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

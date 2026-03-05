@@ -24,6 +24,7 @@ export default function Medicines() {
   const [sort, setSort] = useState("NAME_ASC");
 
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     if (deleteTarget) {
@@ -36,6 +37,17 @@ export default function Medicines() {
       document.body.classList.remove("modal-open");
     };
   }, [deleteTarget]);
+
+
+  useEffect(() => {
+    if (!message) return;
+
+    const timer = setTimeout(() => {
+      setMessage(null);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [message]);
 
 
   const queryClient = useQueryClient();
@@ -69,12 +81,25 @@ export default function Medicines() {
     }
   };
 
+
   const handleDelete = async (id) => {
     try {
       await API.delete(`/medicines/${id}`);
+
       queryClient.invalidateQueries({ queryKey: ["medicines"] });
+
+      setMessage({
+        type: "success",
+        text: "Medicine deleted successfully"
+      });
+
     } catch (err) {
       console.error("Delete medicine error:", err);
+
+      setMessage({
+        type: "error",
+        text: "Failed to delete medicine"
+      });
     }
   };
 
@@ -139,6 +164,14 @@ export default function Medicines() {
   return (
 
     <div className="page-medicines">
+
+      {message && (
+        <div className={`glass-toast ${message.type}`}>
+          {message.type === "success" && "✔ "}
+          {message.type === "error" && "⚠ "}
+          {message.text}
+        </div>
+      )}
 
       <SectionHeader
         title="Medicines Management"
