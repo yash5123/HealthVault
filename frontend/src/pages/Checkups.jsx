@@ -10,6 +10,7 @@ export default function Checkups() {
      STATE
   ====================================================== */
 
+  const [toast, setToast] = useState(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [history, setHistory] = useState([]);
@@ -53,25 +54,49 @@ export default function Checkups() {
     return "NORMAL";
   };
 
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case "OVERDUE":
-        return "#ef4444";
-      case "CRITICAL":
-        return "#f97316";
-      case "IMPORTANT":
-        return "#f59e0b";
-      default:
-        return "#10b981";
-    }
+  const showToast = (message, type = "success") => {
+
+    setToast({ message, type });
+
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+
   };
+
+  /* ======================================================
+     VISIT NOTIFICATION
+  ====================================================== */
+
+  useEffect(() => {
+
+    checkups.forEach((c) => {
+
+      const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
+      const days = getDaysRemaining(next);
+
+      if (days === 0) {
+        showToast(`Checkup due today: ${c.type}`, "warning");
+      }
+
+      if (days < 0) {
+        showToast(`Checkup overdue: ${c.type}`, "error");
+      }
+
+    });
+
+  }, [checkups]);
 
   /* ======================================================
      ADD CHECKUP
   ====================================================== */
 
   const handleAdd = async () => {
+
     await API.post("/checkups", form);
+
+    showToast("Checkup added successfully");
+
     setForm({
       type: "",
       doctorName: "",
@@ -79,7 +104,9 @@ export default function Checkups() {
       intervalMonths: "",
       notes: "",
     });
-    queryClient.invalidateQueries({ queryKey: ["checkups"] })
+
+    queryClient.invalidateQueries({ queryKey: ["checkups"] });
+
   };
 
   /* ======================================================
@@ -97,6 +124,48 @@ export default function Checkups() {
     ]);
 
     await API.patch(`/checkups/${checkup._id}/complete`);
+
+    showToast("Checkup marked as completed");
+
+    queryClient.invalidateQueries({ queryKey: ["checkups"] });
+
+  };
+
+  /* ======================================================
+     DELETE CHECKUP
+  ====================================================== */
+
+  const deleteCheckup = async (id) => {
+
+    if (!window.confirm("Delete this checkup?")) return;
+
+    await API.delete(`/checkups/${id}`);
+
+    showToast("Checkup deleted", "error");
+
+    queryClient.invalidateQueries({ queryKey: ["checkups"] });
+
+  };
+
+  /* ======================================================
+     EDIT CHECKUP DATE
+  ====================================================== */
+
+  const editCheckupDate = async (checkup) => {
+
+    const newDate = prompt(
+      "Enter new last visit date (YYYY-MM-DD)",
+      checkup.lastVisit?.slice(0, 10)
+    );
+
+    if (!newDate) return;
+
+    await API.put(`/checkups/${checkup._id}`, {
+      ...checkup,
+      lastVisit: newDate
+    });
+
+    showToast("Checkup updated");
 
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
 
@@ -119,18 +188,13 @@ export default function Checkups() {
     if (filter !== "ALL") {
       data = data.filter((c) => {
 
-        const next = calculateNextVisit(
-          c.lastVisit,
-          c.intervalMonths
-        );
-
+        const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
         const days = getDaysRemaining(next);
-
         const priority = getPriority(days);
 
         if (filter === "UPCOMING") return days >= 0;
         if (filter === "OVERDUE") return days < 0;
-        if (filter === "CRITICAL") return priority === "CRITICAL";
+        if (filter === "CRITICAL") return priority === "CRITICAL;
 
         return true;
 
@@ -157,19 +221,13 @@ export default function Checkups() {
   const total = checkups.length;
 
   const overdueCount = checkups.filter((c) => {
-
     const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
-
     return getDaysRemaining(next) < 0;
-
   }).length;
 
   const upcomingCount = checkups.filter((c) => {
-
     const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
-
     return getDaysRemaining(next) >= 0;
-
   }).length;
 
   /* ======================================================
@@ -179,8 +237,6 @@ export default function Checkups() {
   return (
 
     <div className="page-checkups page-content">
-
-      {/* HEADER */}
 
       <div className="page-header">
 
@@ -194,9 +250,6 @@ export default function Checkups() {
         </p>
 
       </div>
-
-
-      {/* SUMMARY */}
 
       <div className="stats-panel">
 
@@ -216,9 +269,6 @@ export default function Checkups() {
         </div>
 
       </div>
-
-
-      {/* ADD FORM */}
 
       <div className="checkup-form">
 
@@ -252,10 +302,7 @@ export default function Checkups() {
             type="date"
             value={form.lastVisit}
             onChange={(e) =>
-              setForm({
-                ...form,
-                lastVisit: e.target.value,
-              })
+              setForm({ ...form, lastVisit: e.target.value })
             }
           />
 
@@ -265,10 +312,7 @@ export default function Checkups() {
             placeholder="Interval (Months)"
             value={form.intervalMonths}
             onChange={(e) =>
-              setForm({
-                ...form,
-                intervalMonths: e.target.value,
-              })
+              setForm({ ...form, intervalMonths: e.target.value })
             }
           />
 
@@ -277,10 +321,7 @@ export default function Checkups() {
             placeholder="Notes"
             value={form.notes}
             onChange={(e) =>
-              setForm({
-                ...form,
-                notes: e.target.value,
-              })
+              setForm({ ...form, notes: e.target.value })
             }
           />
 
@@ -299,9 +340,6 @@ export default function Checkups() {
 
       </div>
 
-
-      {/* FILTER */}
-
       <div className="search-panel">
 
         <div className="search-grid">
@@ -310,17 +348,13 @@ export default function Checkups() {
             className="form-input"
             placeholder="Search checkup..."
             value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
+            onChange={(e) => setSearch(e.target.value)}
           />
 
           <select
             className="form-input"
             value={filter}
-            onChange={(e) =>
-              setFilter(e.target.value)
-            }
+            onChange={(e) => setFilter(e.target.value)}
           >
 
             <option value="ALL">All</option>
@@ -334,37 +368,13 @@ export default function Checkups() {
 
       </div>
 
-
-      {/* LIST */}
-
       <div className="checkup-grid">
-
-        {processed.length === 0 && (
-
-          <div className="empty-state">
-
-            <h3>No Checkups Found</h3>
-
-            <p>
-              Add your first medical checkup above.
-            </p>
-
-          </div>
-
-        )}
 
         {processed.map((c) => {
 
-          const next = calculateNextVisit(
-            c.lastVisit,
-            c.intervalMonths
-          );
-
+          const next = calculateNextVisit(c.lastVisit, c.intervalMonths);
           const days = getDaysRemaining(next);
-
           const priority = getPriority(days);
-
-          const color = getPriorityColor(priority);
 
           return (
 
@@ -404,24 +414,27 @@ export default function Checkups() {
                 <span> {days}</span>
               </div>
 
-              <div className="checkup-progress">
-
-                <div
-                  className="checkup-progress-bar"
-                  style={{
-                    width: `${Math.min(100, Math.max(0, 100 - days))}%`
-                  }}
-                />
-
-              </div>
-
               <div className="checkup-actions">
 
                 <button
                   className="complete-btn"
                   onClick={() => markCompleted(c)}
                 >
-                  Mark Completed
+                  Done
+                </button>
+
+                <button
+                  className="edit-btn"
+                  onClick={() => editCheckupDate(c)}
+                >
+                  Edit
+                </button>
+
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteCheckup(c._id)}
+                >
+                  Delete
                 </button>
 
               </div>
@@ -433,6 +446,12 @@ export default function Checkups() {
         })}
 
       </div>
+
+      {toast && (
+        <div className={`glass-toast ${toast.type}`}>
+          {toast.message}
+        </div>
+      )}
 
     </div>
 

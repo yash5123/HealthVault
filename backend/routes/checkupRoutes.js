@@ -9,7 +9,8 @@ const {
 
 // Apply middleware properly
 router.use(protect);
-
+router.delete("/:id", deleteCheckup);
+router.put("/:id", updateCheckup);
 router.post("/", addCheckup);
 router.get("/", getCheckups);
 router.patch("/:id/complete", markComplete);
