@@ -18,7 +18,7 @@ const uploadDocument = async (req, res) => {
     const document = await Document.create({
       title: req.body.title,
       type: req.body.type,
-      fileUrl: req.file.secure_url
+      fileUrl: req.file.path, // Cloudinary URL
       user: new mongoose.Types.ObjectId(req.user.id)
     });
 
