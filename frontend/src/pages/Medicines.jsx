@@ -53,19 +53,44 @@ export default function Medicines() {
   const handleAdd = async (data) => {
     try {
       await API.post("/medicines", data);
+
       queryClient.invalidateQueries({ queryKey: ["medicines"] });
+
+      setMessage({
+        type: "success",
+        text: "Medicine added successfully"
+      });
+
     } catch (err) {
       console.error("Add medicine error:", err);
+
+      setMessage({
+        type: "error",
+        text: "Failed to add medicine"
+      });
     }
   };
 
   const handleUpdate = async (id, data) => {
     try {
       await API.put(`/medicines/${id}`, data);
+
       setEditingMedicine(null);
+
       queryClient.invalidateQueries({ queryKey: ["medicines"] });
+
+      setMessage({
+        type: "success",
+        text: "Medicine updated successfully"
+      });
+
     } catch (err) {
       console.error("Update medicine error:", err);
+
+      setMessage({
+        type: "error",
+        text: "Failed to update medicine"
+      });
     }
   };
 
