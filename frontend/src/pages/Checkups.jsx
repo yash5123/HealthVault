@@ -194,7 +194,7 @@ export default function Checkups() {
 
         if (filter === "UPCOMING") return days >= 0;
         if (filter === "OVERDUE") return days < 0;
-        if (filter === "CRITICAL") return priority === "CRITICAL;
+        if (filter === "CRITICAL") return priority === "CRITICAL";
 
         return true;
 
