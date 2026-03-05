@@ -409,7 +409,7 @@ export default function Checkups() {
                 <div
                   className="checkup-progress-bar"
                   style={{
-                    width: `${Math.max(0, 100 - days)}%`
+                    width: `${Math.min(100, Math.max(0, 100 - days))}%`
                   }}
                 />
 
