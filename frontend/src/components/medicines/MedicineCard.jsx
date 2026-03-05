@@ -10,22 +10,22 @@ export default function MedicineCard({
       ? "CRITICAL"
       : medicine.quantity <=
         medicine.lowStockThreshold
-      ? "LOW"
-      : "HEALTHY";
+        ? "LOW"
+        : "HEALTHY";
 
   const percent = Math.min(
     (medicine.quantity /
       medicine.lowStockThreshold) *
-      100,
+    100,
     100
   );
 
   const daysRemaining =
     medicine.frequencyPerDay > 0
       ? Math.floor(
-          medicine.quantity /
-            medicine.frequencyPerDay
-        )
+        medicine.quantity /
+        medicine.frequencyPerDay
+      )
       : 0;
 
   return (
@@ -84,7 +84,10 @@ export default function MedicineCard({
 
       {/* ACTIONS */}
       <div className="medicine-actions">
-        <button onClick={() => onEdit(medicine)}>
+        <button
+          className="btn btn-primary"
+          onClick={() => onEdit(medicine)}
+        >
           Edit
         </button>
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchMedicines } from "../queries/medicinesQuery";
 import SectionHeader from "../components/medicines/SectionHeader";
@@ -7,7 +7,6 @@ import MedicineForm from "../components/forms/MedicineForm";
 import SearchPanel from "../components/medicines/SearchPanel";
 import MedicineGrid from "../components/medicines/MedicineGrid";
 import Modal from "../components/ui/Modal";
-
 import API from "../services/api";
 import "../styles/medicine.css";
 
@@ -18,7 +17,7 @@ export default function Medicines() {
   ====================================================== */
 
   const [editingMedicine, setEditingMedicine] = useState(null);
-
+  const formRef = useRef(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [sort, setSort] = useState("NAME_ASC");
@@ -171,12 +170,14 @@ export default function Medicines() {
 
         <StatsPanel medicines={medicines} />
 
-        <MedicineForm
-          onAdd={handleAdd}
-          onUpdate={handleUpdate}
-          editingMedicine={editingMedicine}
-          clearEdit={() => setEditingMedicine(null)}
-        />
+        <div ref={formRef}>
+          <MedicineForm
+            onAdd={handleAdd}
+            onUpdate={handleUpdate}
+            editingMedicine={editingMedicine}
+            clearEdit={() => setEditingMedicine(null)}
+          />
+        </div>
 
         <SearchPanel
           search={search}
@@ -189,7 +190,14 @@ export default function Medicines() {
 
         <MedicineGrid
           medicines={processedMedicines}
-          onEdit={(medicine) => setEditingMedicine(medicine)}
+          onEdit={(medicine) => {
+            setEditingMedicine(medicine);
+
+            formRef.current?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }}
           onDelete={(id) => setDeleteTarget(id)}
         />
 
