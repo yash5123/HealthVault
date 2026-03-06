@@ -8,7 +8,7 @@ import {
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-
+import { Circle } from "react-leaflet";
 import {
   MapContainer,
   TileLayer,
@@ -28,7 +28,9 @@ export default function FindHospitals() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [activeHospital, setActiveHospital] = useState(null);
-  const activeHospitalData = hospitals.find(h => h.id === activeHospital);
+  const activeHospitalData = hospitals.find(
+    h => h.id === activeHospital
+  );
 
   const [mounted, setMounted] = useState(false);
 
@@ -169,7 +171,10 @@ export default function FindHospitals() {
 
     } else {
 
-      updated = [...saved, hospital];
+      updated = [
+        hospital,
+        ...saved.filter((h) => h.id !== hospital.id)
+      ];
 
       setToast({
         type: "success",
@@ -287,6 +292,8 @@ export default function FindHospitals() {
 
       {/* ================= MAP ================= */}
 
+
+
       {mounted && location !== null && (
 
         <div className="map-container">
@@ -301,6 +308,12 @@ export default function FindHospitals() {
             <TileLayer
               attribution="© OpenStreetMap contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+
+            <Circle
+              center={[location.lat, location.lon]}
+              radius={radius * 1000}
+              pathOptions={{ color: "#6366f1", fillOpacity: 0.08 }}
             />
 
             <MapFocus hospital={activeHospitalData} />
@@ -377,7 +390,7 @@ export default function FindHospitals() {
             </div>
 
             <div className="distance">
-              📍 {h.distance.toFixed(2)} km away
+              📍 {h.distance ? h.distance.toFixed(2) : "0.00"} km away
             </div>
 
             <div className="rating">
@@ -399,7 +412,10 @@ export default function FindHospitals() {
               </a>
 
               <button
-                onClick={() => toggleSave(h)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleSave(h);
+                }}
                 className={`save-btn ${saved.find((s) => s.id === h.id)
                   ? "saved"
                   : ""
@@ -488,17 +504,23 @@ export default function FindHospitals() {
 }
 
 function FitBounds({ hospitals }) {
+
   const map = useMap();
+  const hasFit = React.useRef(false);
 
   useEffect(() => {
-    if (!hospitals.length) return;
+
+    if (!hospitals.length || hasFit.current) return;
 
     const bounds = hospitals
       .filter(h => h.lat && h.lon)
       .map(h => [h.lat, h.lon]);
+
     map.fitBounds(bounds, { padding: [40, 40] });
 
-  }, [hospitals]);
+    hasFit.current = true;
+
+  }, [hospitals, map]);
 
   return null;
 }
