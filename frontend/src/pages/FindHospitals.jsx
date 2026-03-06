@@ -1,7 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "../styles/pages/hospitals.css";
 import "leaflet/dist/leaflet.css";
-import { useMap } from "react-leaflet";
 import {
   fetchHospitalsFromOSM,
   calculateDistance,
@@ -11,7 +10,8 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup
+  Popup,
+  useMap
 } from "react-leaflet";
 
 import L from "leaflet";
