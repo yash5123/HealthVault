@@ -28,6 +28,8 @@ export default function FindHospitals() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [activeHospital, setActiveHospital] = useState(null);
+  const activeHospitalData = hospitals.find(h => h.id === activeHospital);
+
   const [mounted, setMounted] = useState(false);
 
   const [saved, setSaved] = useState(() => {
@@ -301,6 +303,7 @@ export default function FindHospitals() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
+            <MapFocus hospital={activeHospitalData} />
             <FitBounds hospitals={filteredHospitals} />
 
             {/* User Location */}
@@ -358,7 +361,7 @@ export default function FindHospitals() {
               ${activeHospital === h.id ? "active" : ""}
             `}
             onMouseEnter={() => setActiveHospital(h.id)}
-            onMouseLeave={() => setActiveHospital(null)}
+            onClick={() => setActiveHospital(h.id)}
           >
 
             <div className="card-header">
@@ -496,6 +499,21 @@ function FitBounds({ hospitals }) {
     map.fitBounds(bounds, { padding: [40, 40] });
 
   }, [hospitals]);
+
+  return null;
+}
+
+function MapFocus({ hospital }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!hospital) return;
+
+    map.flyTo([hospital.lat, hospital.lon], 16, {
+      duration: 1.2,
+    });
+
+  }, [hospital]);
 
   return null;
 }
