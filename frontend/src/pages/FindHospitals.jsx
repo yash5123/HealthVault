@@ -37,8 +37,9 @@ export default function FindHospitals() {
   const [toast, setToast] = useState(null);
 
 
-useEffect(() => {
-  if (typeof window !== "undefined") {
+  useEffect(() => {
+    if (!L || !L.Icon || !L.Icon.Default) return;
+
     delete L.Icon.Default.prototype._getIconUrl;
 
     L.Icon.Default.mergeOptions({
@@ -49,8 +50,7 @@ useEffect(() => {
       shadowUrl:
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
     });
-  }
-}, []);
+  }, []);
 
   /* =========================
      Detect Location
@@ -126,7 +126,7 @@ useEffect(() => {
   const filteredHospitals = useMemo(() => {
 
     return hospitals.filter((h) =>
-      h.name?.toLowerCase().includes(search.toLowerCase())
+      (h.name || "").toLowerCase().includes(search.toLowerCase())
     );
 
   }, [hospitals, search]);
@@ -275,6 +275,7 @@ useEffect(() => {
         <div className="map-container">
 
           <MapContainer
+            key={location.lat + location.lon}
             center={[location.lat, location.lon]}
             zoom={14}
             style={{ height: "350px", width: "100%" }}
@@ -304,7 +305,7 @@ useEffect(() => {
                   <Popup>
                     <b>{h.name}</b>
                     <br />
-                    {h.distance.toFixed(2)} km away
+                    📍 {h.distance ? h.distance.toFixed(2) : "0.00"} km away
                   </Popup>
                 </Marker>
               ))}
