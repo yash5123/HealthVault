@@ -92,8 +92,11 @@
 
   font-size: 40px;
   font-weight: 800;
-
   letter-spacing: -1px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
 
   background:
     linear-gradient(90deg,
@@ -1764,9 +1767,7 @@
 }
 
 .hospital-icon{
-  font-family: "Apple Color Emoji",
-               "Segoe UI Emoji",
-               "Noto Color Emoji",
-               sans-serif;
-  margin-right:8px;
+  -webkit-text-fill-color: initial;
+  background:none;
+  font-size:38px;
 }

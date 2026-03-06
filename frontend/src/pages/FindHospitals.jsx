@@ -16,7 +16,7 @@ import {
 
 import L from "leaflet";
 
-if (typeof window !== "undefined") {
+useEffect(() => {
   delete L.Icon.Default.prototype._getIconUrl;
 
   L.Icon.Default.mergeOptions({
@@ -27,7 +27,7 @@ if (typeof window !== "undefined") {
     shadowUrl:
       "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   });
-}
+}, []);
 
 export default function FindHospitals() {
 
@@ -219,8 +219,9 @@ export default function FindHospitals() {
       <div className="hospital-header">
 
         <div>
-          <h1>
-            <span className="hospital-icon">🏥</span> Find Nearby Hospitals
+          <h1 className="hospital-title">
+            <span className="hospital-icon">🏥</span>
+            Find Nearby Hospitals
           </h1>
           <p>OpenStreetMap powered healthcare discovery</p>
         </div>
@@ -266,7 +267,7 @@ export default function FindHospitals() {
 
       {/* ================= MAP ================= */}
 
-      {location && (
+      {location !== null && (
 
         <div className="map-container">
 
