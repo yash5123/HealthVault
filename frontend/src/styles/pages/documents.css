@@ -661,3 +661,14 @@
     opacity: 1;
   }
 }
+
+.page-documents .document-card .btn-primary,
+.page-documents .document-card .btn-primary:hover,
+.page-documents .document-card .btn-primary:focus {
+  text-decoration: none;
+}
+.page-documents .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
