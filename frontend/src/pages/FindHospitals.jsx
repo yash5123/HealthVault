@@ -37,7 +37,8 @@ export default function FindHospitals() {
   const [toast, setToast] = useState(null);
 
 
-  useEffect(() => {
+useEffect(() => {
+  if (typeof window !== "undefined") {
     delete L.Icon.Default.prototype._getIconUrl;
 
     L.Icon.Default.mergeOptions({
@@ -48,7 +49,8 @@ export default function FindHospitals() {
       shadowUrl:
         "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
     });
-  }, []);
+  }
+}, []);
 
   /* =========================
      Detect Location
@@ -329,7 +331,7 @@ export default function FindHospitals() {
           </div>
         )}
 
-        {filteredHospitals.map((h, index) => (
+        {!loading && filteredHospitals.map((h, index) => (
 
           <div
             key={h.id}
