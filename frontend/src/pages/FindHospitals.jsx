@@ -16,18 +16,18 @@ import {
 
 import L from "leaflet";
 
-/* Fix leaflet marker icons */
+if (typeof window !== "undefined") {
+  delete L.Icon.Default.prototype._getIconUrl;
 
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-});
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl:
+      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    iconUrl:
+      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    shadowUrl:
+      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  });
+}
 
 export default function FindHospitals() {
 
@@ -219,7 +219,9 @@ export default function FindHospitals() {
       <div className="hospital-header">
 
         <div>
-          <h1>🏥 Find Nearby Hospitals</h1>
+          <h1>
+            <span className="hospital-icon">🏥</span> Find Nearby Hospitals
+          </h1>
           <p>OpenStreetMap powered healthcare discovery</p>
         </div>
 
@@ -373,11 +375,10 @@ export default function FindHospitals() {
 
               <button
                 onClick={() => toggleSave(h)}
-                className={`save-btn ${
-                  saved.find((s) => s.id === h.id)
-                    ? "saved"
-                    : ""
-                }`}
+                className={`save-btn ${saved.find((s) => s.id === h.id)
+                  ? "saved"
+                  : ""
+                  }`}
               >
 
                 {saved.find((s) => s.id === h.id)
@@ -433,11 +434,10 @@ export default function FindHospitals() {
         <div className="toast-container">
 
           <div
-            className={`toast ${
-              toast.type === "success"
-                ? "toast-success"
-                : "toast-remove"
-            }`}
+            className={`toast ${toast.type === "success"
+              ? "toast-success"
+              : "toast-remove"
+              }`}
           >
 
             <div className="toast-title">
