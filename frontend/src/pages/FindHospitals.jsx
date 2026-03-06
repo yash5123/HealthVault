@@ -25,6 +25,7 @@ export default function FindHospitals() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [activeHospital, setActiveHospital] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
   const [saved, setSaved] = useState(() => {
     try {
@@ -35,6 +36,15 @@ export default function FindHospitals() {
   });
 
   const [toast, setToast] = useState(null);
+
+
+  /* =========================
+     CLIENT MOUNT CHECK
+  ========================= */
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
 
   useEffect(() => {
@@ -270,7 +280,7 @@ export default function FindHospitals() {
 
       {/* ================= MAP ================= */}
 
-      {location !== null && (
+      {mounted && location !== null && (
 
         <div className="map-container">
 
