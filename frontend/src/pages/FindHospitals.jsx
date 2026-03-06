@@ -1,4 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
+import "../styles/pages/hospitals.css";
+
 import {
   fetchHospitalsFromOSM,
   calculateDistance,
@@ -364,11 +366,10 @@ export default function FindHospitals() {
 
               <button
                 onClick={() => toggleSave(h)}
-                className={`save-btn ${
-                  saved.find((s) => s.id === h.id)
+                className={`save-btn ${saved.find((s) => s.id === h.id)
                     ? "saved"
                     : ""
-                }`}
+                  }`}
               >
 
                 {saved.find((s) => s.id === h.id)
@@ -424,11 +425,10 @@ export default function FindHospitals() {
         <div className="toast-container">
 
           <div
-            className={`toast ${
-              toast.type === "success"
+            className={`toast ${toast.type === "success"
                 ? "toast-success"
                 : "toast-remove"
-            }`}
+              }`}
           >
 
             <div className="toast-title">
