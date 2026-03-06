@@ -3,7 +3,7 @@ import API from "../services/api";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCheckups } from "../queries/checkupsQuery";
 import "../styles/pages/checkups.css";
-
+import Modal from "../components/ui/Modal";
 export default function Checkups() {
 
   /* ======================================================
@@ -14,7 +14,10 @@ export default function Checkups() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [history, setHistory] = useState([]);
-
+  const [deleteId, setDeleteId] = useState(null);
+  const [editCheckup, setEditCheckup] = useState(null);
+  const [newDate, setNewDate] = useState("");
+  
   const [form, setForm] = useState({
     type: "",
     doctorName: "",
@@ -139,40 +142,46 @@ export default function Checkups() {
      DELETE CHECKUP
   ====================================================== */
 
-  const deleteCheckup = async (id) => {
+  const deleteCheckup = (id) => {
+    setDeleteId(id);
+  };
 
-    const confirmDelete = window.confirm("Delete this checkup permanently?");
+  const confirmDelete = async () => {
 
-    if (!confirmDelete) return;
+    await API.delete(`/checkups/${deleteId}`);
 
-    await API.delete(`/checkups/${id}`);
-
-    showToast("Checkup deleted successfully", "error");
+    showToast("Checkup deleted successfully", "success");
 
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
 
+    setDeleteId(null);
   };
 
   /* ======================================================
      EDIT CHECKUP DATE
   ====================================================== */
 
-  const editCheckupDate = async (checkup) => {
+  const editCheckupDate = (checkup) => {
 
-    const newDate = prompt(
-      "Update last visit date (YYYY-MM-DD)",
-      checkup.lastVisit?.slice(0, 10)
-    );
+    setEditCheckup(checkup);
+    setNewDate(checkup.lastVisit?.slice(0, 10));
 
-    if (!newDate) return;
+  };
+
+  const confirmEdit = async () => {
+
+    if (!newDate) {
+      showToast("Please select a date", "error");
+      return;
+    }
 
     if (isNaN(new Date(newDate).getTime())) {
       showToast("Invalid date format", "error");
       return;
     }
 
-    await API.put(`/checkups/${checkup._id}`, {
-      ...checkup,
+    await API.put(`/checkups/${editCheckup._id}`, {
+      ...editCheckup,
       lastVisit: newDate
     });
 
@@ -180,6 +189,8 @@ export default function Checkups() {
 
     queryClient.invalidateQueries({ queryKey: ["checkups"] });
 
+    setEditCheckup(null);
+    setNewDate("");
   };
 
   /* ======================================================
@@ -472,6 +483,43 @@ export default function Checkups() {
         </div>
       )}
 
+      {/* DELETE CONFIRM MODAL */}
+
+      <Modal
+        isOpen={!!deleteId}
+        onClose={() => setDeleteId(null)}
+        onConfirm={confirmDelete}
+        title="Delete Checkup"
+        confirmText="Delete"
+        cancelText="Cancel"
+        variant="danger"
+      >
+
+        <p>
+          Are you sure you want to delete this checkup permanently?
+        </p>
+
+      </Modal>
+
+      {/* EDIT DATE MODAL */}
+
+      <Modal
+        isOpen={!!editCheckup}
+        onClose={() => setEditCheckup(null)}
+        onConfirm={confirmEdit}
+        title="Update Last Visit Date"
+        confirmText="Update"
+        cancelText="Cancel"
+      >
+
+        <input
+          type="date"
+          className="form-input"
+          value={newDate}
+          onChange={(e) => setNewDate(e.target.value)}
+        />
+
+      </Modal>
     </div>
 
 
