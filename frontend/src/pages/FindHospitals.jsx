@@ -144,11 +144,23 @@ export default function FindHospitals() {
 
   const filteredHospitals = useMemo(() => {
 
-    return hospitals.filter((h) =>
+    const filtered = hospitals.filter((h) =>
       (h.name || "").toLowerCase().includes(search.toLowerCase())
     );
 
-  }, [hospitals, search]);
+    return filtered.sort((a, b) => {
+
+      const aSaved = saved.find(s => s.id === a.id);
+      const bSaved = saved.find(s => s.id === b.id);
+
+      if (aSaved && !bSaved) return -1;
+      if (!aSaved && bSaved) return 1;
+
+      return a.distance - b.distance;
+
+    });
+
+  }, [hospitals, search, saved]);
 
   /* =========================
      Save Hospital
