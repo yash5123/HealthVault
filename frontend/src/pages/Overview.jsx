@@ -1,11 +1,20 @@
 import { useEffect, useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import API from "../services/api";
-import { useCountUp } from "../hooks/useCountUp";
+
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+
+import { useCountUp } from "../hooks/useCountUp";
 import { fetchDashboard } from "../queries/dashboardQuery";
 
+import AnimatedBackground from "../components/dashboard/AnimatedBackground";
+import CursorGlow from "../components/dashboard/CursorGlow";
+import NotificationBell from "../components/dashboard/NotificationBell";
+
+import "../styles/pages/overview.css";
+
 export default function Overview() {
+
   const navigate = useNavigate();
 
   const { data, isLoading: loading } = useQuery({
@@ -45,11 +54,15 @@ export default function Overview() {
   );
 
   const documentTypes = useMemo(() => {
+
     const counts = {};
+
     documents.forEach((doc) => {
       counts[doc.type] = (counts[doc.type] || 0) + 1;
     });
+
     return counts;
+
   }, [documents]);
 
   const recentMedicines = medicines.slice(-3).reverse();
@@ -65,169 +78,282 @@ export default function Overview() {
   /* ================= LOADING ================= */
 
   if (loading) {
+
     return (
       <div className="page-loader-overlay">
         <div className="page-loader"></div>
       </div>
     );
+
   }
 
   return (
-    <>
+
+    <div className="dashboard-page">
+
+      <AnimatedBackground />
+
+      <CursorGlow />
+
       {/* ================= HEADER ================= */}
 
-      <div className="page-header">
-        <h1 className="page-title">
-          AI Health Dashboard
-        </h1>
-        <p className="page-subtitle">
-          Intelligent health monitoring system
-        </p>
+      <div className="dashboard-header">
+
+        <div>
+
+          <h1 className="dashboard-title">
+            AI Health Dashboard
+          </h1>
+
+          <p className="dashboard-subtitle">
+            Intelligent health monitoring system
+          </p>
+
+        </div>
+
+        <div className="dashboard-header-right">
+          <NotificationBell />
+        </div>
+
       </div>
 
       {/* ================= KPI PANELS ================= */}
 
-      <div className="grid">
+      <div className="dashboard-stats-grid">
 
-        {[
-          { label: "Total Medicines", value: totalAnimated },
-          { label: "Healthy", value: healthyAnimated },
-          { label: "Low Stock", value: lowAnimated },
-          { label: "Critical", value: criticalAnimated },
-        ].map((item, index) => (
-          <div
-            key={item.label}
-            className="ai-panel stagger-item"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <div className="ai-panel-title">
-              {item.label}
-            </div>
-            <div className="ai-panel-value">
-              {item.value}
-            </div>
+        <div className="dashboard-stat-card">
+          <div className="dashboard-stat-label">
+            Total Medicines
           </div>
-        ))}
+          <div className="dashboard-stat-value">
+            {totalAnimated}
+          </div>
+        </div>
+
+        <div className="dashboard-stat-card dashboard-stat-healthy">
+          <div className="dashboard-stat-label">
+            Healthy
+          </div>
+          <div className="dashboard-stat-value">
+            {healthyAnimated}
+          </div>
+        </div>
+
+        <div className="dashboard-stat-card dashboard-stat-low">
+          <div className="dashboard-stat-label">
+            Low Stock
+          </div>
+          <div className="dashboard-stat-value">
+            {lowAnimated}
+          </div>
+        </div>
+
+        <div className="dashboard-stat-card dashboard-stat-critical">
+          <div className="dashboard-stat-label">
+            Critical
+          </div>
+          <div className="dashboard-stat-value">
+            {criticalAnimated}
+          </div>
+        </div>
 
       </div>
 
       {/* ================= QUICK ACTIONS ================= */}
 
-      <div style={{ marginTop: 70 }}>
+      <div style={{ marginTop: 60 }}>
+
         <h2>Quick Actions</h2>
 
-        <div className="grid" style={{ marginTop: 25 }}>
+        <div
+          className="dashboard-quick-actions"
+          style={{ marginTop: 20 }}
+        >
 
           <div
-            className="card action-card"
+            className="dashboard-action-card"
             onClick={() => navigate("/medicines")}
           >
-            <div className="action-icon">💊</div>
-            <div>
-              <h4>Manage Medicines</h4>
-              <p>Track stock & dosage</p>
-            </div>
+
+            <h3>Manage Medicines</h3>
+
+            <p>
+              Track stock levels and dosage information
+            </p>
+
           </div>
 
           <div
-            className="card action-card"
+            className="dashboard-action-card"
             onClick={() => navigate("/documents")}
           >
-            <div className="action-icon">📁</div>
-            <div>
-              <h4>Upload Documents</h4>
-              <p>Store reports securely</p>
-            </div>
+
+            <h3>Upload Documents</h3>
+
+            <p>
+              Store prescriptions and reports securely
+            </p>
+
           </div>
 
           <div
-            className="card action-card"
+            className="dashboard-action-card"
             onClick={() => navigate("/hospitals")}
           >
-            <div className="action-icon">🏥</div>
-            <div>
-              <h4>Find Hospitals</h4>
-              <p>Locate nearby care centers</p>
-            </div>
+
+            <h3>Find Hospitals</h3>
+
+            <p>
+              Locate nearby care centers
+            </p>
+
           </div>
 
         </div>
+
       </div>
 
       {/* ================= DOCUMENT ANALYTICS ================= */}
 
-      <div style={{ marginTop: 70 }}>
+      <div style={{ marginTop: 60 }}>
+
         <h2>Document Distribution</h2>
 
-        <div className="grid" style={{ marginTop: 25 }}>
+        <div
+          className="dashboard-quick-actions"
+          style={{ marginTop: 20 }}
+        >
+
           {Object.entries(documentTypes).length === 0 && (
             <p>No document analytics yet.</p>
           )}
 
-          {Object.entries(documentTypes).map(([type, count]) => (
-            <div key={type} className="card">
-              <strong>{type}</strong>
-              <p>{count} file(s)</p>
-            </div>
-          ))}
+          {Object.entries(documentTypes).map(
+            ([type, count]) => (
+
+              <div
+                key={type}
+                className="dashboard-stat-card"
+              >
+
+                <strong>{type}</strong>
+
+                <p>{count} file(s)</p>
+
+              </div>
+
+            )
+          )}
+
         </div>
+
       </div>
 
       {/* ================= RECENT MEDICINES ================= */}
 
-      <div style={{ marginTop: 70 }}>
+      <div style={{ marginTop: 60 }}>
+
         <h2>Recent Medicines</h2>
 
-        <div className="grid" style={{ marginTop: 25 }}>
+        <div
+          className="dashboard-quick-actions"
+          style={{ marginTop: 20 }}
+        >
+
           {recentMedicines.length === 0 && (
             <p>No medicines added yet.</p>
           )}
 
-          {recentMedicines.map((m) => (
-            <div
-              key={m._id}
-              className={`card ${m.quantity === 0 ? "card-critical" : ""}`}
-            >
-              <strong>{m.name}</strong>
-              <p>Qty: {m.quantity}</p>
-              <p>
-                Status:{" "}
-                {m.quantity === 0
-                  ? "❌ Critical"
-                  : m.quantity <= m.lowStockThreshold
-                  ? "⚠ Low"
-                  : "✅ Healthy"}
-              </p>
-            </div>
-          ))}
+          {recentMedicines.map((m) => {
+
+            const status =
+              m.quantity === 0
+                ? "dashboard-status-critical"
+                : m.quantity <= m.lowStockThreshold
+                ? "dashboard-status-low"
+                : "dashboard-status-healthy";
+
+            return (
+
+              <div
+                key={m._id}
+                className="dashboard-medicines-card"
+              >
+
+                <strong>{m.name}</strong>
+
+                <p>Qty: {m.quantity}</p>
+
+                <span
+                  className={`dashboard-medicine-status ${status}`}
+                >
+
+                  {m.quantity === 0
+                    ? "Critical"
+                    : m.quantity <= m.lowStockThreshold
+                    ? "Low"
+                    : "Healthy"}
+
+                </span>
+
+              </div>
+
+            );
+
+          })}
+
         </div>
+
       </div>
 
       {/* ================= UPCOMING CHECKUPS ================= */}
 
-      <div style={{ marginTop: 70 }}>
+      <div style={{ marginTop: 60 }}>
+
         <h2>Upcoming Checkups</h2>
 
-        <div className="grid" style={{ marginTop: 25 }}>
+        <div
+          className="dashboard-quick-actions"
+          style={{ marginTop: 20 }}
+        >
+
           {upcomingCheckups.length === 0 && (
             <p>No checkups scheduled.</p>
           )}
 
           {upcomingCheckups.map((c) => {
+
             const next = new Date(c.lastVisit);
+
             next.setMonth(
               next.getMonth() + Number(c.intervalMonths)
             );
 
             return (
-              <div key={c._id} className="card">
+
+              <div
+                key={c._id}
+                className="dashboard-checkups-card"
+              >
+
                 <strong>{c.type}</strong>
-                <p>Next Visit: {next.toDateString()}</p>
+
+                <p>
+                  Next Visit: {next.toDateString()}
+                </p>
+
               </div>
+
             );
+
           })}
+
         </div>
+
       </div>
-    </>
+
+    </div>
+
   );
+
 }
