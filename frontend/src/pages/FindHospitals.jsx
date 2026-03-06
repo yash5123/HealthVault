@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import "../styles/pages/hospitals.css";
 import "leaflet/dist/leaflet.css";
-
+import { useMap } from "react-leaflet";
 import {
   fetchHospitalsFromOSM,
   calculateDistance,
@@ -286,6 +286,8 @@ export default function FindHospitals() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
+            <FitBounds hospitals={filteredHospitals} />
+
             {/* User Location */}
             <Marker position={[location.lat, location.lon]}>
               <Popup>Your Location</Popup>
@@ -465,4 +467,18 @@ export default function FindHospitals() {
 
   );
 
+}
+
+function FitBounds({ hospitals }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!hospitals.length) return;
+
+    const bounds = hospitals.map(h => [h.lat, h.lon]);
+    map.fitBounds(bounds, { padding: [40, 40] });
+
+  }, [hospitals]);
+
+  return null;
 }
