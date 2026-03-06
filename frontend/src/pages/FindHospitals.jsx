@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import "../styles/pages/hospitals.css";
+import "leaflet/dist/leaflet.css";
 
 import {
   fetchHospitalsFromOSM,
@@ -38,9 +39,13 @@ export default function FindHospitals() {
   const [search, setSearch] = useState("");
   const [activeHospital, setActiveHospital] = useState(null);
 
-  const [saved, setSaved] = useState(
-    JSON.parse(localStorage.getItem("savedHospitals")) || []
-  );
+  const [saved, setSaved] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("savedHospitals")) || [];
+    } catch {
+      return [];
+    }
+  });
 
   const [toast, setToast] = useState(null);
 
@@ -280,21 +285,23 @@ export default function FindHospitals() {
             </Marker>
 
             {/* Hospital Markers */}
-            {filteredHospitals.map((h) => (
-              <Marker
-                key={h.id}
-                position={[h.lat, h.lon]}
-                eventHandlers={{
-                  click: () => setActiveHospital(h.id),
-                }}
-              >
-                <Popup>
-                  <b>{h.name}</b>
-                  <br />
-                  {h.distance.toFixed(2)} km away
-                </Popup>
-              </Marker>
-            ))}
+            {filteredHospitals
+              .filter(h => h.lat && h.lon)
+              .map((h) => (
+                <Marker
+                  key={h.id}
+                  position={[h.lat, h.lon]}
+                  eventHandlers={{
+                    click: () => setActiveHospital(h.id),
+                  }}
+                >
+                  <Popup>
+                    <b>{h.name}</b>
+                    <br />
+                    {h.distance.toFixed(2)} km away
+                  </Popup>
+                </Marker>
+              ))}
 
           </MapContainer>
 
@@ -366,10 +373,11 @@ export default function FindHospitals() {
 
               <button
                 onClick={() => toggleSave(h)}
-                className={`save-btn ${saved.find((s) => s.id === h.id)
+                className={`save-btn ${
+                  saved.find((s) => s.id === h.id)
                     ? "saved"
                     : ""
-                  }`}
+                }`}
               >
 
                 {saved.find((s) => s.id === h.id)
@@ -425,10 +433,11 @@ export default function FindHospitals() {
         <div className="toast-container">
 
           <div
-            className={`toast ${toast.type === "success"
+            className={`toast ${
+              toast.type === "success"
                 ? "toast-success"
                 : "toast-remove"
-              }`}
+            }`}
           >
 
             <div className="toast-title">
