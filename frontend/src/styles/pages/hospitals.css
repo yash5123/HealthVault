@@ -1,39 +1,1768 @@
-/* ======================================================
-   CHECKUPS PAGE PERSONALITY
-   Calm & Structured
-====================================================== */
+/* ==========================================================
+   HOSPITAL FINDER — HEALTHCARE DISCOVERY SYSTEM
+   Personality: Smart • Medical • Trustworthy • Modern
+   Glass Depth: Level 3
+========================================================== */
 
-.page-checkups {
-  position: relative;
+/* ==========================================================
+   PAGE PERSONALITY LAYER
+========================================================== */
+
+.page-hospitals{
+  position:relative;
+  padding-bottom:120px;
+  animation:hospitalPageEnter .6s ease;
 }
 
-/* Header Tone */
-.page-checkups .page-title {
-  background: linear-gradient(
-    90deg,
-    #0ea5e9,
-    #6366f1
+/* ==========================================================
+   AMBIENT MEDICAL AURA
+========================================================== */
+
+.page-hospitals::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-200px;
+  right:-160px;
+
+  width:600px;
+  height:600px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(99,102,241,.18),
+    rgba(14,165,233,.10),
+    transparent 70%
   );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+  filter:blur(100px);
+
+  pointer-events:none;
+
+  z-index:0;
 }
 
-/* Clean Aura */
-.page-checkups::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 30% 30%,
-    rgba(14,165,233,0.05),
+.page-hospitals::after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:-260px;
+  left:-160px;
+
+  width:600px;
+  height:600px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(16,185,129,.15),
+    transparent 70%
+  );
+
+  filter:blur(120px);
+
+  pointer-events:none;
+
+  z-index:0;
+}
+
+/* Ensure content above glow */
+
+.page-hospitals > *{
+  position:relative;
+  z-index:2;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.page-hospitals .hospital-header{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:60px;
+
+}
+
+.page-hospitals .hospital-header h1{
+
+  font-size:40px;
+  font-weight:800;
+
+  letter-spacing:-1px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #6366f1,
+    #0ea5e9,
+    #06b6d4
+  );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.page-hospitals .hospital-header p{
+
+  margin-top:10px;
+
+  font-size:16px;
+
+  color:var(--text-muted);
+
+  max-width:600px;
+}
+
+/* ==========================================================
+   DETECT LOCATION BUTTON
+========================================================== */
+
+.page-hospitals .detect-btn{
+
+  position:relative;
+
+  padding:12px 24px;
+
+  border-radius:999px;
+
+  border:none;
+
+  font-weight:600;
+  font-size:14px;
+
+  cursor:pointer;
+
+  background:
+  linear-gradient(
+    90deg,
+    #6366f1,
+    #0ea5e9
+  );
+
+  color:white;
+
+  transition:all .3s ease;
+
+  box-shadow:
+  0 10px 25px rgba(99,102,241,.35);
+
+}
+
+.page-hospitals .detect-btn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 16px 40px rgba(99,102,241,.45),
+  0 0 25px rgba(14,165,233,.35);
+
+}
+
+.page-hospitals .detect-btn:active{
+  transform:translateY(0);
+}
+
+/* Shine effect */
+
+.page-hospitals .detect-btn::after{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:-40%;
+
+  width:40%;
+  height:100%;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.6),
+    transparent
+  );
+
+  transition:.6s;
+}
+
+.page-hospitals .detect-btn:hover::after{
+  left:120%;
+}
+
+/* ==========================================================
+   ERROR BOX
+========================================================== */
+
+.page-hospitals .error-box{
+
+  margin-bottom:20px;
+
+  padding:14px 18px;
+
+  border-radius:12px;
+
+  background:
+  rgba(239,68,68,.10);
+
+  border-left:4px solid #ef4444;
+
+  font-size:14px;
+  font-weight:600;
+
+  color:#b91c1c;
+
+}
+
+/* ==========================================================
+   CONTROLS PANEL
+========================================================== */
+
+.page-hospitals .hospital-controls{
+
+  margin-top:40px;
+
+  padding:30px;
+
+  border-radius:26px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.95),
+    rgba(255,255,255,.85)
+  );
+
+  backdrop-filter:blur(24px);
+
+  border:1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,.06),
+  inset 0 0 60px rgba(255,255,255,.4);
+
+  display:flex;
+  gap:20px;
+
+  transition:all .35s ease;
+
+}
+
+.page-hospitals .hospital-controls:hover{
+
+  transform:translateY(-4px);
+
+  box-shadow:
+  0 30px 70px rgba(0,0,0,.08),
+  0 0 45px rgba(99,102,241,.15);
+
+}
+
+/* ==========================================================
+   SEARCH INPUT
+========================================================== */
+
+.page-hospitals .search-input{
+
+  flex:1;
+
+  padding:14px 18px;
+
+  border-radius:16px;
+
+  border:1px solid rgba(0,0,0,.08);
+
+  background:rgba(255,255,255,.92);
+
+  font-size:14px;
+
+  transition:all .3s ease;
+
+  outline:none;
+
+}
+
+.page-hospitals .search-input:hover{
+  border-color:rgba(99,102,241,.4);
+}
+
+.page-hospitals .search-input:focus{
+
+  border-color:#6366f1;
+
+  box-shadow:
+  0 0 0 3px rgba(99,102,241,.15),
+  0 8px 25px rgba(99,102,241,.1);
+
+  transform:translateY(-2px);
+}
+
+/* ==========================================================
+   RADIUS SELECT
+========================================================== */
+
+.page-hospitals .radius-select{
+
+  padding:14px 18px;
+
+  border-radius:16px;
+
+  border:1px solid rgba(0,0,0,.08);
+
+  background:rgba(255,255,255,.92);
+
+  font-size:14px;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+}
+
+.page-hospitals .radius-select:hover{
+  border-color:rgba(99,102,241,.4);
+}
+
+.page-hospitals .radius-select:focus{
+
+  border-color:#6366f1;
+
+  box-shadow:
+  0 0 0 3px rgba(99,102,241,.15),
+  0 8px 25px rgba(99,102,241,.1);
+
+}
+
+/* ==========================================================
+   MAP CONTAINER
+========================================================== */
+
+.page-hospitals .map-container{
+
+  margin-top:50px;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,.08);
+
+}
+
+.page-hospitals .map-container iframe{
+
+  width:100%;
+  height:350px;
+
+  border:none;
+}
+
+/* ==========================================================
+   RESULTS GRID
+========================================================== */
+
+.page-hospitals .results-grid{
+
+  margin-top:60px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:36px;
+}
+
+/* ==========================================================
+   LOADING STATE
+========================================================== */
+
+.page-hospitals .loading{
+
+  grid-column:1/-1;
+
+  padding:60px;
+
+  text-align:center;
+
+  font-weight:600;
+
+  color:var(--text-muted);
+
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.page-hospitals .empty-state{
+
+  grid-column:1/-1;
+
+  padding:70px;
+
+  text-align:center;
+
+  border-radius:28px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.95),
+    rgba(255,255,255,.85)
+  );
+
+  backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+  0 18px 50px rgba(0,0,0,.05);
+
+  font-size:15px;
+
+  color:var(--text-muted);
+}
+
+/* ==========================================================
+   PAGE ENTRY
+========================================================== */
+
+@keyframes hospitalPageEnter{
+
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* ==========================================================
+   HOSPITAL CARD GRID ENGINE
+========================================================== */
+
+.page-hospitals .hospital-card{
+
+  position:relative;
+
+  padding:34px;
+
+  border-radius:28px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.96),
+    rgba(255,255,255,.86)
+  );
+
+  backdrop-filter:blur(22px);
+
+  border:1px solid rgba(255,255,255,.75);
+
+  box-shadow:
+  0 20px 55px rgba(0,0,0,.06),
+  inset 0 0 55px rgba(255,255,255,.45);
+
+  transition:
+  all .45s cubic-bezier(.4,0,.2,1);
+
+  overflow:hidden;
+
+}
+
+/* ==========================================================
+   CARD HOVER LIFT
+========================================================== */
+
+.page-hospitals .hospital-card:hover{
+
+  transform:translateY(-8px);
+
+  box-shadow:
+  0 30px 80px rgba(0,0,0,.09),
+  0 0 45px rgba(99,102,241,.15);
+
+}
+
+/* ==========================================================
+   SUBTLE BACKGROUND GLOW
+========================================================== */
+
+.page-hospitals .hospital-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-140px;
+  right:-140px;
+
+  width:260px;
+  height:260px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(99,102,241,.20),
+    transparent 70%
+  );
+
+  filter:blur(70px);
+
+  opacity:0;
+
+  transition:opacity .4s ease;
+
+  pointer-events:none;
+
+}
+
+.page-hospitals .hospital-card:hover::before{
+  opacity:1;
+}
+
+/* ==========================================================
+   NEAREST HOSPITAL HIGHLIGHT
+========================================================== */
+
+.page-hospitals .hospital-card.nearest{
+
+  border-left:6px solid #10b981;
+
+  box-shadow:
+  0 20px 55px rgba(0,0,0,.06),
+  0 0 30px rgba(16,185,129,.35);
+
+}
+
+/* Breathing glow */
+
+@keyframes nearestGlow{
+
+  0%{
+    box-shadow:
+    0 20px 55px rgba(0,0,0,.06),
+    0 0 18px rgba(16,185,129,.25);
+  }
+
+  50%{
+    box-shadow:
+    0 20px 55px rgba(0,0,0,.06),
+    0 0 40px rgba(16,185,129,.45);
+  }
+
+  100%{
+    box-shadow:
+    0 20px 55px rgba(0,0,0,.06),
+    0 0 18px rgba(16,185,129,.25);
+  }
+
+}
+
+.page-hospitals .hospital-card.nearest{
+  animation:nearestGlow 3s ease-in-out infinite;
+}
+
+/* ==========================================================
+   CARD HEADER
+========================================================== */
+
+.page-hospitals .card-header{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+}
+
+.page-hospitals .card-header h3{
+
+  font-size:20px;
+
+  font-weight:700;
+
+  letter-spacing:-0.3px;
+
+  color:#0f172a;
+
+}
+
+/* ==========================================================
+   NEAREST BADGE
+========================================================== */
+
+.page-hospitals .nearest-badge{
+
+  padding:6px 12px;
+
+  border-radius:999px;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  background:
+  rgba(16,185,129,.15);
+
+  color:#10b981;
+
+}
+
+/* ==========================================================
+   DISTANCE DISPLAY
+========================================================== */
+
+.page-hospitals .distance{
+
+  margin-top:16px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  color:#475569;
+
+}
+
+/* ==========================================================
+   RATING SYSTEM
+========================================================== */
+
+.page-hospitals .rating{
+
+  margin-top:14px;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-size:16px;
+
+  color:#f59e0b;
+
+}
+
+/* star icons */
+
+.page-hospitals .rating span{
+
+  font-size:18px;
+
+}
+
+/* rating number */
+
+.page-hospitals .rating-number{
+
+  font-size:14px;
+
+  font-weight:600;
+
+  color:#334155;
+
+}
+
+/* ==========================================================
+   CARD BUTTON SYSTEM
+========================================================== */
+
+.page-hospitals .card-buttons{
+
+  margin-top:24px;
+
+  display:flex;
+
+  gap:12px;
+
+}
+
+/* ==========================================================
+   GET DIRECTIONS BUTTON
+========================================================== */
+
+.page-hospitals .direction-btn{
+
+  flex:1;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:10px 18px;
+
+  border-radius:999px;
+
+  border:none;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+  font-size:13px;
+
+  cursor:pointer;
+
+  background:
+  linear-gradient(
+    90deg,
+    #6366f1,
+    #0ea5e9
+  );
+
+  color:white;
+
+  transition:.3s;
+
+  box-shadow:
+  0 10px 25px rgba(99,102,241,.35);
+
+}
+
+.page-hospitals .direction-btn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 15px 40px rgba(99,102,241,.45);
+
+}
+
+.page-hospitals .direction-btn:active{
+  transform:translateY(0);
+}
+
+/* ==========================================================
+   SAVE BUTTON SYSTEM
+========================================================== */
+
+.page-hospitals .save-btn{
+
+  flex:1;
+
+  padding:10px 18px;
+
+  border-radius:999px;
+
+  border:none;
+
+  font-weight:600;
+
+  font-size:13px;
+
+  cursor:pointer;
+
+  background:
+  rgba(99,102,241,.08);
+
+  color:#6366f1;
+
+  transition:.3s;
+
+}
+
+/* hover */
+
+.page-hospitals .save-btn:hover{
+
+  transform:translateY(-2px);
+
+  background:
+  rgba(99,102,241,.15);
+
+}
+
+/* saved state */
+
+.page-hospitals .save-btn.saved{
+
+  background:
+  linear-gradient(
+    90deg,
+    #ec4899,
+    #ef4444
+  );
+
+  color:white;
+
+  box-shadow:
+  0 10px 25px rgba(239,68,68,.35);
+
+}
+
+/* saved hover */
+
+.page-hospitals .save-btn.saved:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 15px 40px rgba(239,68,68,.45);
+
+}
+
+/* ==========================================================
+   BUTTON PRESS PHYSICS
+========================================================== */
+
+.page-hospitals button:active{
+  transform:scale(.96);
+}
+
+/* ==========================================================
+   CARD ENTRY ANIMATION
+========================================================== */
+
+@keyframes hospitalFadeIn{
+
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.page-hospitals .hospital-card{
+
+  animation:hospitalFadeIn .6s ease forwards;
+
+}
+
+/* stagger animation */
+
+.page-hospitals .hospital-card:nth-child(1){
+  animation-delay:.05s;
+}
+
+.page-hospitals .hospital-card:nth-child(2){
+  animation-delay:.1s;
+}
+
+.page-hospitals .hospital-card:nth-child(3){
+  animation-delay:.15s;
+}
+
+.page-hospitals .hospital-card:nth-child(4){
+  animation-delay:.2s;
+}
+
+.page-hospitals .hospital-card:nth-child(5){
+  animation-delay:.25s;
+}
+
+.page-hospitals .hospital-card:nth-child(6){
+  animation-delay:.3s;
+}
+
+/* ==========================================================
+   ADVANCED STAR RATING SYSTEM
+========================================================== */
+
+.page-hospitals .rating span{
+
+  display:inline-block;
+
+  transition:
+  transform .25s ease,
+  color .25s ease;
+
+}
+
+.page-hospitals .hospital-card:hover .rating span{
+
+  transform:scale(1.15);
+
+}
+
+.page-hospitals .rating span:nth-child(1){transition-delay:.02s}
+.page-hospitals .rating span:nth-child(2){transition-delay:.04s}
+.page-hospitals .rating span:nth-child(3){transition-delay:.06s}
+.page-hospitals .rating span:nth-child(4){transition-delay:.08s}
+.page-hospitals .rating span:nth-child(5){transition-delay:.10s}
+
+/* star glow */
+
+.page-hospitals .rating span{
+
+  text-shadow:
+  0 0 6px rgba(245,158,11,.35);
+
+}
+
+/* ==========================================================
+   DISTANCE BADGE SYSTEM
+========================================================== */
+
+.page-hospitals .distance{
+
+  display:inline-flex;
+  align-items:center;
+
+  padding:6px 12px;
+
+  border-radius:999px;
+
+  background:
+  rgba(59,130,246,.08);
+
+  border:1px solid rgba(59,130,246,.15);
+
+  font-size:13px;
+
+}
+
+/* glow on hover */
+
+.page-hospitals .hospital-card:hover .distance{
+
+  background:
+  rgba(59,130,246,.15);
+
+  box-shadow:
+  0 0 20px rgba(59,130,246,.25);
+
+}
+
+/* ==========================================================
+   SAVED HOSPITAL PANEL
+========================================================== */
+
+.page-hospitals .saved-panel{
+
+  margin-top:70px;
+
+  padding:40px;
+
+  border-radius:28px;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.95),
+    rgba(255,255,255,.85)
+  );
+
+  backdrop-filter:blur(22px);
+
+  border:1px solid rgba(255,255,255,.7);
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,.06);
+
+}
+
+/* header */
+
+.page-hospitals .saved-panel h3{
+
+  font-size:20px;
+
+  font-weight:700;
+
+  margin-bottom:20px;
+
+}
+
+/* saved hospital item */
+
+.page-hospitals .saved-item{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:16px 20px;
+
+  border-radius:16px;
+
+  margin-top:12px;
+
+  background:
+  rgba(0,0,0,.04);
+
+  transition:.25s;
+
+}
+
+.page-hospitals .saved-item:hover{
+
+  transform:translateY(-2px);
+
+  background:
+  rgba(99,102,241,.08);
+
+}
+
+/* ==========================================================
+   REMOVE SAVED BUTTON
+========================================================== */
+
+.page-hospitals .remove-save{
+
+  padding:6px 12px;
+
+  border-radius:999px;
+
+  border:none;
+
+  font-size:12px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  background:#ef4444;
+
+  color:white;
+
+}
+
+.page-hospitals .remove-save:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+  0 8px 20px rgba(239,68,68,.35);
+
+}
+
+/* ==========================================================
+   TOAST NOTIFICATION SYSTEM
+========================================================== */
+
+.page-hospitals .toast-container{
+
+  position:fixed;
+
+  top:20px;
+  right:20px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:12px;
+
+  z-index:999;
+
+}
+
+/* toast card */
+
+.page-hospitals .toast{
+
+  min-width:260px;
+
+  padding:14px 18px;
+
+  border-radius:12px;
+
+  background:white;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.12);
+
+  display:flex;
+  flex-direction:column;
+
+  gap:4px;
+
+  animation:hospitalToastSlide .3s ease;
+
+}
+
+/* toast success */
+
+.page-hospitals .toast-success{
+
+  border-left:4px solid #10b981;
+
+}
+
+/* toast remove */
+
+.page-hospitals .toast-remove{
+
+  border-left:4px solid #ef4444;
+
+}
+
+.page-hospitals .toast-title{
+
+  font-weight:700;
+
+  font-size:14px;
+
+}
+
+.page-hospitals .toast-message{
+
+  font-size:13px;
+
+  color:var(--text-muted);
+
+}
+
+/* toast animation */
+
+@keyframes hospitalToastSlide{
+
+  from{
+
+    transform:translateX(100%);
+
+    opacity:0;
+
+  }
+
+  to{
+
+    transform:translateX(0);
+
+    opacity:1;
+
+  }
+
+}
+
+/* ==========================================================
+   MICRO INTERACTION SYSTEM
+========================================================== */
+
+.page-hospitals .hospital-card,
+.page-hospitals .direction-btn,
+.page-hospitals .save-btn,
+.page-hospitals .search-input,
+.page-hospitals .radius-select{
+
+  transition:
+  transform .25s ease,
+  box-shadow .25s ease,
+  background .25s ease,
+  border-color .25s ease;
+
+}
+
+/* ==========================================================
+   GLASS GLOW OVERLAY
+========================================================== */
+
+.page-hospitals .hospital-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:28px;
+
+  opacity:0;
+
+  box-shadow:
+  inset 0 0 60px rgba(255,255,255,.5);
+
+  transition:opacity .4s ease;
+
+}
+
+.page-hospitals .hospital-card:hover::after{
+  opacity:.7;
+}
+
+/* ==========================================================
+   SEARCH INPUT ICON SPACE
+========================================================== */
+
+.page-hospitals .search-input{
+
+  padding-left:18px;
+
+}
+
+/* ==========================================================
+   PREMIUM LOADING STATE
+========================================================== */
+
+.page-hospitals .loading{
+
+  position:relative;
+
+}
+
+/* shimmer effect */
+
+.page-hospitals .loading::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:-200px;
+
+  top:0;
+
+  width:200px;
+  height:100%;
+
+  background:
+  linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.6),
+    transparent
+  );
+
+  animation:loadingShimmer 1.6s infinite;
+
+}
+
+@keyframes loadingShimmer{
+
+  0%{
+    left:-200px;
+  }
+
+  100%{
+    left:100%;
+  }
+
+}
+
+/* ==========================================================
+   RESPONSIVE IMPROVEMENTS
+========================================================== */
+
+@media(max-width:768px){
+
+.page-hospitals .hospital-header{
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  gap:20px;
+
+}
+
+.page-hospitals .hospital-controls{
+
+  flex-direction:column;
+
+}
+
+.page-hospitals .card-buttons{
+
+  flex-direction:column;
+
+}
+
+.page-hospitals .direction-btn,
+.page-hospitals .save-btn{
+
+  width:100%;
+
+}
+
+.page-hospitals .results-grid{
+
+  grid-template-columns:1fr;
+
+}
+
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+.page-hospitals button:focus,
+.page-hospitals input:focus,
+.page-hospitals select:focus{
+
+  outline:2px solid #6366f1;
+
+  outline-offset:2px;
+
+}
+
+/* ==========================================================
+   PERFORMANCE OPTIMIZATION
+========================================================== */
+
+.page-hospitals .hospital-card,
+.page-hospitals .hospital-controls,
+.page-hospitals .map-container{
+
+  will-change:transform;
+
+}
+
+/* ==========================================================
+   REDUCED MOTION SUPPORT
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+.page-hospitals *{
+
+  animation:none!important;
+
+  transition:none!important;
+
+}
+
+}
+
+/* ==========================================================
+   3D CARD MOTION SYSTEM
+========================================================== */
+
+.page-hospitals .hospital-card{
+
+  transform-style:preserve-3d;
+
+}
+
+.page-hospitals .hospital-card:hover{
+
+  transform:
+  perspective(1000px)
+  rotateX(2deg)
+  rotateY(-2deg)
+  translateY(-10px);
+
+}
+
+/* subtle floating */
+
+@keyframes hospitalFloat{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-3px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+.page-hospitals .hospital-card{
+  animation:hospitalFloat 6s ease-in-out infinite;
+}
+
+/* ==========================================================
+   DYNAMIC LIGHT ENGINE
+========================================================== */
+
+.page-hospitals .hospital-card::before{
+
+  background:
+  radial-gradient(
+    circle at 30% 20%,
+    rgba(255,255,255,.55),
     transparent 60%
   );
-  pointer-events: none;
+
 }
 
-/* Controlled Hover */
-.page-checkups .card:hover {
+/* glow increase */
+
+.page-hospitals .hospital-card:hover::before{
+
+  filter:blur(40px);
+
+}
+
+/* ==========================================================
+   AI STYLE HOVER ILLUMINATION
+========================================================== */
+
+.page-hospitals .hospital-card:hover{
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.98),
+    rgba(255,255,255,.92)
+  );
+
+}
+
+/* ==========================================================
+   MAP CONTAINER PREMIUM
+========================================================== */
+
+.page-hospitals .map-container{
+
+  position:relative;
+
+}
+
+/* glass border glow */
+
+.page-hospitals .map-container::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  border-radius:28px;
+
+  pointer-events:none;
+
   box-shadow:
-    0 18px 45px rgba(0,0,0,0.08),
-    0 0 20px rgba(14,165,233,0.12);
+  inset 0 0 40px rgba(255,255,255,.45);
+
+}
+
+/* hover glow */
+
+.page-hospitals .map-container:hover{
+
+  box-shadow:
+  0 25px 70px rgba(0,0,0,.15),
+  0 0 60px rgba(99,102,241,.25);
+
+}
+
+/* ==========================================================
+   BUTTON LIGHT REFLECTION
+========================================================== */
+
+.page-hospitals .direction-btn,
+.page-hospitals .save-btn{
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+.page-hospitals .direction-btn::before,
+.page-hospitals .save-btn::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-120%;
+  left:-120%;
+
+  width:200%;
+  height:200%;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.5),
+    transparent
+  );
+
+  transform:rotate(25deg);
+
+  transition:.6s;
+
+}
+
+.page-hospitals .direction-btn:hover::before,
+.page-hospitals .save-btn:hover::before{
+
+  top:120%;
+  left:120%;
+
+}
+
+/* ==========================================================
+   DISTANCE PULSE EFFECT
+========================================================== */
+
+@keyframes distancePulse{
+
+  0%{
+    box-shadow:0 0 0 rgba(59,130,246,.2);
+  }
+
+  50%{
+    box-shadow:0 0 18px rgba(59,130,246,.35);
+  }
+
+  100%{
+    box-shadow:0 0 0 rgba(59,130,246,.2);
+  }
+
+}
+
+.page-hospitals .distance{
+
+  animation:distancePulse 4s infinite;
+
+}
+
+/* ==========================================================
+   RATING STAR SHIMMER
+========================================================== */
+
+@keyframes starShimmer{
+
+  0%{
+    opacity:.8;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:.8;
+  }
+
+}
+
+.page-hospitals .rating span{
+
+  animation:starShimmer 3s infinite;
+
+}
+
+.page-hospitals .rating span:nth-child(1){animation-delay:.2s}
+.page-hospitals .rating span:nth-child(2){animation-delay:.4s}
+.page-hospitals .rating span:nth-child(3){animation-delay:.6s}
+.page-hospitals .rating span:nth-child(4){animation-delay:.8s}
+.page-hospitals .rating span:nth-child(5){animation-delay:1s}
+
+/* ==========================================================
+   GRID ANIMATION ENHANCEMENT
+========================================================== */
+
+.page-hospitals .results-grid{
+
+  animation:gridFade .6s ease;
+
+}
+
+@keyframes gridFade{
+
+  from{
+
+    opacity:0;
+    transform:translateY(10px);
+
+  }
+
+  to{
+
+    opacity:1;
+    transform:translateY(0);
+
+  }
+
+}
+
+/* ==========================================================
+   PREMIUM EMPTY STATE
+========================================================== */
+
+.page-hospitals .empty-state{
+
+  position:relative;
+
+}
+
+.page-hospitals .empty-state::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-120px;
+  right:-120px;
+
+  width:260px;
+  height:260px;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(99,102,241,.2),
+    transparent 70%
+  );
+
+  filter:blur(60px);
+
+}
+
+/* ==========================================================
+   CONTROL PANEL MICRO PHYSICS
+========================================================== */
+
+.page-hospitals .hospital-controls{
+
+  transform-style:preserve-3d;
+
+}
+
+.page-hospitals .hospital-controls:hover{
+
+  transform:
+  perspective(1000px)
+  rotateX(.5deg)
+  rotateY(-.5deg)
+  translateY(-4px);
+
+}
+
+/* ==========================================================
+   SAVED BUTTON HEART PULSE
+========================================================== */
+
+@keyframes heartPulse{
+
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.1);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+.page-hospitals .save-btn.saved{
+
+  animation:heartPulse 2s infinite;
+
+}
+
+/* ==========================================================
+   GLASS REFLECTION LAYER
+========================================================== */
+
+.page-hospitals .hospital-card::after{
+
+  background:
+  linear-gradient(
+    120deg,
+    rgba(255,255,255,.35),
+    transparent
+  );
+
+}
+
+/* ==========================================================
+   ADVANCED RESPONSIVE SYSTEM
+========================================================== */
+
+@media(max-width:1024px){
+
+.page-hospitals .results-grid{
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(280px,1fr));
+
+}
+
+}
+
+/* tablet */
+
+@media(max-width:768px){
+
+.page-hospitals .hospital-header h1{
+
+  font-size:32px;
+
+}
+
+.page-hospitals .map-container iframe{
+
+  height:300px;
+
+}
+
+}
+
+/* mobile */
+
+@media(max-width:480px){
+
+.page-hospitals .hospital-header h1{
+
+  font-size:26px;
+
+}
+
+.page-hospitals .hospital-controls{
+
+  padding:20px;
+
+}
+
+.page-hospitals .map-container iframe{
+
+  height:260px;
+
+}
+
+}
+
+/* ==========================================================
+   FINAL UI CONSISTENCY SYSTEM
+========================================================== */
+
+.page-hospitals .hospital-card,
+.page-hospitals .hospital-controls,
+.page-hospitals .map-container,
+.page-hospitals .saved-panel{
+
+  border-radius:28px;
+
+}
+
+/* ==========================================================
+   HARDWARE ACCELERATION
+========================================================== */
+
+.page-hospitals .hospital-card,
+.page-hospitals .direction-btn,
+.page-hospitals .save-btn{
+
+  backface-visibility:hidden;
+
+  transform:translateZ(0);
+
 }
