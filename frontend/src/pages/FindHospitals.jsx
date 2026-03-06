@@ -69,6 +69,11 @@ export default function FindHospitals() {
   const detectLocation = () => {
     setError("");
 
+    if (!navigator.geolocation) {
+      setError("Geolocation not supported");
+      return;
+    }
+
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setLocation({
@@ -76,7 +81,9 @@ export default function FindHospitals() {
           lon: pos.coords.longitude,
         });
       },
-      () => setError("Location permission denied")
+      (err) => {
+        setError("Location permission denied");
+      }
     );
   };
 
@@ -485,7 +492,9 @@ function FitBounds({ hospitals }) {
   useEffect(() => {
     if (!hospitals.length) return;
 
-    const bounds = hospitals.map(h => [h.lat, h.lon]);
+    const bounds = hospitals
+      .filter(h => h.lat && h.lon)
+      .map(h => [h.lat, h.lon]);
     map.fitBounds(bounds, { padding: [40, 40] });
 
   }, [hospitals]);
