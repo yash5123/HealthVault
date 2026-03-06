@@ -4,6 +4,28 @@ import {
   calculateDistance,
 } from "../utils/geoUtils";
 
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup
+} from "react-leaflet";
+
+import L from "leaflet";
+
+/* Fix leaflet marker icons */
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
+
 export default function FindHospitals() {
 
   const [location, setLocation] = useState(null);
@@ -12,6 +34,7 @@ export default function FindHospitals() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  const [activeHospital, setActiveHospital] = useState(null);
 
   const [saved, setSaved] = useState(
     JSON.parse(localStorage.getItem("savedHospitals")) || []
@@ -238,11 +261,40 @@ export default function FindHospitals() {
 
         <div className="map-container">
 
-          <iframe
-            src={`https://www.google.com/maps?q=${location.lat},${location.lon}&z=14&output=embed`}
-            title="map"
-            loading="lazy"
-          />
+          <MapContainer
+            center={[location.lat, location.lon]}
+            zoom={14}
+            style={{ height: "350px", width: "100%" }}
+          >
+
+            <TileLayer
+              attribution="© OpenStreetMap contributors"
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+
+            {/* User Location */}
+            <Marker position={[location.lat, location.lon]}>
+              <Popup>Your Location</Popup>
+            </Marker>
+
+            {/* Hospital Markers */}
+            {filteredHospitals.map((h) => (
+              <Marker
+                key={h.id}
+                position={[h.lat, h.lon]}
+                eventHandlers={{
+                  click: () => setActiveHospital(h.id),
+                }}
+              >
+                <Popup>
+                  <b>{h.name}</b>
+                  <br />
+                  {h.distance.toFixed(2)} km away
+                </Popup>
+              </Marker>
+            ))}
+
+          </MapContainer>
 
         </div>
 
@@ -268,9 +320,12 @@ export default function FindHospitals() {
 
           <div
             key={h.id}
-            className={`hospital-card ${
-              index === 0 ? "nearest" : ""
-            }`}
+            className={`hospital-card 
+              ${index === 0 ? "nearest" : ""}
+              ${activeHospital === h.id ? "active" : ""}
+            `}
+            onMouseEnter={() => setActiveHospital(h.id)}
+            onMouseLeave={() => setActiveHospital(null)}
           >
 
             <div className="card-header">
@@ -393,5 +448,7 @@ export default function FindHospitals() {
       )}
 
     </div>
+
   );
+
 }

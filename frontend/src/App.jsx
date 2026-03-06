@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { MedicineProvider } from "./context/MedicineContext";
 import { DocumentsProvider } from "./context/DocumentsContext";
 
+import "leaflet/dist/leaflet.css";
 import "./styles/base.css";
 import "./styles/variables.css";
 import "./styles/layout.css";
