@@ -367,8 +367,9 @@ export default function LowStock() {
                 <div className="medicine-actions">
 
                   <div className="quick-refill">
+                    <button onClick={() => restockMedicine(med, -1)}>-1</button>
+                    <button onClick={() => restockMedicine(med, 5)}>+5</button>
                     <button onClick={() => restockMedicine(med, 10)}>+10</button>
-                    <button onClick={() => restockMedicine(med, 30)}>+30</button>
                   </div>
 
                   <div className="custom-refill">
@@ -378,12 +379,16 @@ export default function LowStock() {
                       min="0"
                       placeholder="Custom"
                       value={customAmount[med._id] || ""}
-                      onChange={(e) =>
-                        setCustomAmount({
-                          ...customAmount,
-                          [med._id]: e.target.value
-                        })
-                      }
+                      onChange={(e) => {
+                        const value = e.target.value;
+
+                        if (value === "" || Number(value) >= 0) {
+                          setCustomAmount({
+                            ...customAmount,
+                            [med._id]: value
+                          });
+                        }
+                      }}
                     />
 
                     <button
