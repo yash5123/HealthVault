@@ -224,7 +224,10 @@
 .page-hospitals .hospital-controls {
 
   margin-top: 40px;
-
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+  transform-style: preserve-3d;
   padding: 30px;
 
   border-radius: 26px;
@@ -251,7 +254,7 @@
 
 .page-hospitals .hospital-controls:hover {
 
-  transform: translateY(-4px);
+  transform: translate3d(0,-4px,0);
 
   box-shadow:
     0 30px 70px rgba(0, 0, 0, .08),
@@ -304,7 +307,8 @@
 .page-hospitals .radius-select {
 
   padding: 14px 18px;
-
+  position: relative;
+  z-index: 10;
   border-radius: 16px;
 
   border: 1px solid rgba(0, 0, 0, .08);
@@ -1518,12 +1522,6 @@
    CONTROL PANEL MICRO PHYSICS
 ========================================================== */
 
-.page-hospitals .hospital-controls {
-
-  transform-style: preserve-3d;
-
-}
-
 .page-hospitals .hospital-controls:hover {
 
   transform:
@@ -1656,4 +1654,9 @@
   -webkit-text-fill-color: initial;
   background: none;
   font-size: 38px;
+}
+
+.page-hospitals::before,
+.page-hospitals::after {
+  pointer-events: none;
 }
