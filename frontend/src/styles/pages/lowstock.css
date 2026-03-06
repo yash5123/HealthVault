@@ -881,45 +881,6 @@
   gap: 14px;
 }
 
-/* quick buttons */
-
-.page-lowstock .quick-refill {
-  display: flex;
-  gap: 10px;
-}
-
-/* QUICK REFILL BUTTONS */
-
-.page-lowstock .quick-refill {
-  display: flex;
-  gap: 10px;
-}
-
-.page-lowstock .quick-refill button {
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: none;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  background: linear-gradient(135deg, #ef4444, #ff4d6d);
-  color: white;
-
-  cursor: pointer;
-
-  transition: all .25s ease;
-
-  box-shadow: 0 6px 18px rgba(239, 68, 68, .25);
-}
-
-.page-lowstock .quick-refill button:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 30px rgba(239, 68, 68, .35),
-    0 0 18px rgba(239, 68, 68, .25);
-}
 
 /* custom refill */
 
@@ -1019,4 +980,37 @@
 
 .page-lowstock .reduce-btn:hover {
   box-shadow: 0 10px 25px rgba(239, 68, 68, .35);
+}
+
+/* QUICK REFILL PILL GROUP */
+
+.page-lowstock .quick-refill{
+  display:inline-flex;
+  border-radius:999px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,.08);
+  background:#f8fafc;
+}
+
+.page-lowstock .quick-refill button{
+  padding:8px 16px;
+  border:none;
+  background:transparent;
+  font-weight:700;
+  font-size:13px;
+  color:#0f172a;
+  transition:all .25s ease;
+}
+
+.page-lowstock .quick-refill button + button{
+  border-left:1px solid rgba(0,0,0,.08);
+}
+
+.page-lowstock .quick-refill button:hover{
+  background:#ef4444;
+  color:white;
+}
+
+.page-lowstock .quick-refill button:active{
+  transform:scale(.96);
 }
