@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
   const location = useLocation();
-
+  const [open, setOpen] = useState(false);
   const links = [
     { name: "Overview", path: "/" },
     { name: "Documents", path: "/documents" },
@@ -40,3 +40,4 @@ export default function Sidebar() {
     </div>
   );
 }
+

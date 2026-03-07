@@ -1662,3 +1662,20 @@
 .page-hospitals::after {
   pointer-events: none;
 }
+
+@media (max-width:768px){
+
+.hospital-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.map-container{
+
+height:300px;
+
+}
+
+}
+

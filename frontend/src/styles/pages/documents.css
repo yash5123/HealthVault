@@ -672,3 +672,13 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width:768px){
+
+.documents-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}

@@ -14,6 +14,13 @@ export default function Navbar() {
       padding: "0 30px",
       borderBottom: "1px solid #1f2937"
     }}>
+
+      <button
+        className="mobile-menu-btn"
+        onClick={() => setOpen(true)}
+      >
+        ☰
+      </button>
       <h2 style={{ color: "#60a5fa" }}>HealthVault</h2>
       <button onClick={logout}>Logout</button>
     </div>
