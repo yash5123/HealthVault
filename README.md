@@ -10,10 +10,18 @@
 
 <div align="center">
 
-<img src="https://img.shields.io/github/stars/yash5123/HealthVault?style=for-the-badge&logo=github">
-<img src="https://img.shields.io/github/forks/yash5123/HealthVault?style=for-the-badge&logo=github">
-<img src="https://img.shields.io/github/license/yash5123/HealthVault?style=for-the-badge">
-<img src="https://img.shields.io/github/last-commit/yash5123/HealthVault?style=for-the-badge">
+🚀 **Live Application**
+
+### 🔗 [https://health-vault-ruddy.vercel.app/](https://health-vault-ruddy.vercel.app/)
+
+<br>
+
+<a href="https://health-vault-ruddy.vercel.app/">
+<img src="https://img.shields.io/badge/Live%20Demo-Visit%20HealthVault-00c853?style=for-the-badge&logo=vercel&logoColor=white"/>
+</a>
+
+<br><br>
+
 
 </div>
 
@@ -21,40 +29,45 @@
 
 # 🧠 Overview
 
-**HealthVault** is a modern full-stack application that helps users manage and organize their health information in a single place.
+**HealthVault** is a modern full-stack healthcare management platform designed to help users organize and track their medical information in one place.
 
-The platform provides tools to:
+The application provides tools for:
 
-* 💊 manage medicines and dosage
-* 📂 store medical documents
-* 📅 track health checkups
-* 🚨 monitor medicine stock alerts
-* 🗺 find nearby hospitals
+* 💊 managing medicines and dosage
+* 📂 storing medical documents
+* 📅 tracking health checkups
+* 🚨 monitoring medicine stock alerts
+* 🗺 finding nearby hospitals
 
-All features are integrated inside a **clean dashboard interface**.
+All features are integrated into a **clean and intuitive dashboard interface**.
 
 ---
 
 # ✨ Core Features
 
-### 📊 Health Dashboard
+## 📊 Health Dashboard
 
-* overview of medicines and documents
-* recent activity insights
-* quick access actions
-
----
-
-### 💊 Medicine Management
-
-Track medicines efficiently.
+The dashboard provides a quick overview of health data.
 
 Features include:
 
-* dosage & frequency tracking
+* medicine statistics
+* document insights
+* quick access actions
+* recent activity tracking
+
+---
+
+## 💊 Medicine Management
+
+Track medicines efficiently and monitor stock levels.
+
+Features include:
+
+* dosage and frequency tracking
 * automatic days remaining calculation
 * quantity monitoring
-* edit & delete medicines
+* editing and deleting medicines
 
 Status indicators:
 
@@ -64,11 +77,11 @@ Status indicators:
 
 ---
 
-### 🚨 Smart Stock Alerts
+## 🚨 Smart Stock Alerts
 
-Automatically detects medicines running low.
+The system automatically detects medicines that are running low.
 
-Includes:
+Features include:
 
 * refill recommendations
 * quantity adjustment tools
@@ -76,17 +89,17 @@ Includes:
 
 ---
 
-### 📂 Document Vault
+## 📂 Document Vault
 
-Store medical documents securely.
+Securely store important medical documents.
 
-Supported types:
+Supported document types:
 
 * lab reports
 * prescriptions
 * medical records
 
-Features:
+Capabilities include:
 
 * cloud storage uploads
 * document search
@@ -94,31 +107,31 @@ Features:
 
 ---
 
-### 📅 Checkup Reminder System
+## 📅 Checkup Reminder System
 
-Track health visits and reminders.
+Track scheduled health checkups and reminders.
 
-Capabilities:
+Capabilities include:
 
-* schedule checkups
-* doctor information
+* scheduling checkups
+* doctor information tracking
 * reminder intervals
-* overdue tracking
+* overdue alerts
 
 ---
 
-### 🗺 Nearby Hospital Finder
+## 🗺 Nearby Hospital Finder
 
-Discover hospitals using map-based search.
+Find nearby hospitals using an interactive map.
 
-Features:
+Features include:
 
-* detect location
+* location detection
 * distance calculation
 * hospital ratings
-* save favorite hospitals
+* saving favorite hospitals
 
-Powered by **OpenStreetMap + Leaflet**.
+Powered by **OpenStreetMap and Leaflet**.
 
 ---
 
@@ -191,7 +204,7 @@ HealthVault
 
 # 📡 API Overview
 
-### 🔐 Authentication
+## 🔐 Authentication
 
 ```
 POST /api/auth/register
@@ -200,7 +213,7 @@ POST /api/auth/login
 
 ---
 
-### 💊 Medicines
+## 💊 Medicines
 
 ```
 GET    /api/medicines
@@ -211,7 +224,7 @@ DELETE /api/medicines/:id
 
 ---
 
-### 📂 Documents
+## 📂 Documents
 
 ```
 GET    /api/documents
@@ -221,7 +234,7 @@ DELETE /api/documents/:id
 
 ---
 
-### 📅 Checkups
+## 📅 Checkups
 
 ```
 GET    /api/checkups
@@ -234,14 +247,16 @@ DELETE /api/checkups/:id
 
 # ⚙ Installation
 
-Clone the repository
+Clone the repository:
 
 ```
 git clone https://github.com/yash5123/HealthVault.git
 cd HealthVault
 ```
 
-Install dependencies
+---
+
+# 📦 Install Dependencies
 
 ### Backend
 
@@ -261,25 +276,25 @@ npm install
 
 # ▶ Run the Application
 
-Start backend
+Start backend:
 
 ```
 npm run dev
 ```
 
-Start frontend
+Start frontend:
 
 ```
 npm run dev
 ```
 
-Frontend runs on
+Frontend runs on:
 
 ```
 http://localhost:5173
 ```
 
-Backend runs on
+Backend runs on:
 
 ```
 http://localhost:5000
@@ -289,7 +304,7 @@ http://localhost:5000
 
 # 🔑 Environment Variables
 
-Create `.env` inside **backend**
+Create a `.env` file inside the **backend** folder:
 
 ```
 PORT=5000
@@ -301,13 +316,12 @@ CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 ```
 
----
 
 # 👨‍💻 Author
 
 **Yash Rai**
 
-GitHub
+🔗 GitHub
 [https://github.com/yash5123](https://github.com/yash5123)
 
 ---
@@ -315,3 +329,5 @@ GitHub
 # ⭐ Support
 
 If you like this project, consider giving it a **star ⭐ on GitHub**.
+
+---
