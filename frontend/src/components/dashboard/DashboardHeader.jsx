@@ -9,7 +9,7 @@ export default function DashboardHeader() {
       <div className="dashboard-header-left">
 
         <h1 className="dashboard-title">
-          AI Health Dashboard
+          Health Dashboard
         </h1>
 
         <p className="dashboard-subtitle">
