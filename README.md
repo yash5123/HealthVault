@@ -303,16 +303,6 @@ CLOUDINARY_API_SECRET=
 
 ---
 
-# 📊 GitHub Stats
-
-<div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api?username=yash5123&show_icons=true&theme=tokyonight">
-
-</div>
-
----
-
 # 👨‍💻 Author
 
 **Yash Rai**
