@@ -7,8 +7,10 @@
   --bg-main: #f6f9fc;
   --bg-soft: #ffffff;
 
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.8);
+  --glass-blur: blur(16px);
 
   --primary: #00e5c3;
   --primary-dark: #00cbb0;
@@ -33,9 +35,10 @@
      SHADOWS
   ============================ */
 
-  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.05);
-  --shadow-medium: 0 15px 40px rgba(0, 0, 0, 0.08);
-  --shadow-deep: 0 25px 60px rgba(0, 0, 0, 0.12);
+  --shadow-soft: 0 10px 40px rgba(50, 50, 93, 0.05), 0 5px 15px rgba(0, 0, 0, 0.03);
+  --shadow-medium: 0 20px 50px rgba(50, 50, 93, 0.08), 0 10px 20px rgba(0, 0, 0, 0.05);
+  --shadow-deep: 0 30px 60px rgba(50, 50, 93, 0.12), 0 15px 25px rgba(0, 0, 0, 0.08);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 
   /* ===========================
      RADIUS
